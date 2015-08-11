@@ -1,0 +1,72 @@
+extends layout
+
+block content
+  #header
+    .row
+      .col-md-12.text-center
+        h1#hlogo.logoFont
+          a(href='/main') Research BOOK
+  #menuBar.row
+    a(href='/all')
+      .col-md-3.col-xs-6.text-center 모든 조사
+    a(href='/new')
+      #menuBar-on.col-md-3.col-xs-6.text-center 새로운 조사
+    a(href='/time')
+      .col-md-3.col-xs-6.text-center 마감임박 조사
+    a(href='#')
+      .col-md-3.col-xs-6.text-center USER
+  #mainBox.container
+    #all-table.row
+      h3 새로운 조사
+      table.table.table-hover
+        thead.text-center
+          tr
+            td.col-md-7.col-xs-7 제목
+            td.col-md-2.col-xs-2 조회수
+            td.col-md-3.col-xs-3 등록일
+        tbody
+          tr
+            td
+              a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
+            td.text-center 3
+            td.text-center 2014-02-14
+          tr
+            td
+              a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
+            td.text-center 3
+            td.text-center 2014-02-14
+          tr
+            td
+              a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
+            td.text-center 3
+            td.text-center 2014-02-14
+          tr
+            td
+              a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
+            td.text-center 3
+            td.text-center 2014-02-14
+          tr
+            td
+              a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
+            td.text-center 3
+            td.text-center 2014-02-14
+          tr
+            td
+              a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
+            td.text-center 3
+            td.text-center 2014-02-14
+          tr
+            td
+              a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
+            td.text-center 3
+            td.text-center 2014-02-14
+    #searchBox.col-md-12.text-center
+      input#search-all.search(type='text')
+      input(type='submit', value='검색')
+  #footer.container.visible-md.visible-lg
+    hr
+    .row
+      .col-md-4
+        strong 2015 홀가분 (HOLGABUN)
+      .col-md-3.col-md-offset-5.text-right
+        a(href="mailto:enon.jeong@gmail.com") enon.jeong@gmail.com

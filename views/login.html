@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <meta http-equiv="Content-Type" content="html/text; charset=utf-8" >
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet/less" type="text/css" href="/static/style/dest/mine.css">
+  <script type="text/coffeescript" src="/static/js/dest/mine.js"></script>
+</head>
+<body>
+  <div id="header">
+    <div class="row">
+      <div class="col-md-12 text-center"><h1 class="logo-font" id="hlogo"><a href="index.html">Research BOOK</a></h1></div>
+    </div>
+  </div>
+  <div class="container-fluid" id="main-box">
+    <div id="login" class="col-md-6">
+      <div class="jumbotron text-center" id="login-box">
+        <div class="row" id="ltitle"><h1>Login</h1></div>
+        <div class="row" id="lg-input-box">
+          <form action="" method="POST">
+            <div class="row"><input type="text" placeholder="이메일 입력" id="email" /></div>
+            <div class="row"><input type="password" placeholder="비밀번호 입력" id="pw" /></div>
+            <div class="row" id="lg-btn-box">
+              <div class="row"><input type="submit" id="login-btn" class="btn login-btn" value="로그인" /></div>
+              <div class="row"><input type="submit" id="fb-btn" class="btn login-btn" value="페이스북" /></div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="sign" class="col-md-6">
+      <div class="jumbotron text-center" id="sign-box">
+        <div class="row"><h1>Sign</h1></div>
+        <div id="sign-input-box">
+          <form action="" method="POST">
+            <div class="labelbox"><input id="u_name" placeholder="성명" type="text" /></div>
+            <div class="labelbox"><input id="u_email" placeholder="email" type="email" /></div>
+            <div class="alertbox" id="email-alert"><p>이메일 형식이 옳바르지 않습니다.</p></div>
+            <div class="labelbox"><input id="u_pw" placeholder="비밀번호 (6~12 자 이내)" type="password" /></div>
+            <div class="alertbox" id="pw-alert"><p>비밀번호는 6글자 이상 12글자 이하로 입력해주세요.</p></div>
+            <div class="labelbox"><input id="u_pw_ch" placeholder="비밀번호 확인" type="password" /></div>
+            <div class="alertbox" id="pw-ch-alert"><p>비밀번호가 일치하지 않습니다.</p></div>
+            <div class="labelbox">
+              <select name="u_ph_f" id="u_ph_f">
+                <option value="010">010</option>
+                <option value="011">011</option>
+                <option value="016">016</option>
+                <option value="017">017</option>
+              </select> -
+              <input class="ph-input" id="u_ph_m" placeholder="" title="휴대번호 중간" inputtype="number" lengthtype="byte" maxlength="4" /> -
+              <input class="ph-input" id="u_ph_l" placeholder="" title="휴대번호 끝" inputtype="number" lengthtype="byte" maxlength="4" />
+            </div>
+            <div><input type="submit" id="sign-btn" class="btn" value="회원가입" /></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+extends layout
+block content
+  #header
+    .row
+      .col-md-12.text-center
+        h1#hlogo.logoFont
+          a(href='/main') Research BOOK
+  #menu-bar.row
+    a(href='/all')
+      .col-md-3.col-xs-6.text-center 모든 조사
+    a(href='/new')
+      .col-md-3.col-xs-6.text-center 새로운 조사
+    a(href='/time')
+      .col-md-3.col-xs-6.text-center 마감임박 조사
+    a(href='#')
+      .col-md-3.col-xs-6.text-center USER
+
+  #mainBox.container
+    #questionBox
+      #questionInfo.row
+        #userImg.col-md-4.text-center
+          img(src='/static/img/zari.jpg')
+        .col-md-8
+          h2
+            input#voteTitle(type="text" placeholder="제목 입력")
+      #questionContent.row
+        ul#answerList
+          li
+            input#answerValue1(type='text', placeholder="항목이름 입력")
+        .row.text-center
+          button#answerAdd.btn(onclick="answerAdd()") 추가
+          button#answerDel.btn(onclick="answerDel()") 삭제
+        .row.text-center
+          button#voteOkBtn.btn() 올리기

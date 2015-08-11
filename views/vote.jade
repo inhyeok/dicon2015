@@ -1,0 +1,48 @@
+extends layout
+block content
+  #header
+    .row
+      .col-md-12.text-center
+        h1#hlogo.logoFont
+          a(href='/main') Research BOOK
+  #menu-bar.row
+    a(href='/all')
+      .col-md-3.col-xs-6.text-center 모든 조사
+    a(href='/new')
+      .col-md-3.col-xs-6.text-center 새로운 조사
+    a(href='/time')
+      .col-md-3.col-xs-6.text-center 마감임박 조사
+    a(href='#')
+      .col-md-3.col-xs-6.text-center USER
+
+  #mainBox.container
+    #questionBox
+      #questionInfo.row
+        #userImg.col-md-4.text-center
+          img(src='/static/img/zari.jpg')
+        .col-md-8
+          h2 [이벤트] 야식하면 생각나는 음식은??
+      #questionContent.row
+        ul#answerList
+          li
+            input#answer1(type='checkbox', value='라면')
+            p 라면
+
+          li
+            input#answer2(type='checkbox', value='족발')
+            p 족발
+
+          li
+            input#answer3(type='checkbox', value='보쌈')
+            p 보쌈
+
+          li
+            input#answer4(type='checkbox', value='치킨')
+            p 치킨
+
+          li
+            input#answer5(type='checkbox', value='피자')
+            p 피자
+
+        .row.text-center
+          button#voteOkBtn.btn(onclick='voteOk()') 투표하기
