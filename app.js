@@ -8,7 +8,6 @@ var express = require('express')
 //app.use(serveStatic('static'))
 app.use('/static', serveStatic('static'));
 app.use('/bower_components', serveStatic('bower_components'));
-app.use('/node_modules', serveStatic('node_modules'));
 
 app.set('views', __dirname + '/views'); // general config
 app.set('view engine', 'jade');
