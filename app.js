@@ -5,6 +5,14 @@ var express = require('express')
   , path = require("path")
   , serveStatic = require('serve-static');
 
+var mysql = require('mysql');
+var pool = mysql.createPool({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'people'
+});
+
 //app.use(serveStatic('static'))
 app.use('/static', serveStatic('static'));
 app.use('/bower_components', serveStatic('bower_components'));
@@ -15,24 +23,35 @@ app.set('view engine', 'jade');
 app.get('/', function (req, res) {
   res.render('index', {title: 'dicon'});
 });
+
+app.get('/login',function (req, res) {
+  res.redirect('/main');
+});
+
 app.get('/sign', function (req, res) {
   res.render('sign', {title: 'dicon'});
 });
+
 app.get('/main', function (req, res) {
   res.render('main', {title: 'dicon'});
 });
+
 app.get('/all', function (req, res) {
   res.render('all', {title: 'dicon'});
 });
+
 app.get('/new', function (req, res) {
   res.render('new', {title: 'dicon'});
 });
+
 app.get('/time', function (req, res) {
   res.render('time', {title: 'dicon'});
 });
+
 app.get('/vote', function (req, res) {
   res.render('vote', {title: 'dicon'});
 });
+
 app.get('/createVote', function (req, res) {
   res.render('createVote', {title: 'dicon'});
 });
@@ -40,3 +59,5 @@ app.get('/createVote', function (req, res) {
 server.listen(3232, function() {
   console.log('Express server listening on port ' + server.address().port);
 });
+
+module.exports = app;
