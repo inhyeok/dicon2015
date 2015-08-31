@@ -4,20 +4,20 @@ module.exports = (grunt) ->
       development:
         expand: true
         flatten: true
-        cwd: 'static/style'
+        cwd: 'public/style'
         src: ['*.less']
-        dest: 'static/style/dist/'
+        dest: 'public/style/dist/'
         ext: '.css'
     coffee:
       development:
         expand: true
         flatten: true
-        cwd: 'static/js'
+        cwd: 'public/js'
         src: ['*.coffee']
-        dest: 'static/js/dist/'
+        dest: 'public/js/dist/'
         ext: '.js'
     watch:
-      files: ['static/style/*.less','static/js/*.coffee']
+      files: ['public/style/*.less','public/js/*.coffee']
       tasks: ['less','coffee']
 
   grunt.loadNpmTasks 'grunt-contrib-watch'

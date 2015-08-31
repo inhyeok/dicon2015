@@ -6766,7 +6766,7 @@ button.close {
 }
 @font-face {
   font-family: 'smile';
-  src: url('/static/fonts/smile.otf');
+  src: url('/fonts/smile.otf');
 }
 body {
   font-family: 'smile', sans-serif;
@@ -6801,7 +6801,7 @@ button:focus {
   margin-top: 10px;
 }
 #indexBox {
-  background: url("/static/img/main-bg.jpeg") no-repeat center center fixed;
+  background: url("/img/main-bg.jpeg") no-repeat center center fixed;
   background-size: 100% 100%;
   height: 400px;
   position: relative;

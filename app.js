@@ -1,6 +1,7 @@
 var express = require('express')
   , logger = require('morgan')
   , http = require('http')
+  , app = express()
   , server = http.createServer(app)
   , path = require("path")
   , serveStatic = require('serve-static')
@@ -8,7 +9,6 @@ var express = require('express')
   , bodyParser = require('body-parser')
   , methodOverride = require('method-override');
 
-var app = express();
 var routes = require('./routes/index');
 var vote = require('./routes/vote');
 
@@ -58,6 +58,7 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
 server.listen(3232, function() {
   console.log('Express server listening on port ' + server.address().port);
 });
