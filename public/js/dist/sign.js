@@ -24,15 +24,15 @@
         return true;
       }
     });
-    return $('#u_pw_ch').focusout(function() {
-      var u_pw, u_pw_ch;
+    return $('#u_pw_ck').focusout(function() {
+      var u_pw, u_pw_ck;
       u_pw = $('#u_pw').val();
-      u_pw_ch = $('#u_pw_ch').val();
-      if (u_pw !== u_pw_ch) {
-        $('#pw-ch-alert p').show();
+      u_pw_ck = $('#u_pw_ck').val();
+      if (u_pw !== u_pw_ck) {
+        $('#pw-ck-alert p').show();
         return false;
       } else {
-        $('#pw-ch-alert p').hide();
+        $('#pw-ck-alert p').hide();
         return true;
       }
     });

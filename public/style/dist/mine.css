@@ -6866,39 +6866,24 @@ button:focus {
 }
 #login #loginForm input {
   margin-bottom: 3%;
+  color: #364659;
 }
-#sign {
-  padding-top: 10%;
-}
-#sign #signBox {
-  max-width: 420px;
-  background: #495E78;
-  margin: 50px auto;
-  color: #fff;
-}
-#sign #signBox #signInput {
+#sign #signInput {
   padding: 5% 0;
 }
-#sign #signBox #signInput .labelBox {
+#sign #signInput input {
+  margin-bottom: 1%;
+  color: #364659;
+}
+#sign #signInput .labelBox {
   height: 45px;
 }
-#sign #signBox #signInput .alertBox {
+#sign #signInput .alertBox {
   height: auto;
   color: #e22222;
 }
-#sign #signBox #signInput .alertBox p {
+#sign #signInput .alertBox p {
   font-size: 12px;
-}
-#sign #signBox #signInput input {
-  width: 300px;
-  padding: 5px 7px;
-  color: #000;
-  border-radius: 5px 5px 5px 5px;
-  border: 1px solid #e3e3e3;
-}
-#sign #signBox #signInput #signBtn {
-  color: #fff;
-  border: none;
 }
 #questionBox {
   margin: 5%;

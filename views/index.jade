@@ -1,6 +1,52 @@
 extends layout
 
 block content
+  #login.modal.fade(role="dialog")
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type="button", data-dismiss="modal") &times;
+          h1.modal-title 로그인
+        form.form-horizontal(action="/login", method="POST" role="form")
+          .modal-body.col-md-10.col-md-offset-1.col-xs-10.col-xs-offset-1#loginForm
+            .row
+              input#l_email.form-control(type="email", placeholder="이메일 입력", name="l_email")
+            .row
+              input#l_pw.form-control(type="password", placeholder="비밀번호 입력", name="l_pw")
+            .row 아직 회원가입을 안하셨나요??&nbsp;
+              a(data-toggle="modal" data-target="#sign") 회원가입
+          .modal-footer
+            button.btn(type="submit") 로그인
+            button.btn(type="submit") 페이스북
+
+  #sign.modal.fade(role="dialog")
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type="button", data-dismiss="modal") &times;
+          h1.modal-title 회원가입
+        form.form-horizontal(action="/sign", method="POST" role="form")
+          .modal-body.col-md-10.col-md-offset-1.col-xs-10.col-xs-offset-1#signForm
+            #signInput.form-group.text-center
+              .labelBox
+                input#u_name.form-control(placeholder='성명', type='text', name="u_name")
+              .labelBox
+                input#u_email.form-control(placeholder='email', type='email', name="u_email")
+              #email-alert.alertBox
+                p 이메일 형식이 옳바르지 않습니다.
+              .labelBox
+                input#u_pw.form-control(placeholder='비밀번호 (6~12 자 이내)', type='password', name="u_pw")
+              #pw-alert.alertBox
+                p 비밀번호는 6글자 이상 12글자 이하로 입력해주세요.
+              .labelBox
+                input#u_pw_ck.form-control(placeholder='비밀번호 확인', type='password', name="u_pw_ck")
+              #pw-ck-alert.alertBox
+                p 비밀번호가 일치하지 않습니다.
+              .labelBox
+                input#u_ph.form-control(placeholder='휴대번호 입력(\'-\' 제외)', type='text', name="u_ph")
+          .modal-footer
+            button.btn#signbtn(type="submit") 완료
+
   #mainBox
     #indexBox.jumboton
       .row
@@ -9,24 +55,6 @@ block content
             strong.logoFont(style="font-size: 90px;") Research Book
             p(style="font-size: 20px;") 설문조사 커뮤니티 "Research Book"을 지금 시작해보세요.
             button(data-toggle="modal" data-target="#login").indexBtn#startBtn 시작하기
-
-        #login.modal.fade(role="dialog")
-          .modal-dialog
-            .modal-content
-              .modal-header
-                button.close(type="button", data-dismiss="modal") &times;
-                h1.modal-title 로그인
-              form.form-horizontal(action="/login", method="POST" role="form")
-                .modal-body.col-md-10.col-md-offset-1.col-xs-10.col-xs-offset-1#loginForm
-                  .row
-                    input#email.form-control(type="email", placeholder="이메일 입력")
-                  .row
-                    input#pw.form-control(type="password", placeholder="비밀번호 입력")
-                  .row 아직 회원가입을 안하셨나요??&nbsp;
-                    a(href="/sign") 회원가입
-                .modal-footer
-                  button.btn(type="submit", data-dismiss="modal") 로그인
-                  button.btn(type="submit", data-dismiss="modal") 페이스북
 
     #infoBox.container
       .row.text-center
