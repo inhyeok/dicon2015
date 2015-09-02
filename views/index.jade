@@ -25,8 +25,8 @@ block content
         .modal-header
           button.close(type="button", data-dismiss="modal") &times;
           h1.modal-title 회원가입
-        form.form-horizontal(action="/sign", method="POST" role="form")
-          .modal-body.col-md-10.col-md-offset-1.col-xs-10.col-xs-offset-1#signForm
+        form.form-horizontal#signForm(action="/sign", method="POST" role="form")
+          .modal-body.col-md-10.col-md-offset-1.col-xs-10.col-xs-offset-1
             #signInput.form-group.text-center
               .labelBox
                 input#u_name.form-control(placeholder='성명', type='text', name="u_name")
