@@ -6876,14 +6876,11 @@ button:focus {
   color: #364659;
 }
 #sign #signInput .labelBox {
-  height: 45px;
+  height: auto;
 }
-#sign #signInput .alertBox {
+#sign #signInput .error {
   height: auto;
   color: #e22222;
-}
-#sign #signInput .alertBox p {
-  font-size: 12px;
 }
 #questionBox {
   margin: 5%;

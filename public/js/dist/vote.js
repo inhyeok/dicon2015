@@ -1,5 +1,5 @@
 (function() {
-  $(document).ready(function() {
+  jQuery(function() {
     this.answerAdd = function() {
       var answerNo, text;
       answerNo = $('#answerList li').length;
@@ -19,7 +19,7 @@
         return $('#answerList li:last').remove();
       }
     };
-    return this.voteOk = function() {
+    this.voteOk = function() {
       var checkNo;
       checkNo = $('#answerList li input:checked').length;
       if (checkNo !== 1) {
@@ -29,6 +29,7 @@
         return true;
       }
     };
+    return true;
   });
 
 }).call(this);

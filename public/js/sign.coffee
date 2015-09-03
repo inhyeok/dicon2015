@@ -1,18 +1,4 @@
 jQuery ->
-  $('.alertBox p').hide()
-
-  @email_alert = () ->
-    $('#email-alert p').show()
-    return false
-
-  @pw_alert = () ->
-    $('#pw-alert p').show()
-    return false
-
-  @pw_ck_alert = () ->
-    $('#pw-ck-alert p').show()
-    return false
-
   options =
     rules:
       u_name:
@@ -26,15 +12,25 @@ jQuery ->
       u_pw_ck:
         equalTo: '#u_pw'
       u_ph:
-        required: true
-    massages:
+        required: true,
+        minlength: 9,
+        maxlength: 11
+    messages:
       u_name:
-        required: '이름을 입력해주세요.'
+        required: '성명을 입력해주세요.'
       u_email:
-        required: @email_alert(),
-        email: @email_alert()
+        required: '이메일을 입력해주세요.',
+        email: '옳바른 이메일을 입력해주세요.'
       u_pw:
-        required: @pw_alert()
+        required: '비밀번호를 입력해주세요',
+        minlength: '6글자이상 12글자 이하로 입력해주세요.',
+        maxlength: '6글자이상 12글자 이하로 입력해주세요.'
+      u_pw_ck:
+        equalTo: '비밀번호가 일치하지 않습니다.'
+      u_ph:
+        required: '휴대번호를 입력해주세요.',
+        minlength: '옳바른 번호를 입력해주세요.',
+        maxlength: '옳바른 번호를 입력해주세요.'
 
   $('#signForm').validate options
 

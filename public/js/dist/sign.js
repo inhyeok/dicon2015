@@ -1,19 +1,6 @@
 (function() {
   jQuery(function() {
     var options;
-    $('.alertBox p').hide();
-    this.email_alert = function() {
-      $('#email-alert p').show();
-      return false;
-    };
-    this.pw_alert = function() {
-      $('#pw-alert p').show();
-      return false;
-    };
-    this.pw_ck_alert = function() {
-      $('#pw-ck-alert p').show();
-      return false;
-    };
     options = {
       rules: {
         u_name: {
@@ -31,19 +18,31 @@
           equalTo: '#u_pw'
         },
         u_ph: {
-          required: true
+          required: true,
+          minlength: 9,
+          maxlength: 11
         }
       },
-      massages: {
+      messages: {
         u_name: {
-          required: '이름을 입력해주세요.'
+          required: '성명을 입력해주세요.'
         },
         u_email: {
-          required: this.email_alert(),
-          email: this.email_alert()
+          required: '이메일을 입력해주세요.',
+          email: '옳바른 이메일을 입력해주세요.'
         },
         u_pw: {
-          required: this.pw_alert()
+          required: '비밀번호를 입력해주세요',
+          minlength: '6글자이상 12글자 이하로 입력해주세요.',
+          maxlength: '6글자이상 12글자 이하로 입력해주세요.'
+        },
+        u_pw_ck: {
+          equalTo: '비밀번호가 일치하지 않습니다.'
+        },
+        u_ph: {
+          required: '휴대번호를 입력해주세요.',
+          minlength: '옳바른 번호를 입력해주세요.',
+          maxlength: '옳바른 번호를 입력해주세요.'
         }
       }
     };

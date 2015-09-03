@@ -1,4 +1,4 @@
-$(document).ready( () ->
+jQuery ->
 	@answerAdd = () ->
 		answerNo = $('#answerList li').length
 		if answerNo is 10
@@ -21,4 +21,4 @@ $(document).ready( () ->
 			false
 		else
 			true
-)
+	true
