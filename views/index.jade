@@ -1,5 +1,7 @@
 extends layout
 
+block script
+  script(type = "text/javascript" src = "/js/dist/enter.js")
 block content
   #login.modal.fade(role="dialog")
     .modal-dialog
@@ -7,16 +9,16 @@ block content
         .modal-header
           button.close(type="button", data-dismiss="modal") &times;
           h1.modal-title 로그인
-        form.form-horizontal(action="/login", method="POST" role="form")
-          .modal-body.col-md-10.col-md-offset-1.col-xs-10.col-xs-offset-1#loginForm
-            .row
+        form.form-horizontal#loginForm(action="/login", method="POST" role="form")
+          .modal-body.col-md-10.col-md-offset-1.col-xs-10.col-xs-offset-1
+            .row.form-group
               input#l_email.form-control(type="email", placeholder="이메일 입력", name="l_email")
-            .row
+            .row.form-group
               input#l_pw.form-control(type="password", placeholder="비밀번호 입력", name="l_pw")
             .row 아직 회원가입을 안하셨나요??&nbsp;
               a(data-toggle="modal" data-target="#sign") 회원가입
-          .modal-footer
-            button.btn(type="submit") 로그인
+          .modal-footer.form-group
+            button.btn#loginBtn(type="submit") 로그인
             button.btn(type="submit") 페이스북
 
   #sign.modal.fade(role="dialog")
@@ -38,7 +40,7 @@ block content
                 input#u_pw_ck.form-control(placeholder='비밀번호 확인', type='password', name="u_pw_ck")
               .labelBox.form-group
                 input#u_ph.form-control(placeholder='휴대번호 입력(\'-\' 제외)', type='text', name="u_ph")
-          .modal-footer
+          .modal-footer.form-group
             button.btn#signbtn(type="submit") 완료
 
   #mainBox
