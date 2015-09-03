@@ -1,0 +1,23 @@
+{
+  "name": "dicon",
+  "version": "0.0.0",
+  "homepage": "https://github.com/inhyeok/dicon2015",
+  "authors": [
+    "Jeong Inhyeok <inhyeok0327@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "bootstrap": "~3.3.5",
+    "formvalidation": "https://github.com/formvalidation/formvalidation.git",
+    "moment": "~2.8.0",
+    "jquery.inputmask": "*"
+  }
+}

@@ -27,16 +27,16 @@ block content
           h1.modal-title 회원가입
         form.form-horizontal#signForm(action="/sign", method="POST" role="form")
           .modal-body.col-md-10.col-md-offset-1.col-xs-10.col-xs-offset-1
-            #signInput.form-group.text-center
-              .labelBox
+            #signInput.text-center
+              .labelBox.form-group
                 input#u_name.form-control(placeholder='성명', type='text', name="u_name")
-              .labelBox
+              .labelBox.form-group
                 input#u_email.form-control(placeholder='email', type='email', name="u_email")
-              .labelBox
+              .labelBox.form-group
                 input#u_pw.form-control(placeholder='비밀번호 (6~12 자 이내)', type='password', name="u_pw")
-              .labelBox
+              .labelBox.form-group
                 input#u_pw_ck.form-control(placeholder='비밀번호 확인', type='password', name="u_pw_ck")
-              .labelBox
+              .labelBox.form-group
                 input#u_ph.form-control(placeholder='휴대번호 입력(\'-\' 제외)', type='text', name="u_ph")
           .modal-footer
             button.btn#signbtn(type="submit") 완료
