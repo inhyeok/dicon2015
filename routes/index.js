@@ -17,15 +17,23 @@ router.get('/', function (req, res, next) {
 
 router.post('/login', function (req, res, next) {
   var l_email = req.body.l_email;
-  var l_pw = req.body.l_pw;
+  var l_pw = req.body.l_pw || '';
+  console.log(l_pw);
   l_pw = md5.update(l_pw).digest('hex'); //md5 값 변환
+  console.log(l_pw);
   pool.getConnection(function (err, connection) {
-    connection.query('SELECT u_pw FROM users WHERE u_email=?', l_email,function (err, rows) {
+    connection.query('SELECT u_pw FROM users WHERE u_email=?', [l_email], function (err, rows) {
       if(err){
         console.log('Input ID is Wrong....');
-        res.redirect('/');
+        return res.redirect('/');
       }
-      if(l_pw !== rows.l_pw){
+      if(rows.length === 0){
+        // not signed
+        console.log('No user found');
+        return res.redirect('/');
+      }
+      user = rows[0]
+      if(l_pw !== user.u_pw){
         console.log('Input PW is Wrong....');
         res.redirect('/');
       }
@@ -40,7 +48,7 @@ router.post('/login', function (req, res, next) {
 router.post('/sign', function (req, res, next) {
   var u_name = req.body.u_name;
   var u_email = req.body.u_email;
-  var u_pw = req.body.u_pw;
+  var u_pw = req.body.u_pw || '';
   var u_ph = req.body.u_ph;
   u_pw = md5.update(u_pw).digest('hex'); //md5 값 변환
   var user = [u_name, u_email, u_pw, u_ph];
