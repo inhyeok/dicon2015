@@ -12,14 +12,15 @@ block content
         form.form-horizontal#loginForm(action="/login", method="POST" role="form")
           .modal-body.col-md-10.col-md-offset-1.col-xs-10.col-xs-offset-1
             .row.form-group
-              input#l_email.form-control(type="email", placeholder="이메일 입력", name="l_email")
+              input#l_email.form-control(type="text", placeholder="이메일 입력", name="l_email")
             .row.form-group
               input#l_pw.form-control(type="password", placeholder="비밀번호 입력", name="l_pw")
             .row 아직 회원가입을 안하셨나요??&nbsp;
               a(data-toggle="modal" data-target="#sign") 회원가입
-          .modal-footer.form-group
-            button.btn#loginBtn(type="submit") 로그인
-            button.btn(type="submit") 페이스북
+          .modal-footer
+            .form-group
+              button.btn#loginBtn(type="submit") 로그인
+              button.btn(type="submit") 페이스북
 
   #sign.modal.fade(role="dialog")
     .modal-dialog
@@ -33,15 +34,16 @@ block content
               .labelBox.form-group
                 input#u_name.form-control(placeholder='성명', type='text', name="u_name")
               .labelBox.form-group
-                input#u_email.form-control(placeholder='email', type='email', name="u_email")
+                input#u_email.form-control(placeholder='email', type='text', name="u_email")
               .labelBox.form-group
                 input#u_pw.form-control(placeholder='비밀번호 (6~12 자 이내)', type='password', name="u_pw")
               .labelBox.form-group
                 input#u_pw_ck.form-control(placeholder='비밀번호 확인', type='password', name="u_pw_ck")
               .labelBox.form-group
                 input#u_ph.form-control(placeholder='휴대번호 입력(\'-\' 제외)', type='text', name="u_ph")
-          .modal-footer.form-group
-            button.btn#signbtn(type="submit") 완료
+          .modal-footer
+            .form-group
+              button.btn#signbtn(type="submit") 완료
 
   #mainBox
     #indexBox.jumboton

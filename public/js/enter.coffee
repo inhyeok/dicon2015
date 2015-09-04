@@ -16,6 +16,9 @@ jQuery ->
 				validators:
 					notEmpty:
 						message: '항목값을 입력해주세요.'
+					regexp:
+						regexp: /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i
+						message: '옳바른 형식으로 입력해주세요.'
 			u_pw:
 				validators:
 					notEmpty:
@@ -54,6 +57,9 @@ jQuery ->
 				validators:
 					notEmpty:
 						message: '항목값을 입력해주세요.'
+					regexp:
+						regexp: /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i
+						message: '옳바른 형식으로 입력해주세요.'
 			l_pw:
 				validators:
 					notEmpty:
