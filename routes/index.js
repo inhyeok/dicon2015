@@ -18,9 +18,7 @@ router.get('/', function (req, res, next) {
 router.post('/login', function (req, res, next) {
   var l_email = req.body.l_email;
   var l_pw = req.body.l_pw || '';
-  console.log(l_pw);
   l_pw = md5.update(l_pw).digest('hex'); //md5 값 변환
-  console.log(l_pw);
   pool.getConnection(function (err, connection) {
     connection.query('SELECT u_pw FROM users WHERE u_email=?', [l_email], function (err, rows) {
       if(err){

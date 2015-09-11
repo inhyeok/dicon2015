@@ -1,85 +1,110 @@
-extends layout
+doctype html
+html
+  head
+    title= title
+    meta(charset = "utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel = "stylesheet" href = "/style/dist/mine.css")
+    script(type = "text/javascript" src = "/jquery/dist/jquery.min.js")
+    script(type = "text/javascript" src = "/bootstrap/dist/js/bootstrap.min.js")
+    script(type = "text/javascript" src = "/jquery.inputmask/dist/inputmask/jquery.inputmask.js")
+    script(type = "text/javascript" src = "/moment/moment.js")
+    script(type = "text/javascript" src = "/formvalidation/dist/js/formValidation.min.js")
+    script(type = "text/javascript" src = "/formvalidation/dist/js/framework/bootstrap.min.js")
+    script(type = "text/javascript" src = "/js/dist/enter.js")
 
-block script
-  script(type = "text/javascript" src = "/js/dist/enter.js")
-block content
-  #login.modal.fade(role="dialog")
-    .modal-dialog
-      .modal-content
-        .modal-header
-          button.close(type="button", data-dismiss="modal") &times;
-          h1.modal-title 로그인
-        form.form-horizontal#loginForm(action="/login", method="POST" role="form")
-          .modal-body.col-md-10.col-md-offset-1.col-xs-10.col-xs-offset-1
-            .row.form-group
-              input#l_email.form-control(type="text", placeholder="이메일 입력", name="l_email")
-            .row.form-group
-              input#l_pw.form-control(type="password", placeholder="비밀번호 입력", name="l_pw")
-            .row 아직 회원가입을 안하셨나요??&nbsp;
-              a(data-toggle="modal" data-target="#sign") 회원가입
-          .modal-footer
-            .form-group
-              button.btn#loginBtn(type="submit") 로그인
-              button.btn(type="submit") 페이스북
+  body
+    #login.modal.fade(role="dialog")
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type="button", data-dismiss="modal") &times;
+            h1.modal-title 로그인
+          form.form-horizontal#loginForm(action="/login", method="POST" role="form")
+            .modal-body.col-sm-10.col-sm-offset-1.col-xs-10.col-xs-offset-1
+              .row.form-group
+                label 이메일
+                input#l_email.form-control(type="text" name="l_email")
+              .row.form-group
+                label 비밀번호
+                input#l_pw.form-control(type="password" name="l_pw")
+              .row 아직 회원가입을 안하셨나요??&nbsp;
+                a(data-toggle="modal" data-target="#sign") 회원가입
+            .modal-footer
+              .form-group
+                .row
+                  .col-sm-4.col-sm-offset-2
+                    button.btn.btn-block#loginBtn(type="submit") 로그인
+                  .col-sm-4
+                    button.btn.btn-block(type="submit") 페이스북
 
-  #sign.modal.fade(role="dialog")
-    .modal-dialog
-      .modal-content
-        .modal-header
-          button.close(type="button", data-dismiss="modal") &times;
-          h1.modal-title 회원가입
-        form.form-horizontal#signForm(action="/sign", method="POST" role="form")
-          .modal-body.col-md-10.col-md-offset-1.col-xs-10.col-xs-offset-1
-            #signInput.text-center
-              .labelBox.form-group
-                input#u_name.form-control(placeholder='성명', type='text', name="u_name")
-              .labelBox.form-group
-                input#u_email.form-control(placeholder='email', type='text', name="u_email")
-              .labelBox.form-group
-                input#u_pw.form-control(placeholder='비밀번호 (6~12 자 이내)', type='password', name="u_pw")
-              .labelBox.form-group
-                input#u_pw_ck.form-control(placeholder='비밀번호 확인', type='password', name="u_pw_ck")
-              .labelBox.form-group
-                input#u_ph.form-control(placeholder='휴대번호 입력(\'-\' 제외)', type='text', name="u_ph")
-          .modal-footer
-            .form-group
-              button.btn#signbtn(type="submit") 완료
+    #sign.modal.fade(role="dialog")
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type="button", data-dismiss="modal") &times;
+            h1.modal-title 회원가입
+          form.form-horizontal#signForm(action="/sign", method="POST" role="form")
+            .modal-body.col-sm-10.col-sm-offset-1.col-xs-10.col-xs-offset-1
+              #signInput
+                .labelBox.form-group
+                  label 성명
+                  input#u_name.form-control(type='text' name="u_name")
+                .labelBox.form-group
+                  label 이메일
+                  input#u_email.form-control(type='text' name="u_email")
+                .labelBox.form-group
+                  label 비밀번호
+                    small &nbsp;&nbsp;(6~12 자 이내)
+                  input#u_pw.form-control(type='password' name="u_pw")
+                .labelBox.form-group
+                  label 비밀번호 확인
+                  input#u_pw_ck.form-control(type='password' name="u_pw_ck")
+                .labelBox.form-group
+                  label 휴대번호
+                    small &nbsp;&nbsp;('-' 제외)
+                  input#u_ph.form-control(type='text' name="u_ph")
+            .modal-footer
+              .form-group
+                .row
+                  .col-sm-4.col-sm-offset-4
+                    button.btn.btn-block#signbtn(type="submit") 완료
 
-  #mainBox
-    #indexBox.jumboton
+    #mainBox
+      #indexBox.jumboton
+        .row
+          #indexItem.col-sm-12
+            center
+              strong.logoFont(style="font-size: 90px;") Research Book
+              p(style="font-size: 20px;") 설문조사 커뮤니티 "Research Book"을 지금 시작해보세요.
+              button(data-toggle="modal" data-target="#login").indexBtn#startBtn 시작하기
+
+      #infoBox.container
+        .row.text-center
+          h1 Menu
+        .row.text-center
+          .col-sm-4.col-sm-12
+            .infoIcon
+              img(src="/img/pen-icon.png")
+            .infoExplan
+              h2 조사등록
+              p 평소 궁금했던 질문들을 등록함으로써 궁금증을 해결할 수 있습니다.
+          .col-sm-4.col-sm-12
+            .infoIcon
+              img(src="/img/check-icon.png")
+            .infoExplan
+              h2 조사참여
+              p 조사에 참여하여 도움도 주고 이벤트 당첨의 기회를 얻을 수 있습니다.
+          .col-sm-4.col-sm-12
+            .infoIcon
+              img(src="/img/group-icon.png")
+            .infoExplan
+              h2 커뮤니티
+              p 조사 결과를 통하여 많은 사람들의 생각을 엿볼 수 있습니다.
+    #footer.container.visible-sm.visible-lg
+      hr
       .row
-        #indexItem.col-md-12
-          center
-            strong.logoFont(style="font-size: 90px;") Research Book
-            p(style="font-size: 20px;") 설문조사 커뮤니티 "Research Book"을 지금 시작해보세요.
-            button(data-toggle="modal" data-target="#login").indexBtn#startBtn 시작하기
-
-    #infoBox.container
-      .row.text-center
-        h1 Menu
-      .row.text-center
-        .col-md-4.col-sm-12
-          .infoIcon
-            img(src="/img/pen-icon.png")
-          .infoExplan
-            h2 조사등록
-            p 평소 궁금했던 질문들을 등록함으로써 궁금증을 해결할 수 있습니다.
-        .col-md-4.col-sm-12
-          .infoIcon
-            img(src="/img/check-icon.png")
-          .infoExplan
-            h2 조사참여
-            p 조사에 참여하여 도움도 주고 이벤트 당첨의 기회를 얻을 수 있습니다.
-        .col-md-4.col-sm-12
-          .infoIcon
-            img(src="/img/group-icon.png")
-          .infoExplan
-            h2 커뮤니티
-            p 조사 결과를 통하여 많은 사람들의 생각을 엿볼 수 있습니다.
-  #footer.container.visible-md.visible-lg
-    hr
-    .row
-      .col-md-4
-        strong 2015 홀가분 (HOLGABUN)
-      .col-md-3.col-md-offset-5.text-right
-        a(href="mailto:enon.jeong@gmail.com") enon.jeong@gmail.com
+        .col-sm-4
+          strong 2015 홀가분 (HOLGABUN)
+        .col-sm-3.col-sm-offset-5.text-right
+          a(href="mailto:enon.jeong@gmail.com") enon.jeong@gmail.com

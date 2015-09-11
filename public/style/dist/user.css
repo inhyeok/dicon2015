@@ -6910,3 +6910,12 @@ small {
 #questionBox #questionContent ul li p {
   display: inline-block;
 }
+#user {
+  margin-top: 3%;
+}
+#user #userImg {
+  width: 100%;
+  height: 250px;
+  background: url("/img/zari.jpg") no-repeat;
+  background-size: 100% 250px;
+}

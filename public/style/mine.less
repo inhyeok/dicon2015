@@ -2,27 +2,28 @@
 
 @icon-font-path: "/bootstrap/dist/fonts/";
 
+@darkBlue: #364659;
+@red: #E22222;
+@gray: #E3E3E3;
+@darkGray: #4E5259;
+
 @font-face{font-family:'smile'; src:url('/fonts/smile.otf')}
 body {font-family: 'smile', sans-serif;}
 ul{margin: 0;}
 li {list-style:none}
 a{text-decoration:none;}
 .logoFont{font-family: "SignPainter";}
+input{color: @darkBlue;}
 input:focus{outline-width:0;}
 button:focus{outline-width:0;}
 #footer{margin-bottom: 2%;}
+small{color: @darkGray;}
 
-@darkBlue: #364659;
-@red: #E22222;
-@gray: #E3E3E3;
 
 .btn{
-  width:200px;
   background:@darkBlue;
   color: #fff;
   border: none;
-  padding-top: 10px;
-  margin-top: 10px;
 }
 
 #indexBox{
@@ -72,14 +73,14 @@ button:focus{outline-width:0;}
 
 #login{
   #loginForm{
-    input{margin-bottom: 3%; color: @darkBlue;}
+    input{margin-bottom: 3%;}
   }
 }
 
 #sign{
   #signInput{
     padding:5% 0;
-    input{margin-bottom: 1%; color: @darkBlue;}
+    input{margin-bottom: 1%;}
     .labelBox{height:auto;}
     .error{height:auto; color: @red;}
   }

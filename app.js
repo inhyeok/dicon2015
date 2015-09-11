@@ -11,6 +11,7 @@ var express = require('express')
 
 var routes = require('./routes/index');
 var vote = require('./routes/vote');
+var user = require('./routes/user');
 
 app.set('views', __dirname + '/views'); // general config
 app.set('view engine', 'jade');
@@ -26,6 +27,7 @@ app.use(methodOverride('_method'));
 
 app.use('/', routes);
 app.use('/vote', vote);
+app.use('/user', user);
 
 
 // catch 404 and forward to error handler

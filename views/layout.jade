@@ -5,6 +5,7 @@ html
     meta(charset = "utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     link(rel = "stylesheet" href = "/style/dist/mine.css")
+    block style
     script(type = "text/javascript" src = "/jquery/dist/jquery.min.js")
     script(type = "text/javascript" src = "/bootstrap/dist/js/bootstrap.min.js")
     script(type = "text/javascript" src = "/jquery.inputmask/dist/inputmask/jquery.inputmask.js")
@@ -12,7 +13,20 @@ html
     script(type = "text/javascript" src = "/formvalidation/dist/js/formValidation.min.js")
     script(type = "text/javascript" src = "/formvalidation/dist/js/framework/bootstrap.min.js")
     script(type = "text/javascript" src = "/js/dist/mine.js")
-    script(type = "text/javascript" src = "/js/dist/vote.js")
     block script
   body
+    #header
+        .row
+          .col-md-12.text-center
+            h1#hlogo.logoFont
+              a(href='/main') Research BOOK
+    #menuBar.row
+      a(href='/all')
+        .col-md-3.col-xs-6.text-center 모든 조사
+      a(href='/new')
+        .col-md-3.col-xs-6.text-center 새로운 조사
+      a(href='/time')
+        .col-md-3.col-xs-6.text-center 마감임박 조사
+      a(href='/user')
+        .col-md-3.col-xs-6.text-center USER
     block content

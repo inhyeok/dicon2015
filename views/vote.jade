@@ -1,20 +1,11 @@
 extends layout
-block content
-  #header
-    .row
-      .col-md-12.text-center
-        h1#hlogo.logoFont
-          a(href='/main') Research BOOK
-  #menu-bar.row
-    a(href='/all')
-      .col-md-3.col-xs-6.text-center 모든 조사
-    a(href='/new')
-      .col-md-3.col-xs-6.text-center 새로운 조사
-    a(href='/time')
-      .col-md-3.col-xs-6.text-center 마감임박 조사
-    a(href='#')
-      .col-md-3.col-xs-6.text-center USER
 
+block style
+
+block script
+  script(type = "text/javascript" src = "/js/dist/vote.js")
+
+block content
   #mainBox.container
     #questionBox
       #questionInfo.row
@@ -25,23 +16,23 @@ block content
       #questionContent.row
         ul#answerList
           li
-            input#answer1(type='checkbox', value='라면')
+            input#answer1(type='checkbox' value='라면')
             p 라면
 
           li
-            input#answer2(type='checkbox', value='족발')
+            input#answer2(type='checkbox' value='족발')
             p 족발
 
           li
-            input#answer3(type='checkbox', value='보쌈')
+            input#answer3(type='checkbox' value='보쌈')
             p 보쌈
 
           li
-            input#answer4(type='checkbox', value='치킨')
+            input#answer4(type='checkbox' value='치킨')
             p 치킨
 
           li
-            input#answer5(type='checkbox', value='피자')
+            input#answer5(type='checkbox' value='피자')
             p 피자
 
         .row.text-center
