@@ -6882,12 +6882,13 @@ small {
   height: auto;
   color: #e22222;
 }
-#user {
-  margin-top: 3%;
-}
-#user #userImg {
+#createVote label {
   width: 100%;
-  height: 250px;
-  background: url("/img/zari.jpg") no-repeat;
-  background-size: 100% 250px;
+  text-align: right;
+}
+#createVote #voteContent {
+  padding-top: 2%;
+}
+#createVote #voteContent #answer {
+  margin-bottom: 20px;
 }

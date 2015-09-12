@@ -31,3 +31,12 @@ block content
             .row.form-group
               .col-sm-4
                 button.btn.btn-block 저장
+    #voteList
+      .row
+        .col-sm-4
+          for vote in voteList
+            h4= vote.question
+            label 시작일:&nbsp;&nbsp;
+              small= vote.createAt
+            label 마감일:&nbsp;&nbsp;
+              small= vote.finishAt

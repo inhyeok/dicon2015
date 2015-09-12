@@ -9,7 +9,6 @@ var pool = mysql.createPool({
   database: 'dicon2015'
 });
 
-var md5 = crypto.createHash('md5'); //hash md5 생성
 
 router.get('/', function (req, res, next) {
   res.render('index', {title: 'dicon'});
@@ -18,6 +17,7 @@ router.get('/', function (req, res, next) {
 router.post('/login', function (req, res, next) {
   var l_email = req.body.l_email;
   var l_pw = req.body.l_pw || '';
+  var md5 = crypto.createHash('md5'); //hash md5 생성
   l_pw = md5.update(l_pw).digest('hex'); //md5 값 변환
   pool.getConnection(function (err, connection) {
     connection.query('SELECT u_pw FROM users WHERE u_email=?', [l_email], function (err, rows) {
@@ -48,6 +48,7 @@ router.post('/sign', function (req, res, next) {
   var u_email = req.body.u_email;
   var u_pw = req.body.u_pw || '';
   var u_ph = req.body.u_ph;
+  var md5 = crypto.createHash('md5'); //hash md5 생성
   u_pw = md5.update(u_pw).digest('hex'); //md5 값 변환
   var user = [u_name, u_email, u_pw, u_ph];
   pool.getConnection(function (err, connection) {
@@ -60,6 +61,7 @@ router.post('/sign', function (req, res, next) {
 });
 
 router.get('/main', function (req, res, next) {
+  console.log(req);
   res.render('main', {title: 'dicon'});
 });
 

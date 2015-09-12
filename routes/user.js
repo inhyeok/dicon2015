@@ -8,12 +8,12 @@ var pool = mysql.createPool({
   database: 'dicon2015'
 });
 
-router.param('user_id', function (req, res, next, id) {
-  if(!isFinite(+id)){
+router.param('user_id', function (req, res, next, u_id) {
+  if(!isFinite(+u_id)){
     return next(new Error('user_id invalid'));
   }
   pool.getConnection(function(err, connection) {
-    connection.query('SELECT * FROM users WHERE id=?', +id, function(err, rows) {
+    connection.query('SELECT * FROM users WHERE u_id=?', +u_id, function(err, rows) {
       if(err) console.log(err);
       connection.release();
 
@@ -31,8 +31,23 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/:user_id', function (req, res, next) {
-  console.log(req);
-  res.render('user', {title: 'user', user: req.user});
+  pool.getConnection(function (err, connection) {
+    connection.query('SELECT * FROM voteList WHERE u_id=?', req.user.u_id, function (err, rows) {
+      if(err) console.log(err);
+      connection.release();
+      res.render('user', {title: 'user', user: req.user, voteList: rows});
+    });
+  });
+});
+
+router.post('/:user_id', function (req, res, next) {
+  pool.getConnection(function (err, connection) {
+    connection.query('UPDATE users SET u_name=?, u_email=?, u_ph=?, u_self=? WHERE u_id=? ', req.user.u_id, function (err, rows) {
+      if(err) console.log(err);
+      connection.release();
+      res.render('user', {title: 'user', user: req.user, voteList: rows});
+    });
+  });
 });
 
 module.exports = router;

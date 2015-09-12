@@ -14,10 +14,11 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~2.1.1",
     "bootstrap": "~3.3.5",
     "formvalidation": "https://github.com/formvalidation/formvalidation.git",
+    "jquery": "~2.1.1",
+    "jquery.inputmask": "*",
     "moment": "~2.8.0",
-    "jquery.inputmask": "*"
+    "sweetalert": "~1.1.0"
   }
 }

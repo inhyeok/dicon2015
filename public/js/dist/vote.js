@@ -4,26 +4,36 @@
       var answerNo, text;
       answerNo = $('#answerList li').length;
       if (answerNo === 10) {
-        return alert('더 이상 추가할 수 없습니다.');
+        alert('더 이상 추가할 수 없습니다.');
       } else {
-        text = '<li><input type="text" placeholder="항목이름 입력" id="answerValue#{@answerNo}" /></li>';
-        return $('#answerList').append(text);
+        text = '<input id="answer" type="text" name="answer" placeholder="항목 입력" class="form-control"/>';
+        $('#answerList').append(text);
       }
+      return false;
     };
     this.answerDel = function() {
       var answerNo;
-      answerNo = $('#answerList li').length;
+      answerNo = $('#answerList input').length;
       if (answerNo === 1) {
-        return alert('더 이상 삭제할 수 없습니다.');
+        swal({
+          title: '삭제실패',
+          text: '더 이상 삭제할 수 없습니다.',
+          type: 'error'
+        });
       } else {
-        return $('#answerList li:last').remove();
+        $('#answerList input:last').remove();
       }
+      return false;
     };
     this.voteOk = function() {
       var checkNo;
       checkNo = $('#answerList li input:checked').length;
       if (checkNo !== 1) {
-        alert("하나만 선택해 주세요.");
+        swal({
+          title: '투표실패',
+          text: '한개의 항목만 선택해주세요.',
+          type: 'warning'
+        });
         return false;
       } else {
         return true;

@@ -6882,31 +6882,3 @@ small {
   height: auto;
   color: #e22222;
 }
-#questionBox {
-  margin: 5%;
-}
-#questionBox #questionInfo #userImg img {
-  width: 150px;
-}
-#questionBox #questionInfo #voteTitle {
-  width: 100%;
-  margin-top: 5%;
-}
-#questionBox #questionContent {
-  padding-top: 5%;
-}
-#questionBox #questionContent ul li {
-  border: 1px solid #e3e3e3;
-  width: 95%;
-  height: 50px;
-  font-size: 20px;
-  padding: 10px;
-  margin-bottom: 20px;
-}
-#questionBox #questionContent ul li input {
-  margin-right: 10px;
-  border: none;
-}
-#questionBox #questionContent ul li p {
-  display: inline-block;
-}
