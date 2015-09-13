@@ -6890,5 +6890,8 @@ small {
   padding-top: 2%;
 }
 #createVote #voteContent #answer {
-  margin-bottom: 20px;
+  margin-bottom: 2%;
+}
+#createVote #voteContent .controlBtn {
+  cursor: pointer;
 }
