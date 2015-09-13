@@ -15,45 +15,44 @@ block content
         .row.form-group#voteTitle
           .col-sm-2
             label 제목 :
-          .col-sm-10
+          .col-sm-8
             input.form-control#question(type="text" placeholder="제목 입력")
+          .col-sm-2
+            .col-sm-6.col-xs-6
+              input(type='radio' value='Y' name='secret' checked='checked')
+              small &nbsp;&nbsp;공개
+            .col-sm-6.col-xs-6
+              input(type='radio' value='N' name='secret')
+              small &nbsp;&nbsp;비공개
         .row.form-group#voteContent
           .col-sm-2
             label 질문 항목 :
-            .row.form-group
-              .col-sm-4
-                a#answerAdd.controlBtn(onclick="answerAdd()") 추가
-              .col-sm-4
-                a#answerDel.controlBtn(onclick="answerDel()") 삭제
-          .col-sm-10#answerList
+          .col-sm-8#answerList
             input.form-control#answer(type='text' name='answer' placeholder="항목 입력")
+          .col-sm-2
+            .col-sm-6.col-xs-6
+              a#answerAdd.controlBtn(onclick="answerAdd()") 추가
+            .col-sm-6.col-xs-6
+              a#answerDel.controlBtn(onclick="answerDel()") 삭제
         .row.form-group
           .col-sm-2
             label 기타 항목 :
-          .col-sm-5
+          .col-sm-8
             select.form-control#ath
               option(value='Y') 사용
               option(value='N') 사용안함
-          .col-sm-5
-            small 항목 이외의 답변을 문장형식으로 받을 수 있습니다.
-        .row.form-group
-          .col-sm-2
-            label 비밀 조사:
-          .col-sm-5
-            select.form-control#secret
-              option(value='Y') 사용
-              option(value='N') 사용안함
-          .col-sm-5
-            small 조사 결과를 자신만 볼 수 있습니다.
+            small 항목 이외의 답변을 유저들이 추가하여 투표를 할 수 있습니다.
         .row.form-group
           .col-sm-2
             label 조사 기간 :
-          .col-sm-5
-            select.form-control#term
-              option(value='Y') 사용
-              option(value='N') 사용안함
-          .col-sm-5
-            small 조사 결과를 자신만 볼 수 있습니다.
+          .col-sm-8
+            .row.form-group
+              .col-sm-6
+                small 시작일&nbsp;&nbsp;
+                input.form-control(type='date' name='createAt')
+              .col-sm-6
+                small 마감일&nbsp;&nbsp;
+                input.form-control(type='date' name='finishAt')
         br
         .row.form-group
           .col-sm-4.col-sm-offset-2.col-xs-6
