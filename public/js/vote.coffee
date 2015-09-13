@@ -1,4 +1,8 @@
 jQuery ->
+
+	today = moment(Date()).format('YYYY-MM-DD')
+	$('#createAt').val(today)
+
 	@answerAdd = () ->
 		answerNo = $('#answerList li').length
 		if answerNo is 10

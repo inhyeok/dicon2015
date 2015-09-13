@@ -1,5 +1,8 @@
 (function() {
   jQuery(function() {
+    var today;
+    today = moment(Date()).format('YYYY-MM-DD');
+    $('#createAt').val(today);
     this.answerAdd = function() {
       var answerNo, text;
       answerNo = $('#answerList li').length;
