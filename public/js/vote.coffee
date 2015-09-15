@@ -1,7 +1,16 @@
 jQuery ->
 
-	today = moment(Date()).format('YYYY-MM-DD')
-	$('#createAt').val(today)
+	todayDate = moment(Date()).format('YYYY-MM-DD')
+	todayAt = moment(Date()).format('HH:mm')
+	$('#createDate').val(todayDate)
+	$('#createAt').val(todayAt)
+	$('#finishDate').attr('min', todayDate)
+
+	@createVote = () ->
+		$ajax
+			type: 'PUT'
+			url: '/vote/create/'
+			data: avc
 
 	@answerAdd = () ->
 		answerNo = $('#answerList li').length

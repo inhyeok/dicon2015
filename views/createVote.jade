@@ -49,10 +49,18 @@ block content
             .row.form-group
               .col-sm-6
                 small 시작일&nbsp;&nbsp;
-                input.form-control#createAt(type='date' name='createAt')
+                .row
+                  .col-sm-6
+                    input.form-control#createDate(type='date' name='createDate')
+                  .col-sm-6
+                    input.form-control#createAt(type='time' name='createAt')
               .col-sm-6
                 small 마감일&nbsp;&nbsp;
-                input.form-control#finishAt(type='date' name='finishAt' min=createAt)
+                .row
+                  .col-sm-6
+                    input.form-control#finishDate(type='date' name='finishDate')
+                  .col-sm-6
+                    input.form-control#finishAt(type='time' name='finishAt')
         br
         .row.form-group
           .col-sm-4.col-sm-offset-2.col-xs-6
