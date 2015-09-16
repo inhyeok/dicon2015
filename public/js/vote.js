@@ -6,6 +6,9 @@ jQuery(function() {
   $('#createDate').val(todayDate);
   $('#createAt').val(todayAt);
   $('#finishDate').attr('min', todayDate);
+  if ($('#createDate').val() === $('#finishDate').val()) {
+    $('#finishDate').attr('min', $('#createAt').val());
+  }
   this.createVote = function() {
     return $ajax({
       type: 'PUT',
@@ -19,7 +22,7 @@ jQuery(function() {
     if (answerNo === 10) {
       alert('더 이상 추가할 수 없습니다.');
     } else {
-      text = '<input id="answer" type="text" name="answer" placeholder="항목 입력" class="form-control"/>';
+      text = '<input id="answer" type="text" name="answer" placeholder="항목 입력" class="form-control" required/>';
       $('#answerList').append(text);
     }
     return false;

@@ -5,6 +5,8 @@ jQuery ->
 	$('#createDate').val(todayDate)
 	$('#createAt').val(todayAt)
 	$('#finishDate').attr('min', todayDate)
+	if $('#createDate').val() is $('#finishDate').val()
+		$('#finishDate').attr('min', $('#createAt').val())
 
 	@createVote = () ->
 		$ajax
@@ -17,7 +19,7 @@ jQuery ->
 		if answerNo is 10
 			alert '더 이상 추가할 수 없습니다.'
 		else
-			text = '<input id="answer" type="text" name="answer" placeholder="항목 입력" class="form-control"/>'
+			text = '<input id="answer" type="text" name="answer" placeholder="항목 입력" class="form-control" required/>'
 			$('#answerList').append(text)
 		false
 
