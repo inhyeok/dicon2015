@@ -77,4 +77,8 @@ router.get('/time', function (req, res, next) {
   res.render('time', {title: 'dicon'});
 });
 
+router.get('/ex', function (req, res, next) {
+  res.render('ex', {title: 'Ex'});
+});
+
 module.exports = router;

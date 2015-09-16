@@ -1,0 +1,135 @@
+@import "../../bower_components/bootstrap/less/bootstrap.less";
+
+body{background: #DEE8E9;}
+#all{
+  #nav{
+    position: fixed;
+    padding: 0;
+    background: #F2594B;
+    width: 7%;
+    height: 100%;
+    float: left;
+    #logo{
+      background: #E3E3E3;
+      height: 30px;
+      width: 80%;
+      margin: 10px 10%;
+    }
+    #menu{
+      margin-top: 30px;
+      position: relative;
+      .icon{
+        height: 50px;
+        text-align: center;
+        // border: 1px solid #E3E3E3;
+        margin-top: 10px;
+        font-size: 30px;
+        color: #fff;
+        &:hover{
+          background: #CD2C24;
+        }
+      }
+      #user{
+        margin-top: 200px;
+        div{margin-bottom: 5px;}
+        #user-icon{
+          vertical-align: middle;
+          width: 100%;
+          padding: 0 30%;
+          .u-icon{
+            width: 100%;
+            height: 50px;
+            background: #fff;
+          }
+        }
+        #user-name{
+          text-align: center;
+          color: #fff;
+        }
+        #logout{
+          padding: 5px;
+          text-align: center;
+          a{
+            border: 1px solid #E3E3E3;
+            border-radius: 10px;
+            padding: 3px 5px;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+  #content{
+    padding: 0;
+    margin-left: 7%;
+    width: 93%;
+    float: left;
+    #header{
+      background: #F2836B;
+      height: 50px;
+      #name{
+        float: left;
+        width: 7.5%;
+        .name-text{
+          height: 50px;
+          text-align: center;
+          // border: 1px solid #E3E3E3;
+          padding-top: 7px;
+          font-size: 20px;
+          color: #fff;
+        }
+      }
+      #plus-icon{
+        float: left;
+        .icon{
+          margin-top: 10px;
+          width: 30px;
+          height: 30px;
+          background: #fff;
+        }
+      }
+    }
+    #subcontent{
+      #title{
+        background: #F2E1AC;
+        height: 30px;
+        #t1{width: 40%; float: left; padding-left: 5%;}
+        .t{width: 12%; float: left; text-align: center;}
+      }
+      #boxs{
+        .box{
+          background: #fff;
+          height: 100px;
+          border-radius: 10px;
+          margin: 20px 30px;
+          border-bottom: 2px solid #AAB1BF;
+          &:hover{
+            border-bottom: 4px solid #AAB1BF;
+          }
+          .icon{
+            float: left;
+            width: 20px;
+            height: 30px;
+            background: #E3E3E3;
+            margin: 35px 10px;
+          }
+          #b1{
+            p{margin-top: 40px;}
+            width: 40%;
+            float: left;
+          }
+          .b{
+            margin-top: 40px;
+            width: 12%;
+            float: left;
+            text-align: center;
+            span{background: #DF8BA9; padding: 3px 8px; border-radius: 3px; color: #fff;}
+          }
+          .n{
+            margin-top: 20px;
+          }
+        }
+      }
+    }
+  }
+}
