@@ -20,7 +20,7 @@ router.post('/login', function (req, res, next) {
   var md5 = crypto.createHash('md5'); //hash md5 생성
   l_pw = md5.update(l_pw).digest('hex'); //md5 값 변환
   pool.getConnection(function (err, connection) {
-    connection.query('SELECT u_pw FROM users WHERE u_email=?', [l_email], function (err, rows) {
+    connection.query('SELECT * FROM users WHERE u_email=?', [l_email], function (err, rows) {
       if(err){
         console.log('Input ID is Wrong....');
         return res.redirect('/');
@@ -36,6 +36,7 @@ router.post('/login', function (req, res, next) {
         res.redirect('/');
       }
       else{
+        req.session.u_id = user.u_id;
         console.log('Login Success!!!!');
         res.redirect('/main');
       }
@@ -61,7 +62,7 @@ router.post('/sign', function (req, res, next) {
 });
 
 router.get('/main', function (req, res, next) {
-  console.log(req);
+  console.log(req.session);
   res.render('main', {title: 'dicon'});
 });
 

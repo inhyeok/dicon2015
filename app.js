@@ -7,7 +7,8 @@ var express = require('express')
   , serveStatic = require('serve-static')
   , cookieParser = require('cookie-parser')
   , bodyParser = require('body-parser')
-  , methodOverride = require('method-override');
+  , methodOverride = require('method-override')
+  , session = require('express-session');
 
 var routes = require('./routes/index');
 var vote = require('./routes/vote');
@@ -25,6 +26,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
 app.use(methodOverride('_method'));
+app.use(session({
+  secret: 'holgabun',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
 
 app.use('/', routes);
 app.use('/vote', vote);
