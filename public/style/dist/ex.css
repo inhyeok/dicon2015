@@ -6764,7 +6764,7 @@ button.close {
   }
 }
 body {
-  background: #DEE8E9;
+  background: #EEF1F5;
 }
 #all #nav {
   position: fixed;
@@ -6906,4 +6906,59 @@ body {
 }
 #all #content #subcontent #boxs .box .n {
   margin-top: 20px;
+}
+#ex2 #contents {
+  width: 56%;
+  margin: 80px auto;
+}
+#ex2 #contents #title {
+  color: #8C9092;
+  padding-bottom: 20px;
+}
+#ex2 #contents #title p {
+  font-size: 24px;
+}
+#ex2 #contents #title small {
+  font-size: 11px;
+}
+#ex2 #contents #form-box {
+  background: #fff;
+  padding: 10px 30px 40px 30px;
+  border: 2px solid #EAEDF1;
+}
+#ex2 #contents #form-box .form-group {
+  margin-top: 20px;
+}
+#ex2 #contents #form-box .plus-ment {
+  padding-top: 10px;
+  color: #B8B9BA;
+  font-size: 10px;
+}
+#ex2 #contents #form-box label {
+  color: #8A8B8C;
+  font-size: 12px;
+}
+#ex2 #contents #form-box .form-control {
+  height: 40px;
+  margin-top: 10px;
+  border-color: #EAEDF1;
+  box-shadow: none;
+}
+#ex2 #contents #form-box input[type=checkbox] {
+  -ms-transform: scale(1.3);
+  /* IE */
+  -moz-transform: scale(1.3);
+  /* FF */
+  -webkit-transform: scale(1.3);
+  /* Safari and Chrome */
+  -o-transform: scale(1.3);
+  /* Opera */
+}
+#ex2 #contents #form-box #btn1 {
+  background: #56ADF0;
+  border-color: #56ADF0;
+  color: #E5F2FB;
+}
+#ex2 #contents #form-box #btn2 {
+  color: #EAEDF1;
 }

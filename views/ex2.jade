@@ -1,0 +1,51 @@
+doctype html
+html
+  head
+    title= title
+    meta(charset = "utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel = "stylesheet" href = "/style/dist/ex.css")
+    script(type = "text/javascript" src = "/jquery/dist/jquery.min.js")
+    script(type = "text/javascript" src = "/bootstrap/dist/js/bootstrap.min.js")
+  body
+    #ex2
+      #contents
+        #title.text-center
+          p Registration
+          small Full Admin template with very clean and aesthetic style prepared for your app.
+        #form-box
+          form
+            .row
+              .col-sm-12
+                .form-group
+                  label Username
+                  input.form-control
+                  p.plus-ment Your unique Username to app
+            .row
+              .col-sm-6
+                .form-group
+                  label Password
+                  input.form-control
+              .col-sm-6
+                .form-group
+                  label Repeat Password
+                  input.form-control
+            .row
+              .col-sm-6
+                .form-group
+                  label Email Address
+                  input.form-control
+              .col-sm-6
+                .form-group
+                  label Repeat Email Address
+                  input.form-control
+            .row
+              .col-sm-12
+                .form-group
+                  input(type='checkbox' checked)
+                  label &nbsp;&nbsp;&nbsp;&nbsp;sign up for our newsletter
+            .row
+              .col-sm-2.col-sm-offset-4
+                input.btn.btn-block.form-control#btn1(type='button' value='Register')
+              .col-sm-2
+                input.btn.btn-block.form-control#btn2(type='button' value='Register')
