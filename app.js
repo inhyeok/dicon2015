@@ -28,11 +28,12 @@ app.use(express.static(path.join(__dirname, 'bower_components')));
 app.use(methodOverride('_method'));
 app.use(session({
   cookieName: 'session',
+  requestKey: 'session',
   secret: 'holgabun',
   duration: 24 * 60 * 60 * 1000,
   activeDuration: 1000 * 60 * 5,
   httpOnly: true,
-  secure: true,
+  secure: false,
   ephemeral: true
 }));
 
