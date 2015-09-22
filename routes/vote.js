@@ -37,7 +37,7 @@ router.get('/create', function (req, res, next) {
 router.post('/create', function (req, res, next) {
   pool.getConnection(function (err, connection) {
     var data = req.body;
-    connection.query('INSERT INTO voteList( question, answer, ath, secret, createDate, createAt, finishDate, finishAt) VALUES (?,?,?,?,?,?,?,?)', data.question, data.answer, data.ath, data.secret, data.createDate, data.createAt, data.finishDate, data.finishAt, function (err, rows) {
+    connection.query('INSERT INTO voteList( u_id, question, answer, ath, secret, createDate, createAt, finishDate, finishAt) VALUES (2,?,?,?,?,?,?,?,?)', data.question, data.answer, data.ath, data.secret, data.createDate, data.createAt, data.finishDate, data.finishAt, function (err, rows) {
       if(err) console.log(err);
       connection.release();
 

@@ -8,7 +8,7 @@ var express = require('express')
   , cookieParser = require('cookie-parser')
   , bodyParser = require('body-parser')
   , methodOverride = require('method-override')
-  , session = require('express-session');
+  , session = require('client-sessions');
 
 var routes = require('./routes/index');
 var vote = require('./routes/vote');
@@ -27,10 +27,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
 app.use(methodOverride('_method'));
 app.use(session({
+  cookieName: 'session',
   secret: 'holgabun',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
+  duration: 24 * 60 * 60 * 1000,
+  activeDuration: 1000 * 60 * 5,
+  httpOnly: true,
+  secure: true,
+  ephemeral: true
 }));
 
 app.use('/', routes);

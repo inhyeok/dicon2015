@@ -36,7 +36,8 @@ router.post('/login', function (req, res, next) {
         res.redirect('/');
       }
       else{
-        req.session.u_id = user.u_id;
+        req.session.user = user;
+        console.log(req.session);
         console.log('Login Success!!!!');
         res.redirect('/main');
       }
@@ -62,7 +63,6 @@ router.post('/sign', function (req, res, next) {
 });
 
 router.get('/main', function (req, res, next) {
-  console.log(req.session);
   res.render('main', {title: 'dicon'});
 });
 
