@@ -7,9 +7,10 @@ block script
 block content
   #mainBox.container
     #user
-      form.form-horizontal#userInfo()
+      form.form-horizontal#userInfo(action='/user/'+user.u_id method='POST')
         .row.form-group
           .col-sm-3
+            //- p= user.u_id
             #userImg
             input.form-control#u_img(type='file' name='u_img')
           .col-sm-9
@@ -27,7 +28,7 @@ block content
               .col-sm-12
                 label 자기소개
                   small &nbsp;&nbsp;간단한 자기소개를 적어주세요~
-                textarea.form-control#u_self(rows=5 name='u_self')=u_self
+                textarea.form-control#u_self(rows=5 name='u_self')= user.u_self
             .row.form-group
               .col-sm-4
                 button.btn.btn-block 저장

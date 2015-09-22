@@ -26,9 +26,10 @@ router.param('user_id', function (req, res, next, u_id) {
   });
 })
 
-router.get('/', function (req, res, next) {
-  res.redirect('/user/'+user_id);
-});
+// router.get('/', function (req, res, next) {
+//   console.log(req.session.user.u_id);
+//   res.redirect('/user/'+req.session.user.u_id);
+// });
 
 router.get('/:user_id', function (req, res, next) {
   pool.getConnection(function (err, connection) {
@@ -42,10 +43,12 @@ router.get('/:user_id', function (req, res, next) {
 
 router.post('/:user_id', function (req, res, next) {
   pool.getConnection(function (err, connection) {
-    connection.query('UPDATE users SET u_name=?, u_email=?, u_ph=?, u_self=? WHERE u_id=? ', req.user.u_id, function (err, rows) {
+    user_form = req.body;
+    connection.query('UPDATE users SET u_name=?, u_email=?, u_ph=?, u_self=? WHERE u_id=? ', [user_form.u_name, user_form.u_email, user_form.u_ph, user_form.u_self, req.user.u_id], function (err, rows) {
       if(err) console.log(err);
       connection.release();
-      res.render('user', {title: 'user', user: req.user, voteList: rows});
+      req.session.user = req.user; //session update
+      res.redirect('/user/'+req.session.user.u_id, {title: 'user', user: req.session.user});
     });
   });
 });

@@ -37,7 +37,7 @@ router.post('/login', function (req, res, next) {
       }
       else{
         req.session.user = user;
-        console.log(req.session);
+        console.log(req.session.user);
         console.log('Login Success!!!!');
         res.redirect('/main');
       }
@@ -63,19 +63,20 @@ router.post('/sign', function (req, res, next) {
 });
 
 router.get('/main', function (req, res, next) {
-  res.render('main', {title: 'dicon'});
+  console.log(req.session.user.u_id);
+  res.render('main', {title: 'dicon', user: req.session.user});
 });
 
 router.get('/all', function (req, res, next) {
-  res.render('all', {title: 'dicon'});
+  res.render('all', {title: 'dicon',  user: req.session.user});
 });
 
 router.get('/new', function (req, res, next) {
-  res.render('new', {title: 'dicon'});
+  res.render('new', {title: 'dicon',  user: req.session.user});
 });
 
 router.get('/time', function (req, res, next) {
-  res.render('time', {title: 'dicon'});
+  res.render('time', {title: 'dicon',  user: req.session.user});
 });
 
 module.exports = router;
