@@ -44,11 +44,12 @@ router.get('/:user_id', function (req, res, next) {
 router.post('/:user_id', function (req, res, next) {
   pool.getConnection(function (err, connection) {
     user_form = req.body;
-    connection.query('UPDATE users SET u_name=?, u_email=?, u_ph=?, u_self=? WHERE u_id=? ', [user_form.u_name, user_form.u_email, user_form.u_ph, user_form.u_self, req.user.u_id], function (err, rows) {
+    var u_id = req.session.user.u_id;
+    connection.query('UPDATE users SET u_name=?, u_email=?, u_ph=?, u_self=? WHERE u_id=? ', [user_form.u_name, user_form.u_email, user_form.u_ph, user_form.u_self, u_id], function (err, rows) {
       if(err) console.log(err);
       connection.release();
       req.session.user = req.user; //session update
-      res.redirect('/user/'+req.session.user.u_id, {title: 'user', user: req.session.user});
+      res.redirect('/user/'+u_id);
     });
   });
 });
