@@ -9,13 +9,7 @@ jQuery(function() {
   if ($('#createDate').val() === $('#finishDate').val()) {
     $('#finishDate').attr('min', $('#createAt').val());
   }
-  this.createVote = function() {
-    return $ajax({
-      type: 'PUT',
-      url: '/vote/create/',
-      data: avc
-    });
-  };
+  this.createVote = function() {};
   this.answerAdd = function() {
     var answerNo, text;
     answerNo = $('#answerList li').length;

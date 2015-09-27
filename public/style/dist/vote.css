@@ -6882,6 +6882,11 @@ small {
   height: auto;
   color: #e22222;
 }
+#user-vote div {
+  border: 1px solid #e3e3e3;
+  height: 150px;
+  margin: 5px 10px;
+}
 #createVote label {
   width: 100%;
   text-align: right;

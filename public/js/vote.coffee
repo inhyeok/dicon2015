@@ -9,10 +9,10 @@ jQuery ->
 		$('#finishDate').attr('min', $('#createAt').val())
 
 	@createVote = () ->
-		$ajax
-			type: 'PUT'
-			url: '/vote/create/'
-			data: avc
+		# $ajax
+		# 	type: 'PUT'
+		# 	url: '/vote/create'
+		# 	data: avc
 
 	@answerAdd = () ->
 		answerNo = $('#answerList li').length
