@@ -27,22 +27,25 @@ router.param('user_id', function (req, res, next, u_id) {
 })
 
 router.get('/', function (req, res, next) {
-  res.render('vote', {title: 'vote'});
+  var user = req.session.user;
+  res.render('vote', {title: 'vote', user: user});
 });
 
 router.get('/create', function (req, res, next) {
-  res.render('createvote', {title: 'create'});
+  var user = req.session.user;
+  res.render('createvote', {title: 'create', user: user});
 });
 
 router.post('/create', function (req, res, next) {
+  var user = req.session.user;
   pool.getConnection(function (err, connection) {
     var data = req.body;
-    var u_id = req.session.user.u_id;
-    connection.query('INSERT INTO voteList( u_id, question, answer, ath, secret, createTime, finishTime) VALUES (?,?,?,?,?,?,?)', u_id, data.question, data.answer, data.ath, data.secret, function (err, rows) {
+    createTime = data.createDate+" "+data.createAt;
+    finishTime = data.finishDate+" "+data.finishAt;
+    connection.query('INSERT INTO vote_list( u_id, question, answer, ath, secret, createTime, finishTime) VALUES (?,?,?,?,?,?,?)', [user.u_id, data.question, data.answer, data.ath, data.secret, createTime, finishTime], function (err, rows) {
       if(err) console.log(err);
       connection.release();
-
-      res.redirect('/user/'+u_id);
+      res.redirect('/user/'+user.u_id);
     });
   });
 });

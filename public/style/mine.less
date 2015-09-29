@@ -7,8 +7,9 @@
 @gray: #E3E3E3;
 @darkGray: #4E5259;
 
+body {font-family: 'smile', sans-serif; background: #F0F0F0;}
+
 @font-face{font-family:'smile'; src:url('/fonts/smile.otf')}
-body {font-family: 'smile', sans-serif;}
 ul{margin: 0;}
 li {list-style:none}
 a{text-decoration:none;}
@@ -19,6 +20,12 @@ button:focus{outline-width:0;}
 #footer{margin-bottom: 2%;}
 small{color: @darkGray;}
 
+.content{
+  background: #fff;
+  padding: 20px 30px;
+  margin: 20px 0px;
+  border-radius: 5px;
+}
 
 .btn{
   background:@darkBlue;
@@ -83,13 +90,5 @@ small{color: @darkGray;}
     input{margin-bottom: 1%;}
     .labelBox{height:auto;}
     .error{height:auto; color: @red;}
-  }
-}
-
-#user-vote{
-  div{
-    border: 1px solid @gray;
-    height: 150px;
-    margin: 5px 10px;
   }
 }

@@ -63,20 +63,47 @@ router.post('/sign', function (req, res, next) {
 });
 
 router.get('/main', function (req, res, next) {
-  console.log(req.session.user.u_id);
-  res.render('main', {title: 'dicon', user: req.session.user});
+  var user = req.session.user;
+  pool.getConnection(function (err, connection) {
+    connection.query('SELECT * FROM vote_list', function (err, rows) {
+      if(err) console.log(err);
+      connection.release();
+      res.render('main', {title: 'dicon', user: user, vote_list: rows});
+    });
+  });
 });
 
 router.get('/all', function (req, res, next) {
-  res.render('all', {title: 'dicon',  user: req.session.user});
+  var user = req.session.user;
+  pool.getConnection(function (err, connection) {
+    connection.query('SELECT * FROM vote_list', function (err, rows) {
+      if(err) console.log(err);
+      connection.release();
+      res.render('all', {title: 'dicon',  user: user, vote_list: rows});
+    });
+  });
 });
 
 router.get('/new', function (req, res, next) {
-  res.render('new', {title: 'dicon',  user: req.session.user});
+  var user = req.session.user;
+  pool.getConnection(function (err, connection) {
+    connection.query('SELECT * FROM vote_list', function (err, rows) {
+      if(err) console.log(err);
+      connection.release();
+      res.render('new', {title: 'dicon',  user: user, vote_list: rows});
+    });
+  });
 });
 
 router.get('/time', function (req, res, next) {
-  res.render('time', {title: 'dicon',  user: req.session.user});
+  var user = req.session.user;
+  pool.getConnection(function (err, connection) {
+    connection.query('SELECT * FROM vote_list', function (err, rows) {
+      if(err) console.log(err);
+      connection.release();
+      res.render('time', {title: 'dicon',  user: user, vote_list: rows});
+    });
+  });
 });
 
 module.exports = router;
