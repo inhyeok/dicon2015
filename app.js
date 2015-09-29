@@ -15,6 +15,7 @@ var vote = require('./routes/vote');
 var user = require('./routes/user');
 var ex = require('./routes/ex');
 
+app.locals.moment = require('moment');
 app.set('views', __dirname + '/views'); // general config
 app.set('view engine', 'jade');
 
