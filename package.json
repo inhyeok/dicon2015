@@ -21,6 +21,7 @@
     "bower-endpoint-parser": "^0.2.2",
     "client-sessions": "^0.7.0",
     "crypto-js": "^3.1.5",
+    "moment": "^2.10.6",
     "validator": "^4.0.5"
   }
 }
