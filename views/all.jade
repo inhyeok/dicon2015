@@ -5,62 +5,25 @@ block style
 block script
 
 block content
-  #mainBox.container
-    #all-table.row
-      h3 모든 조사
-      table.table.table-hover
-        thead.text-center
-          tr
-            td.col-md-6.col-xs-6 제목
-            td.col-md-2.col-xs-2 조회수
-            td.col-md-2.col-xs-2 등록일
-            td.col-md-2.col-xs-2 작성자
-        tbody
-          tr
-            td
-              a(href='#') [이벤트][마감] 야식하면 생각나는 음식은?? [1]
-            td.text-center 3
-            td.text-center 2014-02-14
-            td.text-center 개생키
-          tr
-            td
-              a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
-            td.text-center 3
-            td.text-center 2014-02-14
-            td.text-center 개생키
-          tr
-            td
-              a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
-            td.text-center 3
-            td.text-center 2014-02-14
-            td.text-center 개생키
-          tr
-            td
-              a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
-            td.text-center 3
-            td.text-center 2014-02-14
-            td.text-center 개생키
-          tr
-            td
-              a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
-            td.text-center 3
-            td.text-center 2014-02-14
-            td.text-center 개생키
-          tr
-            td
-              a(href='#') [이벤트][마감] 야식하면 생각나는 음식은?? [1]
-            td.text-center 3
-            td.text-center 2014-02-14
-            td.text-center 개생키
-          tr
-            td
-              a(href='#') [이벤트][마감] 야식하면 생각나는 음식은?? [1]
-            td.text-center 3
-            td.text-center 2014-02-14
-            td.text-center 개생키
-    #searchBox.col-md-12.text-center
-      input#search-all.search(type='text')
-      input(type='submit', value='검색')
+  #mainBox.container-fluid
+    .content
+      #all-table.row
+        h3 모든 조사
+        table.table.table-hover
+          thead.text-center
+            tr
+              td.col-md-6.col-xs-6 제목
+              td.col-md-2.col-xs-2 조회수
+              td.col-md-2.col-xs-2 등록일
+              td.col-md-2.col-xs-2 마감일
+          tbody
+            each vote in vote_list
+              tr
+                td
+                  a(href='#')= vote.question
+                td.text-center 3
+                td.text-center= moment(vote.createTime).format('YYYY-MM-DD HH:mm')
+                td.text-center= moment(vote.finishTime).format('YYYY-MM-DD HH:mm')
   #footer.container.visible-md.visible-lg
     hr
     .row
