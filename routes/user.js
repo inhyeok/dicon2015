@@ -32,26 +32,33 @@ router.param('user_id', function (req, res, next, u_id) {
 // });
 
 router.get('/:user_id', function (req, res, next) {
+  var user = req.session.user;
+  // console.log(req.user);
   pool.getConnection(function (err, connection) {
-    connection.query('SELECT * FROM voteList WHERE u_id=?', req.user.u_id, function (err, rows) {
+    connection.query('SELECT * FROM vote_list WHERE u_id=?', req.user.u_id, function (err, rows) {
       if(err) console.log(err);
       connection.release();
-      res.render('user', {title: 'user', user: req.user, voteList: rows});
+      res.render('user', {title: 'user', user_id: user.u_id, vote_list: rows, user: req.user});
     });
   });
 });
 
 router.post('/:user_id', function (req, res, next) {
+  var user = req.session.user;
   pool.getConnection(function (err, connection) {
     user_form = req.body;
-    var u_id = req.session.user.u_id;
-    connection.query('UPDATE users SET u_name=?, u_email=?, u_ph=?, u_self=? WHERE u_id=? ', [user_form.u_name, user_form.u_email, user_form.u_ph, user_form.u_self, u_id], function (err, rows) {
+    connection.query('UPDATE users SET u_name=?, u_email=?, u_ph=?, u_self=? WHERE u_id=? ', [user_form.u_name, user_form.u_email, user_form.u_ph, user_form.u_self, req.user.u_id], function (err, rows) {
       if(err) console.log(err);
       connection.release();
       req.session.user = req.user; //session update
-      res.redirect('/user/'+u_id);
+      res.redirect('/user/'+user.u_id);
     });
   });
+});
+
+router.get('/:user_id/logout', function (req, res, next) {
+  delete req.session.user;
+  res.redirect('/');
 });
 
 module.exports = router;
