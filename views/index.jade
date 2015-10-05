@@ -20,7 +20,7 @@ html
           .modal-header
             button.close(type="button", data-dismiss="modal") &times;
             h1.modal-title 로그인
-          form.form-horizontal#loginForm(action="/login", method="POST" role="form")
+          form.form-horizontal#login_form(action="/login", method="POST" role="form")
             .modal-body.col-sm-10.col-sm-offset-1.col-xs-10.col-xs-offset-1
               .row.form-group
                 label 이메일
@@ -34,7 +34,7 @@ html
               .form-group
                 .row
                   .col-sm-4.col-sm-offset-2
-                    button.btn.btn-block#loginBtn(type="submit") 로그인
+                    button.btn.btn-block#login_btn(type="submit") 로그인
                   .col-sm-4
                     button.btn.btn-block(type="submit") 페이스북
 
@@ -44,63 +44,61 @@ html
           .modal-header
             button.close(type="button", data-dismiss="modal") &times;
             h1.modal-title 회원가입
-          form.form-horizontal#signForm(action="/sign", method="POST" role="form")
+          form.form-horizontal#sign_form(action="/sign", method="POST" role="form")
             .modal-body.col-sm-10.col-sm-offset-1.col-xs-10.col-xs-offset-1
-              #signInput
-                .labelBox.form-group
-                  label 성명
-                  input#u_name.form-control(type='text' name="u_name")
-                .labelBox.form-group
-                  label 이메일
-                  input#u_email.form-control(type='text' name="u_email")
-                .labelBox.form-group
-                  label 비밀번호
-                    small &nbsp;&nbsp;(6~12 자 이내)
-                  input#u_pw.form-control(type='password' name="u_pw")
-                .labelBox.form-group
-                  label 비밀번호 확인
-                  input#u_pw_ck.form-control(type='password' name="u_pw_ck")
-                .labelBox.form-group
-                  label 휴대번호
-                    small &nbsp;&nbsp;('-' 제외)
-                  input#u_ph.form-control(type='text' name="u_ph")
+              .labelBox.form-group
+                label 성명
+                input#u_name.form-control(type='text' name="u_name")
+              .labelBox.form-group
+                label 이메일
+                input#u_email.form-control(type='text' name="u_email")
+              .labelBox.form-group
+                label 비밀번호
+                  small &nbsp;&nbsp;(6~12 자 이내)
+                input#u_pw.form-control(type='password' name="u_pw")
+              .labelBox.form-group
+                label 비밀번호 확인
+                input#u_pw_ck.form-control(type='password' name="u_pw_ck")
+              .labelBox.form-group
+                label 휴대번호
+                  small &nbsp;&nbsp;('-' 제외)
+                input#u_ph.form-control(type='text' name="u_ph")
             .modal-footer
               .form-group
                 .row
                   .col-sm-4.col-sm-offset-4
-                    button.btn.btn-block#signbtn(type="submit") 완료
+                    button.btn.btn-block#sign_btn(type="submit") 완료
 
-    #mainBox
-      #indexBox.jumboton
-        .row
-          #indexItem.col-sm-12
-            center
-              strong.logoFont(style="font-size: 90px;") Research Book
-              p(style="font-size: 20px;") 설문조사 커뮤니티 "Research Book"을 지금 시작해보세요.
-              button(data-toggle="modal" data-target="#login").indexBtn#startBtn 시작하기
+    .index_box.jumboton
+      .row
+        #index_item.col-sm-12
+          center
+            strong.logo_font(style="font-size: 90px;") Research Book
+            p(style="font-size: 20px;") 설문조사 커뮤니티 "Research Book"을 지금 시작해보세요.
+            button#index_btn(data-toggle="modal" data-target="#login") 시작하기
 
-      #infoBox.container
-        .row.text-center
-          h1 Menu
-        .row.text-center
-          .col-sm-4.col-sm-12
-            .infoIcon
-              img(src="/img/pen-icon.png")
-            .infoExplan
-              h2 조사등록
-              p 평소 궁금했던 질문들을 등록함으로써 궁금증을 해결할 수 있습니다.
-          .col-sm-4.col-sm-12
-            .infoIcon
-              img(src="/img/check-icon.png")
-            .infoExplan
-              h2 조사참여
-              p 조사에 참여하여 도움도 주고 이벤트 당첨의 기회를 얻을 수 있습니다.
-          .col-sm-4.col-sm-12
-            .infoIcon
-              img(src="/img/group-icon.png")
-            .infoExplan
-              h2 커뮤니티
-              p 조사 결과를 통하여 많은 사람들의 생각을 엿볼 수 있습니다.
+    .info_box.container
+      .row.text-center
+        h1 Menu
+      .row.text-center
+        .col-sm-4.col-sm-12
+          #info_icon
+            img(src="/img/pen-icon.png")
+          #info_explan
+            h2 조사등록
+            p 평소 궁금했던 질문들을 등록함으로써 궁금증을 해결할 수 있습니다.
+        .col-sm-4.col-sm-12
+          #info_icon
+            img(src="/img/check-icon.png")
+          #info_explan
+            h2 조사참여
+            p 조사에 참여하여 도움도 주고 이벤트 당첨의 기회를 얻을 수 있습니다.
+        .col-sm-4.col-sm-12
+          #info_icon
+            img(src="/img/group-icon.png")
+          #info_explan
+            h2 커뮤니티
+            p 조사 결과를 통하여 많은 사람들의 생각을 엿볼 수 있습니다.
     #footer.container.visible-sm.visible-lg
       hr
       .row

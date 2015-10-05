@@ -17,12 +17,12 @@ html
     script(type = "text/javascript" src = "/js/dist/mine.js")
     block script
   body(oncontextmenu="return false" ondragstart="return false" onselectstart="return false")
-    #header
-        .row
-          .col-md-12.text-center
-            h1#hlogo.logoFont
-              a(href='/main') Research BOOK
-    #menuBar.row
+    .header
+      .row
+        .col-md-12.text-center
+          h1.logo_font
+            a(href='/main') Research BOOK
+    .menu_bar.row
       a(href='/all')
         .col-md-3.col-xs-6.text-center 모든 조사
       a(href='/new')

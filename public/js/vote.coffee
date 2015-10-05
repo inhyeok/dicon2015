@@ -1,43 +1,44 @@
 jQuery ->
 
-	todayDate = moment(Date()).format('YYYY-MM-DD')
-	todayAt = moment(Date()).format('HH:mm')
-	$('#createDate').val(todayDate)
-	$('#createAt').val(todayAt)
-	$('#finishDate').attr('min', todayDate)
-	if $('#createDate').val() is $('#finishDate').val()
-		$('#finishDate').attr('min', $('#createAt').val())
+	today_date = moment(Date()).format('YYYY-MM-DD')
+	today_at = moment(Date()).format('HH:mm')
+	$('#create_date').val(today_date)
+	$('#create_at').val(today_at)
+	console.log $('#create_date').val(), $('#create_at').val()
+	$('#finish_date').attr('min', today_date)
+	if $('#create_date').val() is $('#finish_date').val()
+		$('#finish_date').attr('min', $('#create_at').val())
 
-	@createVote = () ->
+	@create_vote = () ->
 		# $ajax
 		# 	type: 'PUT'
 		# 	url: '/vote/create'
 		# 	data: avc
 
-	@answerAdd = () ->
-		answerNo = $('#answerList li').length
-		if answerNo is 10
+	@answer_add = () ->
+		answer_no = $('#answer_list li').length
+		if answer_no is 10
 			alert '더 이상 추가할 수 없습니다.'
 		else
 			text = '<input id="answer" type="text" name="answer" placeholder="항목 입력" class="form-control" required/>'
-			$('#answerList').append(text)
+			$('#answer_list').append(text)
 		false
 
-	@answerDel = () ->
-		answerNo = $('#answerList input').length
-		if answerNo is 1
+	@answer_del = () ->
+		answer_no = $('#answer_list input').length
+		if answer_no is 1
 			swal(
 				title: '삭제실패'
 				text: '더 이상 삭제할 수 없습니다.'
 				type: 'error'
 			)
 		else
-			$('#answerList input:last').remove()
+			$('#answer_list input:last').remove()
 		false
 
-	@voteOk = () ->
-		checkNo = $('#answerList li input:checked').length
-		if checkNo isnt 1
+	@vote_ok = () ->
+		check_no = $('#answer_list li input:checked').length
+		if check_no isnt 1
 			swal(
 				title: '투표실패'
 				text: '한개의 항목만 선택해주세요.'

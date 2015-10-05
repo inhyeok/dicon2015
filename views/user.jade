@@ -5,14 +5,15 @@ block style
 block script
 
 block content
-  #user.container-fluid
+  .user.container-fluid
     .content
-      form.form-horizontal#userInfo(action='/user/'+user.u_id method='POST')
+      form.form-horizontal#user_info(action='/user/'+user.u_id method='POST')
         .row.form-group
           .col-sm-3
             //- p= user.u_id
-            #userImg
-            input.form-control#u_img(type='file' name='u_img')
+            #user_img
+            if user.u_id === user_id
+              input.form-control#u_img(type='file' name='u_img')
           .col-sm-9
             .row.form-group
               .col-sm-4
@@ -34,21 +35,21 @@ block content
                 .col-sm-4
                   button.btn.btn-block 저장
       hr
-      .row#userVoteList
+      .row#user_vote_list
         each vote in vote_list
           .col-sm-4
             a(href='')
-              #userVote.voteBox
+              #user_vote.vote_box
                 h4= vote.question
                 label 시작일:&nbsp;&nbsp;
-                  small= moment(vote.createTime).format('YYYY-MM-DD HH:mm')
+                  small= moment(vote.create_time).format('YYYY-MM-DD HH:mm')
                 br
                 label 마감일:&nbsp;&nbsp;
-                  small= moment(vote.finishTime).format('YYYY-MM-DD HH:mm')
+                  small= moment(vote.finish_time).format('YYYY-MM-DD HH:mm')
         if user.u_id === user_id
           .col-sm-4.text-center
             a(href='/vote/create')
-              .voteBox
+              .vote_box
                 h4 새로운 조사 만들기 +
 
       if user.u_id === user_id

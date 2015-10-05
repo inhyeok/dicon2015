@@ -6,14 +6,14 @@ block script
   script(type = "text/javascript" src = "/js/dist/vote.js")
 
 block content
-  #mainBox.container-fluid
+  #main_box.container-fluid
     .content
-      #createVote
+      #create_vote
         form(action='/vote/create' method='POST')
           .row.form-group
             .col-sm-12
               h1 새로운 조사
-          .row.form-group#voteTitle
+          .row.form-group#vote_title
             .col-sm-2
               label 제목 :
             .col-sm-8
@@ -25,16 +25,16 @@ block content
               .col-sm-6.col-xs-6
                 input(type='radio' value='N' name='secret' required)
                 small &nbsp;&nbsp;비공개
-          .row.form-group#voteContent
+          .row.form-group#vote_content
             .col-sm-2
               label 질문 항목 :
-            .col-sm-8#answerList
+            .col-sm-8#answer_list
               input.form-control#answer(type='text' name='answer' placeholder="항목 입력" required)
             .col-sm-2
               .col-sm-6.col-xs-6
-                a#answerAdd.controlBtn(onclick='answerAdd()') 추가
+                a#answer_add.control_btn(onclick='answer_add()') 추가
               .col-sm-6.col-xs-6
-                a#answerDel.controlBtn(onclick='answerDel()') 삭제
+                a#answer_del.control_btn(onclick='answer_del()') 삭제
           .row.form-group
             .col-sm-2
               label 기타 항목 :
@@ -52,19 +52,19 @@ block content
                   small 시작일&nbsp;&nbsp;
                   .row
                     .col-sm-6
-                      input.form-control#createDate(type='date' name='createDate' required disabled)
+                      input.form-control#create_date(type='date' name='create_date' required disabled)
                     .col-sm-6
-                      input.form-control#createAt(type='time' name='createAt' required disabled)
+                      input.form-control#create_at(type='time' name='create_at' required disabled)
                 .col-sm-6
                   small 마감일&nbsp;&nbsp;
                   .row
                     .col-sm-6
-                      input.form-control#finishDate(type='date' name='finishDate' required)
+                      input.form-control#finish_date(type='date' name='finish_date' required)
                     .col-sm-6
-                      input.form-control#finishAt(type='time' name='finishAt' required)
+                      input.form-control#finish_at(type='time' name='finish_at' required)
           br
           .row.form-group
             .col-sm-4.col-sm-offset-2.col-xs-6
-              button#voteOkBtn.btn.btn-block(type='submit') 올리기
+              button.btn.btn-block(type='submit') 올리기
             .col-sm-4.col-xs-6
-              button#voteOkBtn.btn.btn-block() 취소
+              button.btn.btn-block() 취소
