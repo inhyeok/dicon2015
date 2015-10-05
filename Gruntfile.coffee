@@ -1,7 +1,12 @@
 module.exports = (grunt) ->
   grunt.initConfig
+    concurrent:
+      target:
+        tasks: ['less','coffee','watch']
+        options:
+          logConcurrentOutput: true
     less:
-      development:
+      dev:
         expand: true
         flatten: true
         cwd: 'public/style'
@@ -9,7 +14,7 @@ module.exports = (grunt) ->
         dest: 'public/style/dist/'
         ext: '.css'
     coffee:
-      development:
+      dev:
         expand: true
         flatten: true
         cwd: 'public/js'
@@ -23,9 +28,9 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-less'
+  grunt.loadNpmTasks 'grunt-concurrent' #동시 빌드시간향상
   # grunt.loadNpmTasks 'grunt-contrib-uglify' #최적화
   # grunt.loadNpmTasks 'grunt-nodemon'
-  # grunt.loadNpmTasks 'grunt-concurrent' #동시 빌드시간향상
   # grunt.loadNpmTasks 'grunt-env'
   # grunt.loadNpmTasks 'grunt-mocha-test'
   # grunt.loadNpmTasks 'grunt-shell'
