@@ -8,6 +8,7 @@ var express = require('express')
   , cookieParser = require('cookie-parser')
   , bodyParser = require('body-parser')
   , methodOverride = require('method-override')
+  , moment = require('moment')
   , session = require('client-sessions');
 
 var routes = require('./routes/index');
