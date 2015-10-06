@@ -6892,6 +6892,12 @@ small {
   background: url("/img/zari.jpg") no-repeat;
   background-size: 100% 250px;
 }
+.user #user_info input:disabled {
+  background: none;
+}
+.user #user_info textarea:disabled {
+  background: none;
+}
 .user #user_vote_list {
   padding: 5px 10px;
   color: #364659;

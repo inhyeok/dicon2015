@@ -20,8 +20,11 @@ block content
                 td.text-center 3
                 td.text-center= moment(vote.createTime).format('YYYY-MM-DD HH:mm')
                 td.text-center= moment(vote.finishTime). format('YYYY-MM-DD HH:mm')
-        h6
-          a(href='/all') 더보기+
+            tr
+              td.text-center(colspan=4) ...
+            tr
+              td.text-center(colspan=4)
+                a(href='/all') 더보기+
       br
       #main-new.row
         h3 새로운 조사
@@ -75,8 +78,11 @@ block content
               td.text-center 3
               td.text-center 2014-02-14
               td.text-center 개생키
-        h6
-          a(href='/new') 더보기+
+            tr
+              td.text-center(colspan=4) ...
+            tr
+              td.text-center(colspan=4)
+                a(href='/new') 더보기+
       br
       #main-time.row
         h3 마감임박 조사
@@ -130,8 +136,12 @@ block content
               td.text-center 3
               td.text-center 2014-02-14
               td.text-center 개생키
-        h6
-          a(href='/time') 더보기+
+            tr
+              td.text-center(colspan=4) ...
+            tr
+              td.text-center(colspan=4)
+                a(href='/time') 더보기+
+
   #footer.container.visible-md.visible-lg
     hr
     .row
