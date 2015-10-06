@@ -26,7 +26,7 @@ jQuery ->
 
 	@answer_del = () ->
 		answer_no = $('#answer_list input').length
-		if answer_no is 1
+		if answer_no is 2
 			swal(
 				title: '삭제실패'
 				text: '더 이상 삭제할 수 없습니다.'

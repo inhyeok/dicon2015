@@ -25,7 +25,7 @@ jQuery(function() {
   this.answer_del = function() {
     var answer_no;
     answer_no = $('#answer_list input').length;
-    if (answer_no === 1) {
+    if (answer_no === 2) {
       swal({
         title: '삭제실패',
         text: '더 이상 삭제할 수 없습니다.',
