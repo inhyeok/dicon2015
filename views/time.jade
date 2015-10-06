@@ -15,50 +15,15 @@ block content
               td.col-sm-6.col-xs-6 제목
               td.col-sm-2.col-xs-2 조회수
               td.col-sm-2.col-xs-2 등록일
-              td.col-sm-2.col-xs-2 작성자
+              td.col-sm-2.col-xs-2 마감일
           tbody
-            tr
-              td
-                a(href='#') [이벤트][마감] 야식하면 생각나는 음식은?? [1]
-              td.text-center 3
-              td.text-center 2014-02-14
-              td.text-center 개생키
-            tr
-              td
-                a(href='#') [이벤트][마감] 야식하면 생각나는 음식은?? [1]
-              td.text-center 3
-              td.text-center 2014-02-14
-              td.text-center 개생키
-            tr
-              td
-                a(href='#') [이벤트][마감] 야식하면 생각나는 음식은?? [1]
-              td.text-center 3
-              td.text-center 2014-02-14
-              td.text-center 개생키
-            tr
-              td
-                a(href='#') [이벤트][마감] 야식하면 생각나는 음식은?? [1]
-              td.text-center 3
-              td.text-center 2014-02-14
-              td.text-center 개생키
-            tr
-              td
-                a(href='#') [이벤트][마감] 야식하면 생각나는 음식은?? [1]
-              td.text-center 3
-              td.text-center 2014-02-14
-              td.text-center 개생키
-            tr
-              td
-                a(href='#') [이벤트][마감] 야식하면 생각나는 음식은?? [1]
-              td.text-center 3
-              td.text-center 2014-02-14
-              td.text-center 개생키
-            tr
-              td
-                a(href='#') [이벤트][마감] 야식하면 생각나는 음식은?? [1]
-              td.text-center 3
-              td.text-center 2014-02-14
-              td.text-center 개생키
+            for vote in vote_list
+              tr
+                td
+                  a(href='/vote/'+vote.id)= vote.question
+                td.text-center 3
+                td.text-center= moment(vote.create_time).format('YYYY-MM-DD HH:mm')
+                td.text-center= moment(vote.finish_time).format('YYYY-MM-DD HH:mm')
   #footer.container.visible-sm.visible-lg
     hr
     .row
