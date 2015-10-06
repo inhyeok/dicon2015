@@ -38,7 +38,7 @@ router.get('/:user_id', function (req, res, next) {
     connection.query('SELECT * FROM vote_list WHERE u_id=? ORDER BY id DESC', req.user.u_id, function (err, rows) {
       if(err) console.log(err);
       connection.release();
-      res.render('user', {title: 'user', user_id: user.u_id, vote_list: rows, user: req.user});
+      res.render('user', {title: 'user', v_user: req.user, vote_list: rows, user: user});
     });
   });
 });

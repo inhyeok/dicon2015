@@ -12,33 +12,54 @@ block content
           .col-sm-3
             //- p= user.u_id
             #user_img
-            if user.u_id === user_id
+            if user.u_id === v_user.u_id
               input.form-control#u_img(type='file' name='u_img')
           .col-sm-9
-            .row.form-group
-              .col-sm-4
-                label 이름
-                input.form-control#u_name(type='text' name='u_name' value=user.u_name)
-              .col-sm-4
-                label 이메일
-                input.form-control#u_email(type='text' name='u_email' value=user.u_email)
-              .col-sm-4
-                label 휴대번호
-                input.form-control#u_ph(type='text' name='u_ph' value=user.u_ph)
-            .row.form-group
-              .col-sm-12
-                label 자기소개
-                  small &nbsp;&nbsp;간단한 자기소개를 적어주세요~
-                textarea.form-control#u_self(rows=5 name='u_self')= user.u_self
-            if user.u_id === user_id
+            if user.u_id === v_user.u_id
+              .row.form-group
+                .col-sm-4
+                  label 이름
+                  input.form-control#u_name(type='text' name='u_name' value=v_user.u_name)
+                .col-sm-4
+                  label 이메일
+                  input.form-control#u_email(type='text' name='u_email' value=v_user.u_email)
+                .col-sm-4
+                  label 휴대번호
+                  input.form-control#u_ph(type='text' name='u_ph' value=v_user.u_ph)
+              .row.form-group
+                .col-sm-12
+                  label 자기소개
+                    small &nbsp;&nbsp;간단한 자기소개를 적어주세요~
+                  textarea.form-control#u_self(rows=5 name='u_self')= v_user.u_self
               .row.form-group
                 .col-sm-4
                   button.btn.btn-block 저장
+            else
+              .row.form-group
+                .col-sm-4
+                  label 이름
+                  input.form-control#u_name(type='text' name='u_name' value=v_user.u_name disabled)
+                .col-sm-4
+                  label 이메일
+                  input.form-control#u_email(type='text' name='u_email' value=v_user.u_email disabled)
+                .col-sm-4
+                  label 휴대번호
+                  input.form-control#u_ph(type='text' name='u_ph' value=v_user.u_ph disabled)
+              .row.form-group
+                .col-sm-12
+                  label 자기소개
+                    small &nbsp;&nbsp;간단한 자기소개를 적어주세요~
+                  textarea.form-control#u_self(rows=5 name='u_self' disabled)= v_user.u_self
       hr
       .row#user_vote_list
+        if user.u_id === v_user.u_id
+          .col-sm-4.text-center
+            a(href='/vote/create')
+              .vote_box
+                h4 새로운 조사 만들기 +
         each vote in vote_list
           .col-sm-4
-            a(href='')
+            a(href='/vote/'+vote.id)
               #user_vote.vote_box
                 h4= vote.question
                 label 시작일:&nbsp;&nbsp;
@@ -46,13 +67,8 @@ block content
                 br
                 label 마감일:&nbsp;&nbsp;
                   small= moment(vote.finish_time).format('YYYY-MM-DD HH:mm')
-        if user.u_id === user_id
-          .col-sm-4.text-center
-            a(href='/vote/create')
-              .vote_box
-                h4 새로운 조사 만들기 +
 
-      if user.u_id === user_id
+      if user.u_id === v_user.u_id
         .row
           .col-sm-12
-            a(href='/user/'+user_id+'/logout') 로그아웃
+            a(href='/user/'+user.u_id+'/logout') 로그아웃
