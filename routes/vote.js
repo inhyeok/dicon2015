@@ -38,7 +38,7 @@ router.post('/create', function (req, res, next) {
     data.answer = data.answer.join(',');
     // console.log(data.answer);
     finish_time = data.finish_date+" "+data.finish_at;
-    connection.query('INSERT INTO vote_list( u_id, question, answer, ath, secret, create_time, finish_time) VALUES (?,?,?,?,?, NOW(),?)', [user.u_id, data.question, data.answer, data.ath, data.secret, finish_time], function (err, rows) {
+    connection.query('INSERT INTO vote_list( u_id, question, answer, ath, secret, create_time, finish_time, count) VALUES (?,?,?,?,?, NOW(),?, 0)', [user.u_id, data.question, data.answer, data.ath, data.secret, finish_time], function (err, rows) {
       if(err) console.log(err);
       connection.release();
       res.redirect('/user/'+user.u_id);
@@ -80,7 +80,13 @@ router.param('vote_id', function (req, res, next, id) {
 
 router.get('/:vote_id', function (req, res, next) {
   var user = req.session.user;
-  res.render('vote', {title: req.vote.question, vote: req.vote, user: user});
+  pool.getConnection(function(err, connection) {
+    connection.query('UPDATE vote_list SET count = count+1 WHERE id = ?', [req.vote.id], function (err, rows) {
+      if(err) console.log(err);
+      connection.release();
+      res.render('vote', {title: req.vote.question, vote: req.vote, user: user});
+    });
+  });
 });
 
 module.exports = router;

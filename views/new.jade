@@ -17,13 +17,18 @@ block content
               td.col-md-2.col-xs-2 등록일
               td.col-md-2.col-xs-2 마감일
           tbody
-            for vote in vote_list
+            if vote_list.length
+              for vote in vote_list
+                tr
+                  td
+                    a(href='/vote/'+vote.id)= vote.question
+                  td.text-center= vote.count
+                  td.text-center= moment(vote.create_time).format('YYYY-MM-DD HH:mm')
+                  td.text-center= moment(vote.finish_time).format('YYYY-MM-DD HH:mm')
+            else
               tr
-                td
-                  a(href='/vote/'+vote.id)= vote.question
-                td.text-center 3
-                td.text-center= moment(vote.create_time).format('YYYY-MM-DD HH:mm')
-                td.text-center= moment(vote.finish_time).format('YYYY-MM-DD HH:mm')
+                td(colspan=4).text-center
+                  span 해당되는 조사가 없습니다.
 
   #footer.container.visible-md.visible-lg
     hr

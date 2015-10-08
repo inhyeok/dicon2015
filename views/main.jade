@@ -17,7 +17,7 @@ block content
               tr
                 td
                   a(href='/vote/'+vote.id)= vote.question
-                td.text-center 3
+                td.text-center= vote.count
                 td.text-center= moment(vote.create_time).format('YYYY-MM-DD HH:mm')
                 td.text-center= moment(vote.finish_time). format('YYYY-MM-DD HH:mm')
             tr
