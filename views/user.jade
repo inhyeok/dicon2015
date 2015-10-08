@@ -24,10 +24,16 @@ block content
           .row
             .col-sm-4
               label 이메일
-              p#u_email(name='u_email')= v_user.u_email
+              if v_user.u_email_secret === 'N'
+                p 비공개
+              else
+                p#u_email(name='u_email')= v_user.u_email
             .col-sm-4
               label 휴대번호
-              p#u_ph(name='u_ph')= v_user.u_ph
+              if v_user.u_ph_secret === 'N'
+                p 비공개
+              else
+                p#u_ph(name='u_ph')= v_user.u_ph
             .col-sm-4
               label 자기소개
               p#u_self(name='u_self')= v_user.u_self

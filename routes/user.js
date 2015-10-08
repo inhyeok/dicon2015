@@ -45,6 +45,9 @@ router.get('/:user_id', function (req, res, next) {
 
 router.get('/update/:user_id', function (req, res, next) {
   var user = req.session.user;
+  if(user.u_id !== req.user.u_id)
+    res.render('error', {title: 'Error', message: '권한이 없는 페이지 입니다.'});
+    // return false;
   // console.log(req.user);
   res.render('user_update', {title: 'user', v_user: req.user, user: user});
 
@@ -53,8 +56,8 @@ router.get('/update/:user_id', function (req, res, next) {
 router.post('/update/:user_id', function (req, res, next) {
   var user = req.session.user;
   pool.getConnection(function (err, connection) {
-    user_form = req.body;
-    connection.query('UPDATE users SET u_name=?, u_email=?, u_ph=?, u_self=? WHERE u_id=?', [user_form.u_name, user_form.u_email, user_form.u_ph, user_form.u_self, req.user.u_id], function (err, rows) {
+    var data = req.body;
+    connection.query('UPDATE users SET u_name=?, u_email=?, u_ph=?, u_self=?, u_email_secret = ?, u_ph_secret = ? WHERE u_id=?', [data.u_name, data.u_email, data.u_ph, data.u_self, data.u_email_secret, data.u_ph_secret, req.user.u_id], function (err, rows) {
       if(err) console.log(err);
       connection.release();
       req.session.user = req.user; //session update
