@@ -6793,7 +6793,7 @@ button:focus {
   outline-width: 0;
 }
 #footer {
-  padding: 2% 0 2% 0;
+  padding: 0 0 2% 0;
 }
 small {
   color: #4e5259;
@@ -6832,7 +6832,7 @@ small {
   background: none;
 }
 .info_box {
-  height: 200px;
+  heigth: auto;
 }
 .info_box #info_icon img {
   width: 70px;
