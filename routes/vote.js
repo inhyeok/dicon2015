@@ -35,6 +35,9 @@ router.post('/create', function (req, res, next) {
   var user = req.session.user;
   pool.getConnection(function (err, connection) {
     var data = req.body;
+    // console.log(data.answer);
+    // data.answer = data.answer.replace(/,/g,"','");
+    console.log(data.answer);
     data.answer = data.answer.join(',');
     // console.log(data.answer);
     finish_time = data.finish_date+" "+data.finish_at;

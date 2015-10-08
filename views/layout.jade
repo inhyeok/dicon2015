@@ -23,12 +23,13 @@ html
           h1.logo_font
             a(href='/main') Research BOOK
     .menu_bar.row
-      a(href='/all')
-        .col-md-3.col-xs-6.text-center 모든 조사
-      a(href='/new')
-        .col-md-3.col-xs-6.text-center 새로운 조사
-      a(href='/time')
-        .col-md-3.col-xs-6.text-center 마감임박 조사
-      a(href='/user/'+user.u_id)
-        .col-md-3.col-xs-6.text-center USER
+      ul.nav.nav-collapse
+        li.col-md-3.col-xs-6.text-center(class=(title == 'all'?'active':undefined))
+          a(href='/all') 모든 조사
+        li.col-md-3.col-xs-6.text-center(class=(title == 'new'?'active':undefined))
+          a(href='/new') 새로운 조사
+        li.col-md-3.col-xs-6.text-center(class=(title == 'time'?'active':undefined))
+          a(href='/time') 마감임박 조사
+        li.col-md-3.col-xs-6.text-center(class=(title == 'user'?'active':undefined))
+          a(href='/user/'+user.u_id) USER
     block content

@@ -46,7 +46,7 @@ router.get('/:user_id', function (req, res, next) {
 router.get('/update/:user_id', function (req, res, next) {
   var user = req.session.user;
   // console.log(req.user);
-  res.render('user_update', {title: 'user update', v_user: req.user, user: user});
+  res.render('user_update', {title: 'user', v_user: req.user, user: user});
 
 });
 
