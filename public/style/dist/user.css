@@ -6852,22 +6852,25 @@ small {
   color: #fff;
 }
 .menu_bar {
-  background: #495E78;
   height: auto;
   width: auto;
   padding-top: 70px;
 }
-.menu_bar a {
-  color: #fff;
+.menu_bar li {
+  background: #495E78;
+  height: 40px;
 }
-.menu_bar a:hover div {
+.menu_bar li a {
+  color: #fff;
+  width: 100%;
+}
+.menu_bar li:hover {
   background: #364659;
 }
-.menu_bar div {
-  height: 40px;
-  padding-top: 10px;
+.menu_bar li:hover a {
+  background: #364659;
 }
-.menu_bar:active {
+.menu_bar .active {
   background: #364659;
 }
 .search {

@@ -70,14 +70,23 @@ small{color: @darkGray;}
   a{color:#fff;}
 }
 .menu_bar{
-  background:#495E78;
   height:auto;
   width:auto;
   padding-top:70px;
-  a{color:#fff;}
-  a:hover{div{background:@darkBlue;}}
-  div{height:40px; padding-top:10px;}
-  &:active{background:@darkBlue;}
+  li{
+    background:#495E78;
+    height:40px;
+    a{
+      color:#fff;
+      width: 100%;
+    }
+    &:hover{
+      background:@darkBlue;
+      a{background: @darkBlue;}
+    }
+  }
+  .active{background:@darkBlue;}
+  // &:active{background:@darkBlue;}
 }
 .search{width:250px;}
 
