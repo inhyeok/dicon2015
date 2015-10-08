@@ -1,0 +1,44 @@
+extends layout
+
+block style
+  link(rel="stylesheet" href="/style/dist/user.css")
+block script
+
+block content
+  .user.container-fluid
+    .content
+      form.form-horizontal#user_info(action='/user/update/'+user.u_id method='POST')
+        .row.form-group
+          .col-sm-6
+            label 이름
+            input.form-control#u_name(type='text' name='u_name' value=v_user.u_name)
+        .row.form-group
+          .col-sm-6
+            label 이메일
+            input.form-control#u_email(type='text' name='u_email' value=v_user.u_email)
+        .row.form-group
+          .col-sm-6
+            input(type='radio' value='Y' name='u_email_secret' checked='checked' required)
+            small &nbsp;&nbsp;공개
+            |&nbsp;&nbsp;&nbsp;&nbsp;
+            input(type='radio' value='N' name='u_email_secret' required)
+            small &nbsp;&nbsp;비공개
+        .row.form-group
+          .col-sm-6
+            label 휴대번호
+            input.form-control#u_ph(type='text' name='u_ph' value=v_user.u_ph)
+        .row.form-group
+          .col-sm-6
+            input(type='radio' value='Y' name='u_ph_secret' checked='checked' required)
+            small &nbsp;&nbsp;공개
+            |&nbsp;&nbsp;&nbsp;&nbsp;
+            input(type='radio' value='N' name='u_ph_secret' required)
+            small &nbsp;&nbsp;비공개
+        .row.form-group
+          .col-sm-6
+            label 자기소개
+              small &nbsp;&nbsp;간단한 자기소개를 적어주세요~
+            textarea.form-control#u_self(rows=5 name='u_self')= v_user.u_self
+        .row.form-group
+          .col-sm-4
+            button.btn.btn-block 저장

@@ -7,49 +7,30 @@ block script
 block content
   .user.container-fluid
     .content
-      form.form-horizontal#user_info(action='/user/'+user.u_id method='POST')
-        .row.form-group
-          .col-sm-3
-            //- p= user.u_id
-            #user_img
+      .row
+        .col-sm-3
+          //- p= user.u_id
+          #user_img(style='width: 100%; height: 250px; background-size: 100% 250px; background: url("/img/user-icon.png") no-repeat;')
+          //- if user.u_id === v_user.u_id
+          //-   input.form-control#u_img(type='file' name='u_img')
+        .col-sm-9
+          .row
+            .col-sm-8
+              h3#u_name(name='u_name')= v_user.u_name
             if user.u_id === v_user.u_id
-              input.form-control#u_img(type='file' name='u_img')
-          .col-sm-9
-            if user.u_id === v_user.u_id
-              .row.form-group
-                .col-sm-4
-                  label 이름
-                  input.form-control#u_name(type='text' name='u_name' value=v_user.u_name)
-                .col-sm-4
-                  label 이메일
-                  input.form-control#u_email(type='text' name='u_email' value=v_user.u_email)
-                .col-sm-4
-                  label 휴대번호
-                  input.form-control#u_ph(type='text' name='u_ph' value=v_user.u_ph)
-              .row.form-group
-                .col-sm-12
-                  label 자기소개
-                    small &nbsp;&nbsp;간단한 자기소개를 적어주세요~
-                  textarea.form-control#u_self(rows=5 name='u_self')= v_user.u_self
-              .row.form-group
-                .col-sm-4
-                  button.btn.btn-block 저장
-            else
-              .row.form-group
-                .col-sm-4
-                  label 이름
-                  input.form-control#u_name(type='text' name='u_name' value=v_user.u_name disabled)
-                .col-sm-4
-                  label 이메일
-                  input.form-control#u_email(type='text' name='u_email' value=v_user.u_email disabled)
-                .col-sm-4
-                  label 휴대번호
-                  input.form-control#u_ph(type='text' name='u_ph' value=v_user.u_ph disabled)
-              .row.form-group
-                .col-sm-12
-                  label 자기소개
-                    small &nbsp;&nbsp;간단한 자기소개를 적어주세요~
-                  textarea.form-control#u_self(rows=5 name='u_self' disabled)= v_user.u_self
+              .col-sm-4.text-right
+                a(href='/user/update/'+v_user.u_id) 설정
+          hr
+          .row
+            .col-sm-4
+              label 이메일
+              p#u_email(name='u_email')= v_user.u_email
+            .col-sm-4
+              label 휴대번호
+              p#u_ph(name='u_ph')= v_user.u_ph
+            .col-sm-4
+              label 자기소개
+              p#u_self(name='u_self')= v_user.u_self
       hr
       .row#user_vote_list
         if user.u_id === v_user.u_id
@@ -67,6 +48,9 @@ block content
                 br
                 label 마감일:&nbsp;&nbsp;
                   small= moment(vote.finish_time).format('YYYY-MM-DD HH:mm')
+                br
+                label 조회수:&nbsp;&nbsp;
+                  small= vote.count
 
       if user.u_id === v_user.u_id
         .row
