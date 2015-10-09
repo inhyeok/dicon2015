@@ -15,7 +15,7 @@ block content
         .row
           .col-sm-12
             ul#answer_list
-              for answer in vote.answer.split(",")
+              for answer in vote.answer.split("\n")
                 .form-group
                   li.form-control
                     input#answer1(type='checkbox' value=answer)
