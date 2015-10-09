@@ -25,3 +25,7 @@ block content
           .col-sm-4.col-sm-offset-4
             .form-group
               button#voteOkBtn.btn.btn-block(onclick='voteOk()') 투표하기
+          if user.u_id === vote.u_id
+            .col-sm-4
+              .form-group.text-right
+                a(href='#') 수정하기
