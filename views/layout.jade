@@ -31,5 +31,8 @@ html
         li.col-md-3.col-xs-6.text-center(class=(title == 'time'?'active':undefined))
           a(href='/time') 마감임박 조사
         li.col-md-3.col-xs-6.text-center(class=(title == 'user'?'active':undefined))
-          a(href='/user/'+user.u_id) USER
+          if user === ''
+            a(href='/user/no') USER
+          else
+            a(href='/user/'+user.u_id) USER
     block content

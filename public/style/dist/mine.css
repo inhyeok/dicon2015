@@ -6820,7 +6820,7 @@ small {
   margin-top: 3%;
   color: #fff;
 }
-.index_box #index_item #index_btn {
+.index_box #index_item .index_btn {
   -webkit-border-radius: 10;
   -moz-border-radius: 10;
   border-radius: 10px;

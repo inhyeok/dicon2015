@@ -31,12 +31,14 @@ html
               .row 아직 회원가입을 안하셨나요??&nbsp;
                 a(data-toggle="modal" data-target="#sign") 회원가입
             .modal-footer
-              .form-group
-                .row
-                  .col-sm-4.col-sm-offset-2
-                    button.btn.btn-block#login_btn(type="submit") 로그인
-                  .col-sm-4
-                    button.btn.btn-block(type="submit") 페이스북
+              .row.form-group
+                .col-sm-4.col-sm-offset-2
+                  button.btn.btn-block#login_btn(type="submit") 로그인
+                .col-sm-4
+                  a.btn.btn-block(href='/main') 바로입장
+              //- .row.form-group
+              //-   .col-sm-4.col-sm-offset-4
+              //-     button.btn.btn-block(type="submit") 페이스북
 
     #sign.modal.fade(role="dialog")
       .modal-dialog
@@ -75,7 +77,10 @@ html
           center
             strong.logo_font(style="font-size: 90px;") Research Book
             p(style="font-size: 20px;") 설문조사 커뮤니티 "Research Book"을 지금 시작해보세요.
-            button#index_btn(data-toggle="modal" data-target="#login") 시작하기
+            if user === ''
+              button.index_btn(data-toggle="modal" data-target="#login") 시작하기
+            else
+              a.index_btn(href='/main') 시작하기
 
     .info_box.container
       .row.text-center

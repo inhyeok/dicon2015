@@ -1,0 +1,51 @@
+extends layout
+
+block script
+  script(type = "text/javascript" src = "/js/dist/enter.js")
+
+block content
+  .row
+    .col-sm-5.col-sm-offset-1
+      .content
+        h1 로그인
+        .row
+          form.form-horizontal#login_form(action="/login" method="POST" role="form")
+            .col-sm-12
+              .form-group
+                .labelBox
+                  input#l_email.form-control(placeholder='email' name='l_email' type='email')
+            .col-sm-12
+              .form-group
+                .labelBox
+                  input#l_pw.form-control(placeholder='비밀번호' name='l_pw' type='password')
+            .row
+              .col-sm-4.col-sm-offset-4
+                button.btn.btn-block(type='submit') 완료
+    .col-sm-5
+      .content
+        h1 회원가입
+        .row
+          form.form-horizontal#sign_form(action="/sign", method="POST" role="form")
+            .col-sm-12
+              .form-group
+                .labelBox
+                  input#u_name.form-control(placeholder='성명' name='u_name' type='text')
+            .col-sm-12
+              .form-group
+                .labelBox
+                  input#u_email.form-control(placeholder='email' name='u_email' type='email')
+            .col-sm-12
+              .form-group
+                .labelBox
+                  input#u_pw.form-control(placeholder='비밀번호 (6~12 자 이내)' name='u_pw' type='password')
+            .col-sm-12
+              .form-group
+                .labelBox
+                  input#u_pw_ck.form-control(placeholder='비밀번호 확인' name='u_pw_ck' type='password')
+            .col-sm-12
+              .form-group
+                .labelBox
+                  input#u_ph.form-control(placeholder='휴대번호 입력' name='u_ph' type='text')
+            .row
+              .col-sm-4.col-sm-offset-4
+                button.btn.btn-block(type='submit') 완료

@@ -8,6 +8,11 @@ var pool = mysql.createPool({
   database: 'dicon2015'
 });
 
+router.get('/no', function (req, res, next) {
+  var user = req.session.user || '';
+  res.render('user_no', {title: 'user', user: user});
+});
+
 router.param('user_id', function (req, res, next, u_id) {
   if(!isFinite(+u_id)){
     return next(new Error('user_id invalid'));
@@ -32,7 +37,7 @@ router.param('user_id', function (req, res, next, u_id) {
 // });
 
 router.get('/:user_id', function (req, res, next) {
-  var user = req.session.user;
+  var user = req.session.user || '';
   // console.log(req.user);
   pool.getConnection(function (err, connection) {
     connection.query('SELECT * FROM vote_list WHERE u_id=? ORDER BY id DESC', req.user.u_id, function (err, rows) {
@@ -44,7 +49,7 @@ router.get('/:user_id', function (req, res, next) {
 });
 
 router.get('/update/:user_id', function (req, res, next) {
-  var user = req.session.user;
+  var user = req.session.user || '';
   if(user.u_id !== req.user.u_id)
     res.render('error', {title: 'Error', message: '권한이 없는 페이지 입니다.'});
     // return false;
@@ -53,8 +58,9 @@ router.get('/update/:user_id', function (req, res, next) {
 
 });
 
+
 router.post('/update/:user_id', function (req, res, next) {
-  var user = req.session.user;
+  var user = req.session.user || '';
   pool.getConnection(function (err, connection) {
     var data = req.body;
     connection.query('UPDATE users SET u_name=?, u_email=?, u_ph=?, u_self=?, u_email_secret = ?, u_ph_secret = ? WHERE u_id=?', [data.u_name, data.u_email, data.u_ph, data.u_self, data.u_email_secret, data.u_ph_secret, req.user.u_id], function (err, rows) {

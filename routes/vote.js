@@ -27,7 +27,9 @@ var pool = mysql.createPool({
 // });
 
 router.get('/create', function (req, res, next) {
-  var user = req.session.user;
+  var user = req.session.user || '';
+  if(!user)
+    res.render('error', {title: 'Error', message: '로그인이 필요한 페이지 입니다.'});
   res.render('createvote', {title: 'create', user: user});
 });
 
@@ -82,7 +84,7 @@ router.param('vote_id', function (req, res, next, id) {
 // });
 
 router.get('/:vote_id', function (req, res, next) {
-  var user = req.session.user;
+  var user = req.session.user || '';
   pool.getConnection(function(err, connection) {
     connection.query('UPDATE vote_list SET count = count+1 WHERE id = ?', [req.vote.id], function (err, rows) {
       if(err) console.log(err);

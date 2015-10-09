@@ -43,7 +43,7 @@ jQuery ->
 						max: 11,
 						message: '정확한 번호를 입력해주세요.'
 
-	$('#signForm').formValidation options
+	$('#sign_form').formValidation options
 
 	options =
 		framework: 'bootstrap'
@@ -65,4 +65,4 @@ jQuery ->
 					notEmpty:
 						message: '항목값을 입력해주세요.'
 
-	$('#loginForm').formValidation options
+	$('#login_form').formValidation options

@@ -11,9 +11,9 @@ var pool = mysql.createPool({
 
 
 router.get('/', function (req, res, next) {
-  var user = req.session.user;
+  var user = req.session.user || '';
   console.log(user);
-  res.render('index', {title: 'dicon'});
+  res.render('index', {title: 'dicon', user: user});
 });
 
 router.post('/login', function (req, res, next) {
@@ -65,7 +65,8 @@ router.post('/sign', function (req, res, next) {
 });
 
 router.get('/main', function (req, res, next) {
-  var user = req.session.user;
+  var user = req.session.user || '';
+  console.log(user);
   pool.getConnection(function (err, connection) {
     connection.query('SELECT * FROM vote_list ORDER BY id DESC LIMIT 10', function (err, rows) {
       if(err) console.log(err);
@@ -76,7 +77,7 @@ router.get('/main', function (req, res, next) {
 });
 
 router.get('/all', function (req, res, next) {
-  var user = req.session.user;
+  var user = req.session.user || '';
   pool.getConnection(function (err, connection) {
     connection.query('SELECT * FROM vote_list ORDER BY id DESC', function (err, rows) {
       if(err) console.log(err);
@@ -87,7 +88,7 @@ router.get('/all', function (req, res, next) {
 });
 
 router.get('/new', function (req, res, next) {
-  var user = req.session.user;
+  var user = req.session.user || '';
   pool.getConnection(function (err, connection) {
     connection.query('SELECT * FROM vote_list WHERE date(create_time) >= date(subdate(now(), INTERVAL 7 DAY)) and date(finish_time) >= date(now()) ORDER BY id DESC', function (err, rows) {
       if(err) console.log(err);
@@ -98,7 +99,7 @@ router.get('/new', function (req, res, next) {
 });
 
 router.get('/time', function (req, res, next) {
-  var user = req.session.user;
+  var user = req.session.user || '';
   pool.getConnection(function (err, connection) {
     connection.query('SELECT * FROM vote_list WHERE date(finish_time) <= date(subdate(now(), INTERVAL 3 DAY)) and date(finish_time) >= date(now()) ORDER BY id DESC', function (err, rows) {
       if(err) console.log(err);
