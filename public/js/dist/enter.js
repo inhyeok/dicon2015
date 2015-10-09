@@ -64,7 +64,7 @@
         }
       }
     };
-    $('#signForm').formValidation(options);
+    $('#sign_form').formValidation(options);
     options = {
       framework: 'bootstrap',
       icon: {
@@ -93,7 +93,7 @@
         }
       }
     };
-    return $('#loginForm').formValidation(options);
+    return $('#login_form').formValidation(options);
   });
 
 }).call(this);
