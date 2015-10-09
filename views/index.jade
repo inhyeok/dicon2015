@@ -80,7 +80,8 @@ html
             if user === ''
               button.index_btn(data-toggle="modal" data-target="#login") 시작하기
             else
-              a.index_btn(href='/main') 시작하기
+              a(href='/main')
+                button.index_btn(data-toggle="modal" data-target="#login") 시작하기
 
     .info_box.container
       .row.text-center
