@@ -18,9 +18,14 @@ block content
               for answer in vote.answer.split("\n")
                 .form-group
                   li.form-control
-                    input#answer1(type='checkbox' value=answer)
+                    input#answer(type='checkbox' value=answer)
                     | &nbsp;&nbsp;
                     span= answer
+              if vote.ath === 'Y'
+                .form-group
+                  span 기타 답변
+                  li
+                    input.form-control(type='text' placeholder='보기 이외의 답변을 힐 수 있습니다.')
         .row
           .col-sm-4.col-sm-offset-4
             .form-group
