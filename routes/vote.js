@@ -94,7 +94,8 @@ router.get('/:vote_id', function (req, res, next) {
 
 router.get('/update/:vote_id', function (req, res, next) {
   var user = req.session.user || '';
-  console.log(req.vote.finish_time);
+  if(user.u_id !== req.vote.u_id)
+    res.render('error', {title: 'Error', message: '권한이 없는 페이지 입니다.'});
   res.render('vote_update', {title: 'vote', vote: req.vote, user: user});
 });
 
@@ -112,10 +113,10 @@ router.post('/update/:vote_id', function (req, res, next) {
   });
 });
 
-router.delete('delete/:vote_id', function (req, res, next) {
+router.get('/delete/:vote_id', function (req, res, next) {
   var user = req.session.user || '';
   pool.getConnection(function(err, connection) {
-    connection.query('DELTE FROM vote_list WHERE id = ?', [req.vote.id], function (err, rows) {
+    connection.query('DELETE FROM vote_list WHERE id = ?', [req.vote.id], function (err) {
       if(err) console.log(err);
       connection.release();
       res.redirect('/user/'+user.u_id);
