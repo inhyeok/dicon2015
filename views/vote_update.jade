@@ -1,0 +1,71 @@
+extends layout
+
+block style
+  link(rel = "stylesheet" href = "/style/dist/vote.css")
+block script
+  script(type = "text/javascript" src = "/js/dist/vote.js")
+
+block content
+  #main_box.container-fluid
+    .content
+      #create_vote
+        form(action='/vote/update/'+vote.id method='POST')
+          .row.form-group
+            .col-sm-12
+              h1 조사 업데이트
+          .row.form-group#vote_title
+            .col-sm-2
+              label 제목 :
+            .col-sm-8
+              input.form-control#question(type='text' name='question' placeholder="제목 입력" value=vote.question required autofocus)
+            .col-sm-2
+              .col-sm-6.col-xs-6
+                input(type='radio' value='Y' name='secret' checked='checked' required)
+                small &nbsp;&nbsp;공개
+              .col-sm-6.col-xs-6
+                input(type='radio' value='N' name='secret' required)
+                small &nbsp;&nbsp;비공개
+          .row.form-group#vote_content
+            .col-sm-2
+              label 질문 항목 :
+            .col-sm-8#answer_list
+              for answer in vote.answer.split('\n')
+                input.form-control#answer(type='text' name='answer' placeholder="항목 입력" value=answer required)
+            .col-sm-2
+              .col-sm-6.col-xs-6
+                a#answer_add.control_btn(onclick='answer_add()') 추가
+              .col-sm-6.col-xs-6
+                a#answer_del.control_btn(onclick='answer_del()') 삭제
+          .row.form-group
+            .col-sm-2
+              label 기타 항목 :
+            .col-sm-8
+              select.form-control#ath(name='ath' required)
+                option(value='Y') 사용
+                option(value='N' selected='selected') 사용안함
+              small 항목 이외의 답변을 유저들이 추가하여 투표를 할 수 있습니다.
+          .row.form-group
+            .col-sm-2
+              label 조사 기간 :
+            .col-sm-8
+              .row.form-group
+                //- .col-sm-6
+                //-   small 시작일&nbsp;&nbsp;
+                //-   .row
+                //-     .col-sm-6
+                //-       input.form-control#create_date(type='date' name='create_date' required disabled)
+                //-     .col-sm-6
+                //-       input.form-control#create_at(type='time' name='create_at' required disabled)
+                .col-sm-6
+                  small 마감일&nbsp;&nbsp;
+                  .row
+                    .col-sm-6
+                      input.form-control#finish_date(type='date' name='finish_date' required)
+                    .col-sm-6
+                      input.form-control#finish_at(type='time' name='finish_at' required)
+          br
+          .row.form-group
+            .col-sm-4.col-sm-offset-2.col-xs-6
+              button.btn.btn-block(type='submit') 올리기
+            .col-sm-4.col-xs-6
+              button.btn.btn-block() 취소

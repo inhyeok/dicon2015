@@ -38,7 +38,6 @@ router.post('/create', function (req, res, next) {
   pool.getConnection(function (err, connection) {
     var data = req.body;
     // console.log(data.answer);
-    // data.answer = data.answer.replace(/,/g,"','");
     data.answer = data.answer.join('\n');
     // console.log(data.answer);
     finish_time = data.finish_date+" "+data.finish_at;
@@ -89,6 +88,37 @@ router.get('/:vote_id', function (req, res, next) {
       if(err) console.log(err);
       connection.release();
       res.render('vote', {title: req.vote.question, vote: req.vote, user: user});
+    });
+  });
+});
+
+router.get('/update/:vote_id', function (req, res, next) {
+  var user = req.session.user || '';
+  console.log(req.vote.finish_time);
+  res.render('vote_update', {title: 'vote', vote: req.vote, user: user});
+});
+
+router.post('/update/:vote_id', function (req, res, next) {
+  var user = req.session.user || '';
+  pool.getConnection(function(err, connection) {
+    var data = req.body;
+    data.answer = data.answer.join('\n');
+    finish_time = data.finish_date+" "+data.finish_at;
+    connection.query('UPDATE vote_list SET question = ?, answer = ?, ath = ?, secret = ?, finish_time = ? WHERE id = ?', [data.question, data.answer, data.ath, data.secret, finish_time, req.vote.id], function (err, rows) {
+      if(err) console.log(err);
+      connection.release();
+      res.redirect('/vote/'+req.vote.id);
+    });
+  });
+});
+
+router.delete('delete/:vote_id', function (req, res, next) {
+  var user = req.session.user || '';
+  pool.getConnection(function(err, connection) {
+    connection.query('DELTE FROM vote_list WHERE id = ?', [req.vote.id], function (err, rows) {
+      if(err) console.log(err);
+      connection.release();
+      res.redirect('/user/'+user.u_id);
     });
   });
 });
