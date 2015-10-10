@@ -101,7 +101,7 @@ router.get('/new', function (req, res, next) {
 router.get('/time', function (req, res, next) {
   var user = req.session.user || '';
   pool.getConnection(function (err, connection) {
-    connection.query('SELECT * FROM vote_list WHERE date(finish_time) <= date(subdate(now(), INTERVAL 3 DAY)) and date(finish_time) >= date(now()) ORDER BY id DESC', function (err, rows) {
+    connection.query('SELECT * FROM vote_list WHERE date(finish_time) <= date(adddate(now(), INTERVAL 3 DAY)) and date(finish_time) >= date(now()) ORDER BY id DESC', function (err, rows) {
       if(err) console.log(err);
       connection.release();
       res.render('time', {title: 'time', user: user, vote_list: rows});
