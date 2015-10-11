@@ -30,7 +30,7 @@ router.get('/create', function (req, res, next) {
   var user = req.session.user || '';
   if(!user)
     res.render('error', {title: 'Error', message: '로그인이 필요한 페이지 입니다.'});
-  res.render('createvote', {title: 'create', user: user});
+  res.render('vote_create', {title: 'create', user: user});
 });
 
 router.post('/create', function (req, res, next) {
@@ -104,7 +104,7 @@ router.post('/update/:vote_id', function (req, res, next) {
   pool.getConnection(function(err, connection) {
     var data = req.body;
     data.answer = data.answer.join('\n');
-    finish_time = data.finish_date+" "+data.finish_at;
+    var finish_time = data.finish_date+" "+data.finish_at;
     connection.query('UPDATE vote_list SET question = ?, answer = ?, ath = ?, secret = ?, finish_time = ? WHERE id = ?', [data.question, data.answer, data.ath, data.secret, finish_time, req.vote.id], function (err, rows) {
       if(err) console.log(err);
       connection.release();

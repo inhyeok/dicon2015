@@ -3,7 +3,6 @@ extends layout
 block style
   link(rel = "stylesheet" href = "/style/dist/vote.css")
 block script
-  script(type = "text/javascript" src = "/js/dist/vote.js")
 
 block content
   #main_box.container-fluid
@@ -60,9 +59,9 @@ block content
                   small 마감일&nbsp;&nbsp;
                   .row
                     .col-sm-6
-                      input.form-control#finish_date(type='date' name='finish_date' required)
+                      input.form-control#finish_date(type='date' name='finish_date' value=moment(vote.finish_time).format('YYYY-MM-DD') min=moment(vote.create_time).format('YYYY-MM-DD') required)
                     .col-sm-6
-                      input.form-control#finish_at(type='time' name='finish_at' required)
+                      input.form-control#finish_at(type='time' name='finish_at' value=moment(vote.finish_time).format('HH:mm') required)
           br
           .row.form-group
             .col-sm-4.col-sm-offset-2.col-xs-6
