@@ -18,12 +18,20 @@ block content
             .col-sm-8
               input.form-control#question(type='text' name='question' placeholder="제목 입력" value=vote.question required autofocus)
             .col-sm-2
-              .col-sm-6.col-xs-6
-                input(type='radio' value='Y' name='secret' checked='checked' required)
-                small &nbsp;&nbsp;공개
-              .col-sm-6.col-xs-6
-                input(type='radio' value='N' name='secret' required)
-                small &nbsp;&nbsp;비공개
+              if vote.secret === 'N'
+                .col-sm-6.col-xs-6
+                  input(type='radio' value='Y' name='secret' required)
+                  small &nbsp;&nbsp;공개
+                .col-sm-6.col-xs-6
+                  input(type='radio' value='N' name='secret' checked required)
+                  small &nbsp;&nbsp;비공개
+              else
+                .col-sm-6.col-xs-6
+                  input(type='radio' value='Y' name='secret' checked required)
+                  small &nbsp;&nbsp;공개
+                .col-sm-6.col-xs-6
+                  input(type='radio' value='N' name='secret' required)
+                  small &nbsp;&nbsp;비공개
           .row.form-group#vote_content
             .col-sm-2
               label 질문 항목 :
@@ -40,8 +48,12 @@ block content
               label 기타 항목 :
             .col-sm-8
               select.form-control#ath(name='ath' required)
-                option(value='Y') 사용
-                option(value='N' selected='selected') 사용안함
+                if vote.ath === 'N'
+                  option(value='Y') 사용
+                  option(value='N' selected) 사용안함
+                else
+                  option(value='Y' selected) 사용
+                  option(value='N') 사용안함
               small 항목 이외의 답변을 유저들이 추가하여 투표를 할 수 있습니다.
           .row.form-group
             .col-sm-2
