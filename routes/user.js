@@ -60,14 +60,13 @@ router.get('/update/:user_id', function (req, res, next) {
 
 
 router.post('/update/:user_id', function (req, res, next) {
-  var user = req.session.user || '';
   pool.getConnection(function (err, connection) {
     var data = req.body;
     connection.query('UPDATE users SET u_name=?, u_email=?, u_ph=?, u_self=?, u_email_secret = ?, u_ph_secret = ? WHERE u_id=?', [data.u_name, data.u_email, data.u_ph, data.u_self, data.u_email_secret, data.u_ph_secret, req.user.u_id], function (err, rows) {
       if(err) console.log(err);
       connection.release();
       req.session.user = req.user; //session update
-      res.redirect('/user/'+user.u_id);
+      res.redirect('/user/'+req.user.u_id);
     });
   });
 });
