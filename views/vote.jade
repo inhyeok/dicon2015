@@ -28,9 +28,16 @@ block content
                     input.form-control(type='text' placeholder='보기 이외의 답변을 할 수 있습니다.')
         .row
           .col-sm-4.col-sm-offset-4
-            .form-group
-              button#voteOkBtn.btn.btn-block(onclick='voteOk()') 투표하기
+            if user.u_id !== vote.u_id
+              .form-group
+                button#voteOkBtn.btn.btn-block(onclick='voteOk()') 투표하기
           if user.u_id === vote.u_id
             .col-sm-4
               .form-group.text-right
                 a(href='/vote/update/'+vote.id) 수정하기
+
+        if user.u_id === vote.u_id
+          hr
+          .row
+            .col-sm-12
+              h1 결과
