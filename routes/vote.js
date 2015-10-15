@@ -121,10 +121,28 @@ router.param('question_id', function (req, res, next, id) {
 router.get('/:question_id', function (req, res, next) {
   var user = req.session.user || '';
   pool.getConnection(function(err, connection) {
-    connection.query('UPDATE questions SET count = count+1 WHERE id = ?', [req.vote.id], function (err, rows) {
+    connection.query('UPDATE questions SET count = count+1 WHERE id = ?', [req.vote.id], function (err, result) {
       if(err) console.log(err);
       connection.release();
       res.render('vote', {title: req.vote.question, vote: req.vote, user: user});
+    });
+  });
+});
+
+router.post('/:question_id', function (req, res, next) {
+  var user = req.session.user || '';
+  pool.getConnection(function(err, connection) {
+    var data = req.body;
+    // data.answer = data.answer.join(',');
+    console.log(data.answer, user.u_id);
+    connection.query('SELECT answer, join_user FROM answers WHERE question_id = ?', [req.vote.id], function (err, result) {
+      if(err) return next(new Error(err));
+      console.log(result[0].answer, result[0].join_user);
+      connection.query('INSERT INTO answers(answer, join_user) VALUES (?,?) WHERE question_id = ?', [ data.answer, user.u_id, req.vote.id], function (err, result) {
+        if(err) return err;
+        connection.release();
+        res.redirect('/vote/'+req.vote.id);
+      });
     });
   });
 });

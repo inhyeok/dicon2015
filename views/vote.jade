@@ -11,21 +11,21 @@ block content
       .row
         .col-md-12.text-center
           h2= vote.question
-      form
+      form(action='/vote/'+vote.id method='POST')
         .row
           .col-sm-12
             ul#answer_list
               for answer in vote.answer.split("\n")
                 .form-group
                   li.form-control
-                    input#answer(type='checkbox' value=answer)
+                    input#answer(type='checkbox' value=answer name='answer')
                     | &nbsp;&nbsp;
                     span= answer
               if vote.ath === 'Y'
                 .form-group
                   span 기타 답변
                   li
-                    input.form-control(type='text' placeholder='보기 이외의 답변을 할 수 있습니다.')
+                    input.form-control(type='text' name='answer' placeholder='보기 이외의 답변을 할 수 있습니다.')
         .row
           .col-sm-4.col-sm-offset-4
             if user.u_id !== vote.u_id
