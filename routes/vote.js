@@ -101,7 +101,7 @@ router.param('question_id', function (req, res, next, id) {
   }
   pool.getConnection(function(err, connection) {
     connection.query('SELECT * FROM questions WHERE id=?', +id, function(err, rows) {
-      if(err) console.log(err);
+      if(err) return next(new Error(error));
       connection.release();
 
       if(rows.length === 0){
@@ -137,10 +137,28 @@ router.post('/:question_id', function (req, res, next) {
     console.log(data.answer, user.u_id);
     connection.query('SELECT answer, join_user FROM answers WHERE question_id = ?', [req.vote.id], function (err, result) {
       if(err) return next(new Error(err));
-      console.log(result[0].answer, result[0].join_user);
-      connection.query('INSERT INTO answers(answer, join_user) VALUES (?,?) WHERE question_id = ?', [ data.answer, user.u_id, req.vote.id], function (err, result) {
+      // for()
+      console.log(result[0]);
+      if(result[0].join_user === data.user){
+        return next(new Error('이미 투표를 하신 유저 입니다.'));
+      }
+      var answer_data = [result[0].answer];
+      var join_user_data = [result[0].join_user];
+
+      answer_data.push(data.answer);
+      join_user_data.push(user.u_id);
+
+
+      answer_data = answer_data.join('\n');
+      join_user_data = join_user_data.join('\n');
+
+      // console.log(answer_data);
+      // console.log(join_user_data);
+
+      connection.query('UPDATE answers SET answer = ?, join_user = ? WHERE question_id = ?', [ answer_data, join_user_data, req.vote.id], function (err, result) {
         if(err) return err;
         connection.release();
+        console.log(result);
         res.redirect('/vote/'+req.vote.id);
       });
     });

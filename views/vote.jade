@@ -3,7 +3,7 @@ extends layout
 block style
   link(rel = "stylesheet" href = "/style/dist/vote.css")
 block script
-  script(type = "text/javascript" src = "/js/dist/vote.js")
+  script(type = "text/javascript" src = "/js/dist/vote_ok.js")
 
 block content
   #vote.container-fluid
@@ -30,7 +30,7 @@ block content
           .col-sm-4.col-sm-offset-4
             if user.u_id !== vote.u_id
               .form-group
-                button#voteOkBtn.btn.btn-block(onclick='voteOk()') 투표하기
+                button#voteOkBtn.btn.btn-block(type='submit' onclick='vote_ok()') 투표하기
           if user.u_id === vote.u_id
             .col-sm-4
               .form-group.text-right
