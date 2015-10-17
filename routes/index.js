@@ -64,6 +64,11 @@ router.post('/sign', function (req, res, next) {
   });
 });
 
+router.get('/error', function (req, res, next) {
+  console.log(req);
+  res.render('error', {title: 'Error', message: ''});
+});
+
 router.get('/main', function (req, res, next) {
   var user = req.session.user || '';
   console.log(user);

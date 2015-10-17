@@ -7,7 +7,9 @@ jQuery(function() {
       swal({
         title: '투표실패',
         text: '한개의 항목만 선택해주세요.',
-        type: 'warning'
+        type: 'warning',
+        timer: 1000,
+        showConfirmButton: false
       });
       return false;
     } else {
