@@ -64,17 +64,12 @@ router.post('/sign', function (req, res, next) {
   });
 });
 
-router.get('/error', function (req, res, next) {
-  console.log(req);
-  res.render('error', {title: 'Error', message: ''});
-});
-
 router.get('/main', function (req, res, next) {
   var user = req.session.user || '';
-  console.log(user);
+  // console.log(user);
   pool.getConnection(function (err, connection) {
     connection.query('SELECT * FROM questions ORDER BY id DESC LIMIT 10', function (err, rows) {
-      if(err) console.log(err);
+      if(err) return next(res.render('error', {title: 'Error', message: err}));
       connection.release();
       res.render('main', {title: 'dicon', user: user, vote_list: rows});
     });
@@ -85,7 +80,7 @@ router.get('/all', function (req, res, next) {
   var user = req.session.user || '';
   pool.getConnection(function (err, connection) {
     connection.query('SELECT * FROM questions ORDER BY id DESC', function (err, rows) {
-      if(err) console.log(err);
+      if(err) return next(res.render('error', {title: 'Error', message: err}));
       connection.release();
       res.render('all', {title: 'all', user: user, vote_list: rows});
     });
@@ -96,7 +91,7 @@ router.get('/new', function (req, res, next) {
   var user = req.session.user || '';
   pool.getConnection(function (err, connection) {
     connection.query('SELECT * FROM questions WHERE date(create_time) >= date(subdate(now(), INTERVAL 7 DAY)) and date(finish_time) >= date(now()) ORDER BY id DESC', function (err, rows) {
-      if(err) console.log(err);
+      if(err) return next(res.render('error', {title: 'Error', message: err}));
       connection.release();
       res.render('new', {title: 'new', user: user, vote_list: rows});
     });
@@ -107,7 +102,7 @@ router.get('/time', function (req, res, next) {
   var user = req.session.user || '';
   pool.getConnection(function (err, connection) {
     connection.query('SELECT * FROM questions WHERE date(finish_time) <= date(adddate(now(), INTERVAL 3 DAY)) and date(finish_time) >= date(now()) ORDER BY id DESC', function (err, rows) {
-      if(err) console.log(err);
+      if(err) return next(res.render('error', {title: 'Error', message: err}));
       connection.release();
       res.render('time', {title: 'time', user: user, vote_list: rows});
     });
