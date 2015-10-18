@@ -18,7 +18,8 @@ block content
               for answer in vote.answer.split("\n")
                 .form-group
                   li.form-control
-                    input#answer(type='checkbox' value=answer name='answer')
+                    if user.u_id !== vote.u_id
+                      input#answer(type='checkbox' value=answer name='answer')
                     | &nbsp;&nbsp;
                     span= answer
               if vote.ath === 'Y'

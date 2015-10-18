@@ -118,8 +118,12 @@ router.get('/:question_id', function (req, res, next) {
   pool.getConnection(function(err, connection) {
     connection.query('UPDATE questions SET count = count+1 WHERE id = ?', [req.vote.id], function (err, result) {
       if(err) return next(res.render('error', {title: 'Error', message: err}));
-      connection.release();
-      res.render('vote', {title: req.vote.question, vote: req.vote, user: user});
+      connection.query('SELECT * FROM answers WHERE question_id = ?', [req.vote.id], function (err, result) {
+        if(err) return next(res.render('error', {title: 'Error', message: err}));
+        console.log(result);
+        connection.release();
+        res.render('vote', {title: req.vote.question, vote: req.vote, user: user});
+      });
     });
   });
 });
@@ -130,14 +134,17 @@ router.post('/:question_id', function (req, res, next) {
     var data = req.body;
     connection.query('SELECT answer, join_user FROM answers WHERE question_id = ?', [req.vote.id], function (err, result) {
       if(err) return next(res.render('error', {title: 'Error', message: err}));
-      for(var i in result[0].join_user.split('\n')){
-        if(+result[0].join_user.split('\n')[i] === +user.u_id){
-          return next(res.render('error', {title: 'Error', message: '이미 투표를 하신 유저입니다.'}));
+      var answer_data = []
+      var join_user_data = []
+      if(result[0].join_user){
+        for(var i in result[0].join_user.split('\n')){
+          if(+result[0].join_user.split('\n')[i] === +user.u_id){
+            return next(res.render('error', {title: 'Error', message: '이미 투표를 하신 유저입니다.'}));
+          }
         }
+        answer_data = [result[0].answer];
+        join_user_data = [result[0].join_user];
       }
-      var answer_data = [result[0].answer];
-      var join_user_data = [result[0].join_user];
-
       answer_data.push(data.answer);
       join_user_data.push(user.u_id);
 
