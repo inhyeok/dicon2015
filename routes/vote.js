@@ -113,11 +113,6 @@ router.param('question_id', function (req, res, next, id) {
   });
 });
 
-// router.get('/', function (req, res, next) {
-//   var user = req.session.user;
-//   res.render('vote', {title: 'vote', user: user});
-// });
-
 router.get('/:question_id', function (req, res, next) {
   var user = req.session.user || '';
   pool.getConnection(function(err, connection) {
@@ -133,11 +128,8 @@ router.post('/:question_id', function (req, res, next) {
   var user = req.session.user || '';
   pool.getConnection(function(err, connection) {
     var data = req.body;
-    // data.answer = data.answer.join(',');
-    // console.log(data.answer, user.u_id);
     connection.query('SELECT answer, join_user FROM answers WHERE question_id = ?', [req.vote.id], function (err, result) {
       if(err) return next(res.render('error', {title: 'Error', message: err}));
-      // console.log(result[0].join_user.split('\n'));
       for(var i in result[0].join_user.split('\n')){
         if(+result[0].join_user.split('\n')[i] === +user.u_id){
           return next(res.render('error', {title: 'Error', message: '이미 투표를 하신 유저입니다.'}));
@@ -149,12 +141,8 @@ router.post('/:question_id', function (req, res, next) {
       answer_data.push(data.answer);
       join_user_data.push(user.u_id);
 
-
       answer_data = answer_data.join('\n');
       join_user_data = join_user_data.join('\n');
-
-      // console.log(answer_data);
-      // console.log(join_user_data);
 
       connection.query('UPDATE answers SET answer = ?, join_user = ? WHERE question_id = ?', [ answer_data, join_user_data, req.vote.id], function (err, result) {
         if(err) return err;
