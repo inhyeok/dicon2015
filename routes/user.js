@@ -20,13 +20,13 @@ router.param('user_id', function (req, res, next, u_id) {
   pool.getConnection(function(err, connection) {
     connection.query('SELECT * FROM users WHERE u_id=?', +u_id, function(err, rows) {
       if(err) return next(res.render('error', {title: 'Error', message: err}));
-      connection.release();
 
-      if(rows.length === 0){
-        return next(res.render('error', {title: 'Error', message: '유저를 찾을 수 없습니다.'}));
-      }
-      req.user = rows[0]
-      next()
+      // if(rows.length === 0){
+      //   return next(res.render('error', {title: 'Error', message: '유저를 찾을 수 없습니다.'}));
+      // }
+      connection.release();
+      req.user = rows[0];
+      next();
     });
   });
 })
@@ -39,6 +39,9 @@ router.param('user_id', function (req, res, next, u_id) {
 router.get('/:user_id', function (req, res, next) {
   var user = req.session.user || '';
   // console.log(req.user);
+  if(!req.user){
+    return next(res.render('error', {title: 'Error', message: '유저를 찾을 수 없습니다.'}));
+  }
   pool.getConnection(function (err, connection) {
     connection.query('SELECT * FROM questions WHERE u_id=? ORDER BY id DESC', req.user.u_id, function (err, rows) {
       if(err) return next(res.render('error', {title: 'Error', message: err}));

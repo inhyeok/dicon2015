@@ -9,5 +9,4 @@ jQuery ->
         timer: 1000
         showConfirmButton: false
       return false
-    else
-      return true
+    return true

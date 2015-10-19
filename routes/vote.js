@@ -102,25 +102,28 @@ router.param('question_id', function (req, res, next, id) {
   pool.getConnection(function(err, connection) {
     connection.query('SELECT * FROM questions WHERE id=?', +id, function(err, rows) {
       if(err) return next(res.render('error', {title: 'Error', message: err}));
-      connection.release();
 
-      if(rows.length === 0){
-        return next(res.render('error', {title: 'Error', message: 'vote not found'}));
-      }
-      req.vote = rows[0]
-      next()
+      // if(rows.length === 0){
+      //   return next(res.render('error', {title: 'Error', message: 'vote not found'}));
+      // }
+      connection.release();
+      req.vote = rows[0];
+      next();
     });
   });
 });
 
 router.get('/:question_id', function (req, res, next) {
   var user = req.session.user || '';
+  if(!req.vote){
+    return next(res.render('error', {title: 'Error', message: 'vote not found'}));
+  }
   pool.getConnection(function(err, connection) {
     connection.query('UPDATE questions SET count = count+1 WHERE id = ?', [req.vote.id], function (err, result) {
       if(err) return next(res.render('error', {title: 'Error', message: err}));
       connection.query('SELECT * FROM answers WHERE question_id = ?', [req.vote.id], function (err, result) {
         if(err) return next(res.render('error', {title: 'Error', message: err}));
-        console.log(result);
+        // console.log(result);
         connection.release();
         res.render('vote', {title: req.vote.question, vote: req.vote, user: user});
       });
