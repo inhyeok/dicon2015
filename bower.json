@@ -19,6 +19,7 @@
     "jquery": "~2.1.1",
     "jquery.inputmask": "*",
     "moment": "~2.8.0",
-    "sweetalert": "~1.1.0"
+    "sweetalert": "~1.1.0",
+    "Chart.js": "chartjs#~1.0.2"
   }
 }
