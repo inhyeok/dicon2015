@@ -4,6 +4,7 @@ block style
   link(rel = "stylesheet" href = "/style/dist/vote.css")
 block script
   script(type = "text/javascript" src = "/js/dist/vote_ok.js")
+  script(type = "text/javascript" src = "/Chart.js/Chart.min.js")
 
 block content
   #vote.container-fluid
@@ -37,8 +38,12 @@ block content
               .form-group.text-right
                 a(href='/vote/update/'+vote.id) 수정하기
 
-        if user.u_id === vote.u_id
+        if user.u_id === vote.u_id || vote.secret === 'Y'
           hr
           .row
             .col-sm-12
               h1 결과
+          .row
+            .col-sm-12
+              for result in vote_result
+                h5= result
