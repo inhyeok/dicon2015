@@ -37,13 +37,3 @@ block content
             .col-sm-4
               .form-group.text-right
                 a(href='/vote/update/'+vote.id) 수정하기
-
-        if user.u_id === vote.u_id || vote.secret === 'Y'
-          hr
-          .row
-            .col-sm-12
-              h1 결과
-          .row
-            .col-sm-12
-              for result in vote_result
-                h5= result

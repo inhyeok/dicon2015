@@ -121,20 +121,35 @@ router.get('/:question_id', function (req, res, next) {
   pool.getConnection(function(err, connection) {
     connection.query('UPDATE questions SET count = count+1 WHERE id = ?', [req.vote.id], function (err, result) {
       if(err) return next(res.render('error', {title: 'Error', message: err}));
-      connection.query('SELECT * FROM answers WHERE question_id = ?', [req.vote.id], function (err, result) {
-        if(err) return next(res.render('error', {title: 'Error', message: err}));
-        // console.log(result);
-        var vote_result = [];
-        for(var i in result[0].answer.split('\n')){
-          vote_result.push(result[0].answer.split('\n')[i]);
-        }
-        // console.log(vote_result);
-        connection.release();
-        res.render('vote', {title: req.vote.question, vote: req.vote, user: user, vote_result: vote_result});
-      });
+      connection.release();
+      res.render('vote', {title: req.vote.question, vote: req.vote, user: user});
     });
   });
 });
+// router.get('/:question_id', function (req, res, next) {
+//   var user = req.session.user || '';
+//   if(!req.vote){
+//     return next(res.render('error', {title: 'Error', message: 'vote not found'}));
+//   }
+//   pool.getConnection(function(err, connection) {
+//     connection.query('UPDATE questions SET count = count+1 WHERE id = ?', [req.vote.id], function (err, result) {
+//       if(err) return next(res.render('error', {title: 'Error', message: err}));
+//       connection.query('SELECT * FROM answers WHERE question_id = ?', [req.vote.id], function (err, result) {
+//         if(err) return next(res.render('error', {title: 'Error', message: err}));
+//         // console.log(result);
+//         var vote_result = [];
+//         if(result[0].answer){
+//           for(var i in result[0].answer.split('\n')){
+//             vote_result.push(result[0].answer.split('\n')[i]);
+//           }
+//         }
+//         // console.log(vote_result);
+//         connection.release();
+//         res.render('vote', {title: req.vote.question, vote: req.vote, user: user, vote_result: vote_result});
+//       });
+//     });
+//   });
+// });
 
 router.post('/:question_id', function (req, res, next) {
   var user = req.session.user || '';
