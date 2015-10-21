@@ -13,13 +13,13 @@ block content
               td.col-md-2.col-xs-2 등록일
               td.col-md-2.col-xs-2 마감일
           tbody
-            for vote in vote_list
+            for all in all_list
               tr
                 td
-                  a(href='/vote/'+vote.id)= vote.question
-                td.text-center= vote.count
-                td.text-center= moment(vote.create_time).format('YYYY-MM-DD HH:mm')
-                td.text-center= moment(vote.finish_time). format('YYYY-MM-DD HH:mm')
+                  a(href='/vote/'+all.id)= all.question
+                td.text-center= all.count
+                td.text-center= moment(all.create_time).format('YYYY-MM-DD HH:mm')
+                td.text-center= moment(all.finish_time). format('YYYY-MM-DD HH:mm')
             tr
               td.text-center(colspan=4) ...
             tr
@@ -36,48 +36,13 @@ block content
               td.col-md-2.col-xs-2 등록일
               td.col-md-2.col-xs-2 마감일
           tbody
-            tr
-              td
-                a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
-              td.text-center 3
-              td.text-center 2014-02-14
-              td.text-center 개생키
-            tr
-              td
-                a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
-              td.text-center 3
-              td.text-center 2014-02-14
-              td.text-center 개생키
-            tr
-              td
-                a(href='#') [이벤트][마감] 야식하면 생각나는 음식은?? [1]
-              td.text-center 3
-              td.text-center 2014-02-14
-              td.text-center 개생키
-            tr
-              td
-                a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
-              td.text-center 3
-              td.text-center 2014-02-14
-              td.text-center 개생키
-            tr
-              td
-                a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
-              td.text-center 3
-              td.text-center 2014-02-14
-              td.text-center 개생키
-            tr
-              td
-                a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
-              td.text-center 3
-              td.text-center 2014-02-14
-              td.text-center 개생키
-            tr
-              td
-                a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
-              td.text-center 3
-              td.text-center 2014-02-14
-              td.text-center 개생키
+            for new_ in new_list
+              tr
+                td
+                  a(href='/vote/'+new_.id)= new_.question
+                td.text-center= new_.count
+                td.text-center= moment(new_.create_time).format('YYYY-MM-DD HH:mm')
+                td.text-center= moment(new_.finish_time). format('YYYY-MM-DD HH:mm')
             tr
               td.text-center(colspan=4) ...
             tr
@@ -94,48 +59,13 @@ block content
               td.col-md-2.col-xs-2 등록일
               td.col-md-2.col-xs-2 마감일
           tbody
-            tr
-              td
-                a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
-              td.text-center 3
-              td.text-center 2014-02-14
-              td.text-center 개생키
-            tr
-              td
-                a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
-              td.text-center 3
-              td.text-center 2014-02-14
-              td.text-center 개생키
-            tr
-              td
-                a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
-              td.text-center 3
-              td.text-center 2014-02-14
-              td.text-center 개생키
-            tr
-              td
-                a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
-              td.text-center 3
-              td.text-center 2014-02-14
-              td.text-center 개생키
-            tr
-              td
-                a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
-              td.text-center 3
-              td.text-center 2014-02-14
-              td.text-center 개생키
-            tr
-              td
-                a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
-              td.text-center 3
-              td.text-center 2014-02-14
-              td.text-center 개생키
-            tr
-              td
-                a(href='#') [이벤트] 야식하면 생각나는 음식은?? [1]
-              td.text-center 3
-              td.text-center 2014-02-14
-              td.text-center 개생키
+            for time in time_list
+              tr
+                td
+                  a(href='/vote/'+time.id)= time.question
+                td.text-center= time.count
+                td.text-center= moment(time.create_time).format('YYYY-MM-DD HH:mm')
+                td.text-center= moment(time.finish_time). format('YYYY-MM-DD HH:mm')
             tr
               td.text-center(colspan=4) ...
             tr
