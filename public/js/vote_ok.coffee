@@ -4,9 +4,14 @@ jQuery ->
     if check_no isnt 1
       swal
         title: '투표실패'
-        text: '한개의 항목만 선택해주세요.'
+        text: '한개의 항목을 선택해주세요.'
         type: 'warning'
-        timer: 1000
-        showConfirmButton: false
       return false
-    return true
+
+    else
+      swal
+        title: '투표성공'
+        text: '참여해주셔서 감사합니다.'
+        type: 'success'
+      return true
+    return false

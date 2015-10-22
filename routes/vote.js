@@ -153,8 +153,15 @@ router.get('/:question_id', function (req, res, next) {
 
 router.post('/:question_id', function (req, res, next) {
   var user = req.session.user || '';
+  if(!user){
+    return next(res.redirect('/user/no'));
+  }
   pool.getConnection(function(err, connection) {
     var data = req.body;
+    console.log(typeof data.answer);
+    if(!data.answer || typeof data.answer !== 'string'){
+      return false;
+    }
     connection.query('SELECT answer, join_user FROM answers WHERE question_id = ?', [req.vote.id], function (err, result) {
       if(err) return next(res.render('error', {title: 'Error', message: err}));
       var answer_data = []
@@ -162,7 +169,7 @@ router.post('/:question_id', function (req, res, next) {
       if(result[0].join_user){
         for(var i in result[0].join_user.split('\n')){
           if(+result[0].join_user.split('\n')[i] === +user.u_id){
-            return next(res.render('error', {title: 'Error', message: '이미 투표를 하신 유저입니다.'}));
+            return false, next(res.render('error', {title: 'Error', message: '이미 투표를 하신 유저입니다.'}));
           }
         }
         answer_data = [result[0].answer];
