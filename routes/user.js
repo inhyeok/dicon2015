@@ -45,8 +45,9 @@ router.get('/:user_id', function (req, res, next) {
   pool.getConnection(function (err, connection) {
     connection.query('SELECT * FROM questions WHERE u_id=? ORDER BY id DESC', req.user.u_id, function (err, rows) {
       if(err) return next(res.render('error', {title: 'Error', message: err}));
+      var vote_list = rows;
       connection.release();
-      res.render('user', {title: 'user', v_user: req.user, vote_list: rows, user: user});
+      res.render('user', {title: 'user', v_user: req.user, vote_list: vote_list, user: user});
     });
   });
 });

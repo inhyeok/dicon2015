@@ -12,7 +12,7 @@ block content
       .row
         .col-md-12.text-center
           h2= vote.question
-      form(action='/vote/'+vote.id method='POST')
+      form#vote_form(action='/vote/'+vote.id method='POST')
         .row
           .col-sm-12
             ul#answer_list
@@ -32,8 +32,15 @@ block content
           .col-sm-4.col-sm-offset-4
             if user.u_id !== vote.u_id
               .form-group
-                button#voteOkBtn.btn.btn-block(type='submit' onclick='vote_ok()') 투표하기
+                button#vote_ok_btn.btn.btn-block(type='submit' onclick='vote_ok()') 투표하기
+                //- button#voteOkBtn.btn.btn-block(onclick='vote_ok('+vote.id+')') 투표하기
           if user.u_id === vote.u_id
             .col-sm-4
               .form-group.text-right
                 a(href='/vote/update/'+vote.id) 수정하기
+      if vote.secret === 'Y' || user.u_id === vote.u_id
+        .row#vote_result
+          .col-sm-12
+            h2 결과
+            for answer in vote.answer.split("\n")
+              p= answer

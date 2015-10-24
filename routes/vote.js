@@ -43,11 +43,8 @@ router.post('/create', function (req, res, next) {
     finish_time = data.finish_date+" "+data.finish_at;
     connection.query('INSERT INTO questions( u_id, question, answer, ath, secret, create_time, finish_time, count) VALUES (?,?,?,?,?, NOW(),?, 0)', [user.u_id, data.question, data.answer, data.ath, data.secret, finish_time], function (err, result) {
       if(err) return next(res.render('error', {title: 'Error', message: err}));
-      connection.query('INSERT INTO answers(question_id) VALUES (?)', result.insertId, function (err) {
-        if(err) return next(res.render('error', {title: 'Error', message: err}));
-        connection.release();
-        res.redirect('/user/'+user.u_id);
-      });
+      connection.release();
+      res.redirect('/user/'+user.u_id);
     });
   });
 });
@@ -162,30 +159,27 @@ router.post('/:question_id', function (req, res, next) {
     if(!data.answer || typeof data.answer !== 'string'){
       return false;
     }
-    connection.query('SELECT answer, join_user FROM answers WHERE question_id = ?', [req.vote.id], function (err, result) {
-      if(err) return next(res.render('error', {title: 'Error', message: err}));
-      var answer_data = []
-      var join_user_data = []
-      if(result[0].join_user){
-        for(var i in result[0].join_user.split('\n')){
-          if(+result[0].join_user.split('\n')[i] === +user.u_id){
-            return false, next(res.render('error', {title: 'Error', message: '이미 투표를 하신 유저입니다.'}));
-          }
+    var user_answer_data = []
+    var user_join_data = []
+    if(req.vote.user_join){
+      for(var i in req.vote.user_join.split('\n')){
+        if(+req.vote.user_join.split('\n')[i] === +user.u_id){
+          return false, next(res.render('error', {title: 'Error', message: '이미 투표를 하신 유저입니다.'}));
         }
-        answer_data = [result[0].answer];
-        join_user_data = [result[0].join_user];
       }
-      answer_data.push(data.answer);
-      join_user_data.push(user.u_id);
+      user_answer_data = [req.vote.user_answer];
+      user_join_data = [req.vote.user_join];
+    }
+    user_answer_data.push(data.answer);
+    user_join_data.push(user.u_id);
 
-      answer_data = answer_data.join('\n');
-      join_user_data = join_user_data.join('\n');
+    user_answer_data = user_answer_data.join('\n');
+    user_join_data = user_join_data.join('\n');
 
-      connection.query('UPDATE answers SET answer = ?, join_user = ? WHERE question_id = ?', [ answer_data, join_user_data, req.vote.id], function (err, result) {
-        if(err) return err;
-        connection.release();
-        res.redirect('/vote/'+req.vote.id);
-      });
+    connection.query('UPDATE questions SET user_answer = ?, user_join = ? WHERE id = ?', [ user_answer_data, user_join_data, req.vote.id], function (err, result) {
+      if(err) return err;
+      connection.release();
+      res.redirect('/vote/'+req.vote.id);
     });
   });
 });
@@ -216,10 +210,8 @@ router.get('/delete/:question_id', function (req, res, next) {
   pool.getConnection(function(err, connection) {
     connection.query('DELETE FROM questions WHERE id = ?', [req.vote.id], function (err) {
       if(err) return next(res.render('error', {title: 'Error', message: err}));
-      connection.query('DELETE FROM answers WHERE question_id = ?', [req.vote.id], function (err) {
-        connection.release();
-        res.redirect('/user/'+user.u_id);
-      });
+      connection.release();
+      res.redirect('/user/'+user.u_id);
     });
   });
 });

@@ -10,13 +10,6 @@ jQuery(function() {
         type: 'warning'
       });
       return false;
-    } else {
-      swal({
-        title: '투표성공',
-        text: '참여해주셔서 감사합니다.',
-        type: 'success'
-      });
-      return true;
     }
     return false;
   };
