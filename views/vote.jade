@@ -16,13 +16,13 @@ block content
         .row
           .col-sm-12
             ul#answer_list
-              for answer in vote.answer.split("\n")
+              for answer in vote.answer
                 .form-group
                   li.form-control
                     if user.u_id !== vote.u_id
-                      input#answer(type='checkbox' value=answer name='answer')
+                      input#answer(type='checkbox' value='#{answer.label}' name='answer')
                     | &nbsp;&nbsp;
-                    span= answer
+                    span #{answer.label}
               if vote.ath === 'Y'
                 .form-group
                   span 기타 답변
@@ -42,5 +42,5 @@ block content
         .row#vote_result
           .col-sm-12
             h2 결과
-            for answer in vote.answer.split("\n")
-              p= answer
+            for answer in vote.answer
+              p #{answer.label} : #{answer.count}

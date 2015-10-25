@@ -37,11 +37,17 @@ router.post('/create', function (req, res, next) {
   var user = req.session.user;
   pool.getConnection(function (err, connection) {
     var data = req.body;
-    // console.log(data.answer);
-    data.answer = data.answer.join('\n');
-    // console.log(data.answer);
+    answer = [];
+    for(var i in data.answer){
+      var answer_oj = {
+        label: data.answer[i],
+        count: 0
+      };
+      answer.push(answer_oj);
+    }
+    answer = JSON.stringify(answer);
     finish_time = data.finish_date+" "+data.finish_at;
-    connection.query('INSERT INTO questions( u_id, question, answer, ath, secret, create_time, finish_time, count) VALUES (?,?,?,?,?, NOW(),?, 0)', [user.u_id, data.question, data.answer, data.ath, data.secret, finish_time], function (err, result) {
+    connection.query('INSERT INTO questions( u_id, question, answer, ath, secret, create_time, finish_time, count) VALUES (?,?,?,?,?, NOW(),?, 0)', [user.u_id, data.question, answer, data.ath, data.secret, finish_time], function (err, result) {
       if(err) return next(res.render('error', {title: 'Error', message: err}));
       connection.release();
       res.redirect('/user/'+user.u_id);
@@ -119,6 +125,7 @@ router.get('/:question_id', function (req, res, next) {
     connection.query('UPDATE questions SET count = count+1 WHERE id = ?', [req.vote.id], function (err, result) {
       if(err) return next(res.render('error', {title: 'Error', message: err}));
       connection.release();
+      req.vote.answer = JSON.parse(req.vote.answer);
       res.render('vote', {title: req.vote.question, vote: req.vote, user: user});
     });
   });
@@ -155,11 +162,11 @@ router.post('/:question_id', function (req, res, next) {
   }
   pool.getConnection(function(err, connection) {
     var data = req.body;
+    req.vote.answer = JSON.parse(req.vote.answer);
     console.log(typeof data.answer);
     if(!data.answer || typeof data.answer !== 'string'){
       return false;
     }
-    var user_answer_data = []
     var user_join_data = []
     if(req.vote.user_join){
       for(var i in req.vote.user_join.split('\n')){
@@ -167,16 +174,20 @@ router.post('/:question_id', function (req, res, next) {
           return false, next(res.render('error', {title: 'Error', message: '이미 투표를 하신 유저입니다.'}));
         }
       }
-      user_answer_data = [req.vote.user_answer];
       user_join_data = [req.vote.user_join];
     }
-    user_answer_data.push(data.answer);
     user_join_data.push(user.u_id);
-
-    user_answer_data = user_answer_data.join('\n');
     user_join_data = user_join_data.join('\n');
-
-    connection.query('UPDATE questions SET user_answer = ?, user_join = ? WHERE id = ?', [ user_answer_data, user_join_data, req.vote.id], function (err, result) {
+    console.log(req.vote.answer);
+    for(var i in req.vote.answer){
+      if(req.vote.answer[i].label === data.answer){
+        req.vote.answer[i].count += 1;
+        console.log(req.vote.answer[i].count);
+      }
+    }
+    req.vote.answer = JSON.stringify(req.vote.answer);
+    console.log(req.vote.answer);
+    connection.query('UPDATE questions SET answer = ?, user_join = ? WHERE id = ?', [ req.vote.answer, user_join_data, req.vote.id], function (err, result) {
       if(err) return err;
       connection.release();
       res.redirect('/vote/'+req.vote.id);
