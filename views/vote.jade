@@ -12,6 +12,7 @@ block content
       .row
         .col-md-12.text-center
           h2= vote.question
+      //- form#vote_form(method='POST')
       form#vote_form(action='/vote/'+vote.id method='POST')
         .row
           .col-sm-12
@@ -33,7 +34,7 @@ block content
             if user.u_id !== vote.u_id
               .form-group
                 button#vote_ok_btn.btn.btn-block(type='submit' onclick='vote_ok()') 투표하기
-                //- button#voteOkBtn.btn.btn-block(onclick='vote_ok('+vote.id+')') 투표하기
+                //- button#voteOkBtn.btn.btn-block(onclick='vote_ok(#{vote.id}') 투표하기
           if user.u_id === vote.u_id
             .col-sm-4
               .form-group.text-right

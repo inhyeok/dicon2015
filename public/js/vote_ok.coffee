@@ -15,3 +15,22 @@ jQuery ->
     #     type: 'success'
     #   return true
     return false
+  # @vote_ok = (vote_id) ->
+  #   alert vote_id
+  #   check_no = $('#answer_list li input:checked').length
+  #   if check_no isnt 1
+  #     swal
+  #       title: '투표실패'
+  #       text: '한개의 항목을 선택해주세요.'
+  #       type: 'warning'
+  #     return false
+  #   # $('#vote_form').
+  #   $ajax(
+  #     url: '/vote/'+vote_id
+  #     type: 'POST'
+  #     success: () ->
+  #       alert 'good'
+  #     error: (err) ->
+  #       alert err
+  #   )
+  #   return false
