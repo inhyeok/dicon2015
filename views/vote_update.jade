@@ -3,6 +3,7 @@ extends layout
 block style
   link(rel = "stylesheet" href = "/style/dist/vote.css")
 block script
+  script(type = "text/javascript" src = "/js/dist/vote.js")
 
 block content
   #main_box.container-fluid
@@ -36,8 +37,8 @@ block content
             .col-sm-2
               label 질문 항목 :
             .col-sm-8#answer_list
-              for answer in vote.answer.split('\n')
-                input.form-control#answer(type='text' name='answer' placeholder="항목 입력" value=answer required)
+              for answer in vote.answer
+                input.form-control#answer(type='text' value='#{answer.label}' name='answer' required)
             .col-sm-2
               .col-sm-6.col-xs-6
                 a#answer_add.control_btn(onclick='answer_add()') 추가

@@ -8,24 +8,6 @@ var pool = mysql.createPool({
   database: 'dicon2015'
 });
 
-// router.param('user_id', function (req, res, next, u_id) {
-//   if(!isFinite(+u_id)){
-//     return next(new Error('user_id invalid'));
-//   }
-//   pool.getConnection(function(err, connection) {
-//     connection.query('SELECT * FROM users WHERE u_id=?', +u_id, function(err, rows) {
-//       if(err) console.log(err);
-//       connection.release();
-
-//       if(rows.length === 0){
-//         return next(new Error('user not found'));
-//       }
-//       req.user = rows[0]
-//       next()
-//     });
-//   });
-// });
-
 router.get('/create', function (req, res, next) {
   var user = req.session.user || '';
   if(!user)
@@ -54,49 +36,6 @@ router.post('/create', function (req, res, next) {
     });
   });
 });
-
-// router.post('/create', function (req, res, next) {
-//   var user = req.session.user;
-//   pool.getConnection(function (err, connection) {
-//     var data = req.body;
-//     // console.log(data.answer);
-//     data.answer = data.answer.join('\n');
-//     // console.log(data.answer);
-//     finish_time = data.finish_date+" "+data.finish_at;
-//     connection.query('INSERT INTO vote_list( u_id, question, answer, ath, secret, create_time, finish_time, count) VALUES (?,?,?,?,?, NOW(),?, 0)', [user.u_id, data.question, data.answer, data.ath, data.secret, finish_time], function (err, rows) {
-//       if(err) console.log(err);
-//       connection.release();
-//       res.redirect('/user/'+user.u_id);
-//     });
-//     // if(data.create_date === data.finish_date && data.create_at < data.finish_at){
-//     //   connection.query('INSERT INTO vote_list( u_id, question, answer, ath, secret, create_time, finish_time) VALUES (?,?,?,?,?, NOW(),?)', [user.u_id, data.question, data.answer, data.ath, data.secret, finish_time], function (err, rows) {
-//     //     if(err) console.log(err);
-//     //     connection.release();
-//     //     res.redirect('/user/'+user.u_id);
-//     //   });
-//     // }
-//     // else
-//     //   return next(new Error('Time invalid'));
-//   });
-// });
-
-// router.param('vote_id', function (req, res, next, id) {
-//   if(!isFinite(+id)){
-//     return next(new Error('vote_id invalid'));
-//   }
-//   pool.getConnection(function(err, connection) {
-//     connection.query('SELECT * FROM vote_list WHERE id=?', +id, function(err, rows) {
-//       if(err) console.log(err);
-//       connection.release();
-
-//       if(rows.length === 0){
-//         return next(new Error('vote not found'));
-//       }
-//       req.vote = rows[0]
-//       next()
-//     });
-//   });
-// });
 
 router.param('question_id', function (req, res, next, id) {
   if(!isFinite(+id)){
@@ -130,30 +69,6 @@ router.get('/:question_id', function (req, res, next) {
     });
   });
 });
-// router.get('/:question_id', function (req, res, next) {
-//   var user = req.session.user || '';
-//   if(!req.vote){
-//     return next(res.render('error', {title: 'Error', message: 'vote not found'}));
-//   }
-//   pool.getConnection(function(err, connection) {
-//     connection.query('UPDATE questions SET count = count+1 WHERE id = ?', [req.vote.id], function (err, result) {
-//       if(err) return next(res.render('error', {title: 'Error', message: err}));
-//       connection.query('SELECT * FROM answers WHERE question_id = ?', [req.vote.id], function (err, result) {
-//         if(err) return next(res.render('error', {title: 'Error', message: err}));
-//         // console.log(result);
-//         var vote_result = [];
-//         if(result[0].answer){
-//           for(var i in result[0].answer.split('\n')){
-//             vote_result.push(result[0].answer.split('\n')[i]);
-//           }
-//         }
-//         // console.log(vote_result);
-//         connection.release();
-//         res.render('vote', {title: req.vote.question, vote: req.vote, user: user, vote_result: vote_result});
-//       });
-//     });
-//   });
-// });
 
 router.post('/:question_id', function (req, res, next) {
   var user = req.session.user || '';
@@ -163,7 +78,6 @@ router.post('/:question_id', function (req, res, next) {
   pool.getConnection(function(err, connection) {
     var data = req.body;
     req.vote.answer = JSON.parse(req.vote.answer);
-    console.log(typeof data.answer);
     if(!data.answer || typeof data.answer !== 'string'){
       return false;
     }
@@ -178,15 +92,12 @@ router.post('/:question_id', function (req, res, next) {
     }
     user_join_data.push(user.u_id);
     user_join_data = user_join_data.join('\n');
-    console.log(req.vote.answer);
     for(var i in req.vote.answer){
       if(req.vote.answer[i].label === data.answer){
         req.vote.answer[i].count += 1;
-        console.log(req.vote.answer[i].count);
       }
     }
     req.vote.answer = JSON.stringify(req.vote.answer);
-    console.log(req.vote.answer);
     connection.query('UPDATE questions SET answer = ?, user_join = ? WHERE id = ?', [ req.vote.answer, user_join_data, req.vote.id], function (err, result) {
       if(err) return err;
       connection.release();
@@ -199,16 +110,25 @@ router.get('/update/:question_id', function (req, res, next) {
   var user = req.session.user || '';
   if(user.u_id !== req.vote.u_id)
     return next(res.render('error', {title: 'Error', message: '권한이 없는 페이지 입니다.'}));
+  req.vote.answer = JSON.parse(req.vote.answer);
   res.render('vote_update', {title: 'vote', vote: req.vote, user: user});
 });
 
 router.post('/update/:question_id', function (req, res, next) {
-  var user = req.session.user || '';
-  pool.getConnection(function(err, connection) {
+  var user = req.session.user;
+  pool.getConnection(function (err, connection) {
     var data = req.body;
-    data.answer = data.answer.join('\n');
-    var finish_time = data.finish_date+" "+data.finish_at;
-    connection.query('UPDATE questions SET question = ?, answer = ?, ath = ?, secret = ?, finish_time = ? WHERE id = ?', [data.question, data.answer, data.ath, data.secret, finish_time, req.vote.id], function (err, rows) {
+    answer = [];
+    for(var i in data.answer){
+      var answer_oj = {
+        label: data.answer[i],
+        count: 0
+      };
+      answer.push(answer_oj);
+    }
+    answer = JSON.stringify(answer);
+    finish_time = data.finish_date+" "+data.finish_at;
+    connection.query('UPDATE questions SET question = ?, answer = ?, ath = ?, secret = ?, finish_time = ? WHERE id = ?', [data.question, answer, data.ath, data.secret, finish_time, req.vote.id], function (err, rows) {
       if(err) return next(res.render('error', {title: 'Error', message: err}));
       connection.release();
       res.redirect('/vote/'+req.vote.id);
