@@ -20,7 +20,7 @@ block content
               for answer in vote.answer
                 .form-group
                   li.form-control
-                    if user.u_id !== vote.u_id
+                    if user.u_id !== vote.u_id && vote.finish_vote !== 'Y'
                       input#answer(type='checkbox' value='#{answer.label}' name='answer')
                     | &nbsp;&nbsp;
                     span #{answer.label}
@@ -28,14 +28,14 @@ block content
                 .form-group
                   span 기타 답변
                   li
-                    if user.u_id !== vote.u_id
+                    if user.u_id !== vote.u_id && vote.finish_vote !== 'Y'
                       input.form-control(type='text' name='answer' placeholder='보기 이외의 답변을 할 수 있습니다.')
                     else
                       input.form-control(type='text' name='answer' placeholder='보기 이외의 답변을 할 수 있습니다.' disabled)
 
         .row
           .col-sm-4.col-sm-offset-4
-            if user.u_id !== vote.u_id || vote.finish_vote !== 'Y'
+            if user.u_id !== vote.u_id && vote.finish_vote !== 'Y'
               .form-group
                 button#vote_ok_btn.btn.btn-block(type='submit' onclick='vote_ok()') 투표하기
                 //- button#voteOkBtn.btn.btn-block(onclick='vote_ok(#{vote.id}') 투표하기

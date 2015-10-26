@@ -36,5 +36,6 @@ Dicon 2015 홀가분(HOLGABUN)
 >   finish_time DATETIME,
 >   count INT(11),
 >   user_join TEXT,
+>   finish_vote CHAR(10),
 >   PRIMARY KEY (id)
 > );
