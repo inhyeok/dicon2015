@@ -44,18 +44,18 @@ block content
                 a#answer_add.control_btn(onclick='answer_add()') 추가
               .col-sm-6.col-xs-6
                 a#answer_del.control_btn(onclick='answer_del()') 삭제
-          //- .row.form-group
-          //-   .col-sm-2
-          //-     label 기타 항목 :
-          //-   .col-sm-8
-          //-     select.form-control#ath(name='ath' required)
-          //-       if vote.ath === 'N'
-          //-         option(value='Y') 사용
-          //-         option(value='N' selected) 사용안함
-          //-       else
-          //-         option(value='Y' selected) 사용
-          //-         option(value='N') 사용안함
-          //-     small 항목 이외의 답변을 유저들이 추가하여 투표를 할 수 있습니다.
+          .row.form-group
+            .col-sm-2
+              label 기타 항목 :
+            .col-sm-8
+              select.form-control#ath(name='ath' required)
+                if vote.ath === 'N'
+                  option(value='Y') 사용
+                  option(value='N' selected) 사용안함
+                else
+                  option(value='Y' selected) 사용
+                  option(value='N') 사용안함
+              small 항목 이외의 답변을 유저들이 추가하여 투표를 할 수 있습니다.
           .row.form-group
             .col-sm-2
               label 조사 기간 :

@@ -77,6 +77,7 @@ router.post('/:question_id', function (req, res, next) {
   }
   pool.getConnection(function(err, connection) {
     var data = req.body;
+    console.log(data);
     req.vote.answer = JSON.parse(req.vote.answer);
     if(!data.answer || typeof data.answer !== 'string'){
       return false;
@@ -95,6 +96,13 @@ router.post('/:question_id', function (req, res, next) {
     for(var i in req.vote.answer){
       if(req.vote.answer[i].label === data.answer){
         req.vote.answer[i].count += 1;
+      }
+      else if(+i === +req.vote.answer.length-1){
+        var answer_oj = {
+          label: data.answer,
+          count: 1
+        };
+        req.vote.answer.push(answer_oj);
       }
     }
     req.vote.answer = JSON.stringify(req.vote.answer);
