@@ -25,7 +25,11 @@ Dicon 2015 홀가분(HOLGABUN)
 > );
 
 **questions ->**
+<<<<<<< HEAD
 > CREATE TABLE questions (
+=======
+> CREATE TABLE ‘questions’ (
+>>>>>>> origin/master
 >   id INT(11) AUTO_INCREMENT,
 >   u_id INT(11),
 >   question VARCHAR(255),
