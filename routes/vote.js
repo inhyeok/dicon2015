@@ -112,12 +112,19 @@ router.post('/:question_id', function (req, res, next) {
           req.vote.answer[i].count += 1;
         }
       }
-      req.vote.answer = JSON.stringify(req.vote.answer);
-      connection.query('UPDATE questions SET answer = ?, user_join = ? WHERE id = ?', [ req.vote.answer, user_join_data, req.vote.id], function (err, result) {
-        if(err) return err;
-        connection.release();
-        res.redirect('/vote/'+req.vote.id);
-      });
+      else if(+i === +req.vote.answer.length-1){
+        var answer_oj = {
+          label: data.answer,
+          count: 1
+        };
+        req.vote.answer.push(answer_oj);
+      }
+    }
+    req.vote.answer = JSON.stringify(req.vote.answer);
+    connection.query('UPDATE questions SET answer = ?, user_join = ? WHERE id = ?', [ req.vote.answer, user_join_data, req.vote.id], function (err, result) {
+      if(err) return err;
+      connection.release();
+      res.redirect('/vote/'+req.vote.id);
     });
   }
 });
