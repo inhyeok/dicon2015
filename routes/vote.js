@@ -79,7 +79,7 @@ router.post('/:question_id', function (req, res, next) {
   if(!user){
     return next(res.redirect('/user/no'));
   }
-  if(now_time < finish_time){
+  if(now_time >= finish_time){
     pool.getConnection(function (err, connection) {
       req.vote.question = "[마감]"+req.vote.question;
       connection.query('UPDATE questions SET question = ?, finish_vote = "Y" WHERE id = ?', [ req.vote.question, req.vote.id], function (err, result) {
@@ -93,6 +93,9 @@ router.post('/:question_id', function (req, res, next) {
     pool.getConnection(function(err, connection) {
       var data = req.body;
       req.vote.answer = JSON.parse(req.vote.answer);
+      // if(!data.answer || typeof data.answer !== 'string'){
+      //   return false;
+      // }
       var user_join_data = []
       if(req.vote.user_join){
         for(var i in req.vote.user_join.split('\n')){
@@ -109,17 +112,19 @@ router.post('/:question_id', function (req, res, next) {
           req.vote.answer[i].count += 1;
           break;
         }
-        var answer_oj = {
-          label: data.answer,
-          count: 1
-        };
-        req.vote.answer.push(answer_oj);
+        else if(+i === +req.vote.answer.length-1){
+          var answer_oj = {
+            label: data.answer,
+            count: 1
+          };
+          req.vote.answer.push(answer_oj);
+        }
       }
       req.vote.answer = JSON.stringify(req.vote.answer);
       connection.query('UPDATE questions SET answer = ?, user_join = ? WHERE id = ?', [ req.vote.answer, user_join_data, req.vote.id], function (err, result) {
         if(err) return err;
         connection.release();
-        res.render('투표완료!!!', {title: '투표완료', message: '설문조사에 응해주셔서 감사합니다.'});
+        res.render('vote_ok', {title: '투표완료', message: '설문조사에 응해주셔서 감사합니다.'});
         // res.redirect('/vote/'+req.vote.id);
       });
     });
