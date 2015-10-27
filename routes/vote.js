@@ -46,12 +46,19 @@ router.param('question_id', function (req, res, next, id) {
   pool.getConnection(function(err, connection) {
     connection.query('SELECT * FROM questions WHERE id=?', +id, function(err, rows) {
       if(err) return next(res.render('error', {title: 'Error', message: err}));
-
-      // if(rows.length === 0){
-      //   return next(res.render('error', {title: 'Error', message: 'vote not found'}));
-      // }
-      connection.release();
       req.vote = rows[0];
+
+      var now_time = moment().format('YYYY-MM-DD HH:mm:ss');
+      var finish_time = moment(req.vote.finish_time).format('YYYY-MM-DD HH:mm:ss');
+      if(now_time >= finish_time){
+        if(req.vote.question.indexOf('[마감]') === -1){
+          req.vote.question = "[마감]"+req.vote.question;
+        }
+        connection.query('UPDATE questions SET question = ?, finish_vote = "Y" WHERE id = ?', [ req.vote.question, req.vote.id], function (err, result) {
+          if(err) return err;
+        });
+      }
+      connection.release();
       next();
     });
   });
@@ -74,69 +81,55 @@ router.get('/:question_id', function (req, res, next) {
 
 router.post('/:question_id', function (req, res, next) {
   var user = req.session.user || '';
-  var now_time = moment().format('YYYY-MM-DD HH:mm:ss');
-  var finish_time = moment(req.vote.finish_time).format('YYYY-MM-DD HH:mm:ss');
   if(!user){
     return next(res.redirect('/user/no'));
   }
-  if(now_time >= finish_time){
-    pool.getConnection(function (err, connection) {
-      req.vote.question = "[마감]"+req.vote.question;
-      connection.query('UPDATE questions SET question = ?, finish_vote = "Y" WHERE id = ?', [ req.vote.question, req.vote.id], function (err, result) {
-        if(err) return err;
-        connection.release();
-        return false, next(res.render('error', {title: 'FINISH VOTE', message: '마감된 투표입니다.'}));
-      });
+  pool.getConnection(function (err, connection) {
+    var data = req.body;
+    req.vote.answer = JSON.parse(req.vote.answer);
+    if(typeof data.answer !== 'string'){
+      if(data.answer.indexOf('') !== -1){
+        data.answer.pop();
+      }
+      if(data.answer.length === 1){
+        data.answer = data.answer[0];
+      }
+      else{
+        return false, next(res.render('vote_ok', {title: '투표실패...', message: '다시 시도해 주세요.'}));
+      }
+    }
+    var user_join_data = []
+    if(req.vote.user_join){
+      for(var i in req.vote.user_join.split('\n')){
+        if(+req.vote.user_join.split('\n')[i] === +user.u_id){
+          return false, next(res.render('error', {title: 'Error', message: '이미 투표를 하신 유저입니다.'}));
+        }
+      }
+      user_join_data = [req.vote.user_join];
+    }
+    user_join_data.push(user.u_id);
+    user_join_data = user_join_data.join('\n');
+    for(var i in req.vote.answer){
+      if(req.vote.answer[i].label === data.answer){
+        req.vote.answer[i].count += 1;
+        break;
+      }
+      else if(+i === +req.vote.answer.length-1){
+        var answer_oj = {
+          label: data.answer,
+          count: 1
+        };
+        req.vote.answer.push(answer_oj);
+      }
+    }
+    req.vote.answer = JSON.stringify(req.vote.answer);
+    connection.query('UPDATE questions SET answer = ?, user_join = ? WHERE id = ?', [ req.vote.answer, user_join_data, req.vote.id], function (err, result) {
+      if(err) return err;
+      connection.release();
+      res.render('vote_ok', {title: '투표완료!!!', message: '설문조사에 응해주셔서 감사합니다.'});
+      // res.redirect('/vote/'+req.vote.id);
     });
-  }
-  else{
-    pool.getConnection(function(err, connection) {
-      var data = req.body;
-      req.vote.answer = JSON.parse(req.vote.answer);
-      if(typeof data.answer !== 'string'){
-        if(data.answer.indexOf('') !== -1){
-          data.answer.pop();
-        }
-        if(data.answer.length === 1){
-          data.answer = data.answer[0];
-        }
-        else{
-          return false, next(res.render('vote_ok', {title: '투표실패...', message: '다시 시도해 주세요.'}));
-        }
-      }
-      var user_join_data = []
-      if(req.vote.user_join){
-        for(var i in req.vote.user_join.split('\n')){
-          if(+req.vote.user_join.split('\n')[i] === +user.u_id){
-            return false, next(res.render('error', {title: 'Error', message: '이미 투표를 하신 유저입니다.'}));
-          }
-        }
-        user_join_data = [req.vote.user_join];
-      }
-      user_join_data.push(user.u_id);
-      user_join_data = user_join_data.join('\n');
-      for(var i in req.vote.answer){
-        if(req.vote.answer[i].label === data.answer){
-          req.vote.answer[i].count += 1;
-          break;
-        }
-        else if(+i === +req.vote.answer.length-1){
-          var answer_oj = {
-            label: data.answer,
-            count: 1
-          };
-          req.vote.answer.push(answer_oj);
-        }
-      }
-      req.vote.answer = JSON.stringify(req.vote.answer);
-      connection.query('UPDATE questions SET answer = ?, user_join = ? WHERE id = ?', [ req.vote.answer, user_join_data, req.vote.id], function (err, result) {
-        if(err) return err;
-        connection.release();
-        res.render('vote_ok', {title: '투표완료!!!', message: '설문조사에 응해주셔서 감사합니다.'});
-        // res.redirect('/vote/'+req.vote.id);
-      });
-    });
-  }
+  });
 });
 
 router.get('/update/:question_id', function (req, res, next) {
