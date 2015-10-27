@@ -93,13 +93,10 @@ router.post('/:question_id', function (req, res, next) {
     pool.getConnection(function(err, connection) {
       var data = req.body;
       req.vote.answer = JSON.parse(req.vote.answer);
-      console.log(data.answer);
-      console.log(typeof data.answer);
       if(typeof data.answer !== 'string'){
         if(data.answer.indexOf('') !== -1){
           data.answer.pop();
         }
-        console.log(data.answer);
         if(data.answer.length === 1){
           data.answer = data.answer[0];
         }
@@ -107,10 +104,6 @@ router.post('/:question_id', function (req, res, next) {
           return false, next(res.render('vote_ok', {title: '투표실패...', message: '다시 시도해 주세요.'}));
         }
       }
-      console.log(data.answer);
-      // if(!data.answer || typeof data.answer !== 'string'){
-      //   return false, next(res.render('vote_ok', {title: '투표실패...', message: '다시 시도해 주세요.'}));
-      // }
       var user_join_data = []
       if(req.vote.user_join){
         for(var i in req.vote.user_join.split('\n')){

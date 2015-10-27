@@ -66,11 +66,9 @@ router.post('/sign', function (req, res, next) {
 
 router.get('/main', function (req, res, next) {
   var user = req.session.user || '';
-  // console.log(user);
   pool.getConnection(function (err, connection) {
     connection.query('SELECT * FROM questions ORDER BY id DESC LIMIT 10', function (err, rows) {
       if(err) return next(res.render('error', {title: 'Error', message: err}));
-      // console.log(rows);
       var all_list = rows;
       connection.query('SELECT * FROM questions WHERE date(create_time) >= date(subdate(now(), INTERVAL 7 DAY)) and date(finish_time) >= date(now()) ORDER BY id DESC', function (err, rows) {
         if(err) return next(res.render('error', {title: 'Error', message: err}));
