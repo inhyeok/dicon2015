@@ -93,9 +93,6 @@ router.post('/:question_id', function (req, res, next) {
     pool.getConnection(function(err, connection) {
       var data = req.body;
       req.vote.answer = JSON.parse(req.vote.answer);
-      if(!data.answer || typeof data.answer !== 'string'){
-        return false;
-      }
       var user_join_data = []
       if(req.vote.user_join){
         for(var i in req.vote.user_join.split('\n')){
@@ -110,9 +107,8 @@ router.post('/:question_id', function (req, res, next) {
       for(var i in req.vote.answer){
         if(req.vote.answer[i].label === data.answer){
           req.vote.answer[i].count += 1;
+          break;
         }
-      }
-      if(+i === +req.vote.answer.length-1){
         var answer_oj = {
           label: data.answer,
           count: 1
@@ -123,7 +119,8 @@ router.post('/:question_id', function (req, res, next) {
       connection.query('UPDATE questions SET answer = ?, user_join = ? WHERE id = ?', [ req.vote.answer, user_join_data, req.vote.id], function (err, result) {
         if(err) return err;
         connection.release();
-        res.redirect('/vote/'+req.vote.id);
+        res.render('투표완료!!!', {title: '투표완료', message: '설문조사에 응해주셔서 감사합니다.'});
+        // res.redirect('/vote/'+req.vote.id);
       });
     });
   }
