@@ -77,8 +77,7 @@ app.use(function(err, req, res, next) {
   //   error: {}
   // });
 });
-
-server.listen(3232, function() {
+server.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + server.address().port);
 });
 
