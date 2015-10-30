@@ -9,7 +9,8 @@ var express = require('express')
   , bodyParser = require('body-parser')
   , methodOverride = require('method-override')
   , moment = require('moment')
-  , session = require('client-sessions');
+  , session = require('client-sessions')
+  , port = process.env.PORT || 3000;
 
 var routes = require('./routes/index');
 var vote = require('./routes/vote');
@@ -77,7 +78,7 @@ app.use(function(err, req, res, next) {
   //   error: {}
   // });
 });
-server.listen(app.get('port'), function() {
+server.listen(port, function() {
   console.log('Express server listening on port ' + server.address().port);
 });
 
