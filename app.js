@@ -10,7 +10,7 @@ var express = require('express')
   , methodOverride = require('method-override')
   , moment = require('moment')
   , session = require('client-sessions')
-  , port = process.env.PORT || 3000;
+  , port = process.env.PORT || 8080;
 
 var routes = require('./routes/index');
 var vote = require('./routes/vote');
