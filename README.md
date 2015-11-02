@@ -22,7 +22,7 @@ Dicon 2015 홀가분(HOLGABUN)
 >   u_ph_secret CHAR(10),
 >   u_email_secret CHAR(10),
 >   PRIMARY KEY (u_id)
-> );
+> )DEFAULT CHARACTER SET utf8;
 
 **questions ->**
 > CREATE TABLE questions (
@@ -38,4 +38,4 @@ Dicon 2015 홀가분(HOLGABUN)
 >   user_join TEXT,
 >   finish_vote CHAR(10),
 >   PRIMARY KEY (id)
-> );
+> )DEFAULT CHARACTER SET utf8;
