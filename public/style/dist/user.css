@@ -6763,13 +6763,21 @@ button.close {
     display: none !important;
   }
 }
-body {
-  font-family: 'smile', sans-serif;
-  background: #F0F0F0;
-}
 @font-face {
   font-family: 'smile';
   src: url('/fonts/smile.otf');
+}
+@font-face {
+  font-family: 'SignPainter';
+  src: url('/fonts/SignPainter.otf');
+}
+@font-face {
+  font-family: 'SignPainter';
+  src: url('/fonts/SignPainter.ttf');
+}
+body {
+  font-family: 'smile', sans-serif;
+  background: #F0F0F0;
 }
 ul {
   margin: 0;
