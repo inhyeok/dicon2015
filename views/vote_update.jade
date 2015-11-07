@@ -33,6 +33,17 @@ block content
                 .col-sm-6.col-xs-6
                   input(type='radio' value='N' name='secret' required)
                   small &nbsp;&nbsp;비공개
+          .row.form-group
+            .col-sm-2
+              label 조사 종류 :
+            .col-sm-8
+              select.form-control#question_type(name='question_type' required)
+                if vote.question_type === 'check'
+                  option(value='check' selected='selected') 투표
+                  option(value='description') 서술
+                else
+                  option(value='check') 투표
+                  option(value='description' selected='selected') 서술
           .row.form-group#vote_content
             .col-sm-2
               label 질문 항목 :
@@ -44,6 +55,7 @@ block content
                 a#answer_add.control_btn(onclick='answer_add()') 추가
               .col-sm-6.col-xs-6
                 a#answer_del.control_btn(onclick='answer_del()') 삭제
+
           .row.form-group
             .col-sm-2
               label 기타 항목 :
