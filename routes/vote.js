@@ -5,7 +5,7 @@ var moment = require('moment');
 var pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
-  password: '',
+  password: 'research0302',
   database: 'dicon2015'
 });
 
