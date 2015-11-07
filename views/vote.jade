@@ -55,4 +55,8 @@ block content
           .col-sm-12
             h2 결과
             for answer in vote.answer
-              p #{answer.label} : #{answer.count}
+              if vote.question_type === 'check'
+                p #{answer.label} : #{answer.count}
+              else
+                p #{answer}
+

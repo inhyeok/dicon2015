@@ -21,7 +21,6 @@ router.post('/create', function (req, res, next) {
   var user = req.session.user;
   pool.getConnection(function (err, connection) {
     var data = req.body;
-    console.log(data);
     answer = [];
     for(var i in data.answer){
       var answer_oj = {
@@ -89,16 +88,34 @@ router.post('/:question_id', function (req, res, next) {
     var data = req.body;
     console.log(data);
     req.vote.answer = JSON.parse(req.vote.answer);
-    if(typeof data.answer !== 'string'){
-      if(data.answer.indexOf('') !== -1){
-        data.answer.pop();
+    if(req.vote.question_type === 'check'){
+      if(typeof data.answer !== 'string'){
+        if(data.answer.indexOf('') !== -1){
+          data.answer.pop();
+        }
+        if(data.answer.length === 1){
+          data.answer = data.answer[0];
+        }
+        else{
+          return false, next(res.render('vote_ok', {title: '투표실패...', message: '다시 시도해 주세요.'}));
+        }
       }
-      if(data.answer.length === 1){
-        data.answer = data.answer[0];
+      for(var i in req.vote.answer){
+        if(req.vote.answer[i].label === data.answer){
+          req.vote.answer[i].count += 1;
+          break;
+        }
+        else if(+i === +req.vote.answer.length-1){
+          var answer_oj = {
+            label: data.answer,
+            count: 1
+          };
+          req.vote.answer.push(answer_oj);
+        }
       }
-      else{
-        return false, next(res.render('vote_ok', {title: '투표실패...', message: '다시 시도해 주세요.'}));
-      }
+    }
+    else{
+      req.vote.answer.push(data.answer);
     }
     var user_join_data = []
     if(req.vote.user_join){
@@ -111,19 +128,6 @@ router.post('/:question_id', function (req, res, next) {
     }
     user_join_data.push(user.u_id);
     user_join_data = user_join_data.join('\n');
-    for(var i in req.vote.answer){
-      if(req.vote.answer[i].label === data.answer){
-        req.vote.answer[i].count += 1;
-        break;
-      }
-      else if(+i === +req.vote.answer.length-1){
-        var answer_oj = {
-          label: data.answer,
-          count: 1
-        };
-        req.vote.answer.push(answer_oj);
-      }
-    }
     req.vote.answer = JSON.stringify(req.vote.answer);
     connection.query('UPDATE questions SET answer = ?, user_join = ? WHERE id = ?', [ req.vote.answer, user_join_data, req.vote.id], function (err, result) {
       if(err) return err;
