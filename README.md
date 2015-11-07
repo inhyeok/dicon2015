@@ -30,6 +30,7 @@ Dicon 2015 홀가분(HOLGABUN)
 >   u_id INT(11),
 >   question VARCHAR(255),
 >   answer VARCHAR(255),
+>   question_type VARCHAR(100),
 >   ath CHAR(10),
 >   secret CHAR(10),
 >   create_time DATETIME,
