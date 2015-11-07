@@ -16,21 +16,29 @@ block content
         .row
           .col-sm-12
             ul#answer_list
-              for answer in vote.answer
-                .form-group
-                  li.form-control
-                    if user.u_id !== vote.u_id && vote.finish_vote !== 'Y'
-                      input#answer(type='checkbox' value='#{answer.label}' name='answer')
-                    | &nbsp;&nbsp;
-                    span #{answer.label}
-              if vote.ath === 'Y'
-                .form-group
-                  span 기타 답변
-                  li
-                    if user.u_id !== vote.u_id && vote.finish_vote !== 'Y'
-                      input.form-control(type='text' name='answer' placeholder='보기 이외의 답변을 할 수 있습니다.')
-                    else
-                      input.form-control(type='text' name='answer' placeholder='보기 이외의 답변을 할 수 있습니다.' disabled)
+              if vote.question_type === 'check'
+                for answer in vote.answer
+                  .form-group
+                    li.form-control
+                      if user.u_id !== vote.u_id && vote.finish_vote !== 'Y'
+                        input#answer(type='checkbox' value='#{answer.label}' name='answer')
+                      | &nbsp;&nbsp;
+                      span #{answer.label}
+                if vote.ath === 'Y'
+                  .form-group
+                    span 기타 답변
+                    li
+                      if user.u_id !== vote.u_id && vote.finish_vote !== 'Y'
+                        input.form-control(type='text' name='answer' placeholder='보기 이외의 답변을 할 수 있습니다.')
+                      else
+                        input.form-control(type='text' name='answer' placeholder='보기 이외의 답변을 할 수 있습니다.' disabled)
+              else if vote.question_type === 'description'
+                if user.u_id !== vote.u_id && vote.finish_vote !== 'Y'
+                  .form-group
+                    textarea.form-control(name='answer' placeholder='답변을 해주세요.')
+                else
+                  .form-group
+                    textarea.form-control(name='answer' placeholder='답변을 해주세요.' disabled)
 
         .row
           .col-sm-4.col-sm-offset-4

@@ -87,6 +87,7 @@ router.post('/:question_id', function (req, res, next) {
   }
   pool.getConnection(function (err, connection) {
     var data = req.body;
+    console.log(data);
     req.vote.answer = JSON.parse(req.vote.answer);
     if(typeof data.answer !== 'string'){
       if(data.answer.indexOf('') !== -1){
@@ -155,7 +156,7 @@ router.post('/update/:question_id', function (req, res, next) {
     }
     answer = JSON.stringify(answer);
     finish_time = data.finish_date+" "+data.finish_at;
-    connection.query('UPDATE questions SET question = ?, answer = ?, ath = ?, secret = ?, finish_time = ? WHERE id = ?', [data.question, answer, data.ath, data.secret, finish_time, req.vote.id], function (err, rows) {
+    connection.query('UPDATE questions SET question = ?, answer = ?, question_type = ?, ath = ?, secret = ?, finish_time = ? WHERE id = ?', [data.question, answer, data.question_type, data.ath, data.secret, finish_time, req.vote.id], function (err, rows) {
       if(err) return next(res.render('error', {title: 'Error', message: err}));
       connection.release();
       res.redirect('/vote/'+req.vote.id);
