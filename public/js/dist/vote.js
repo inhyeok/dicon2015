@@ -10,6 +10,15 @@
     if ($('#create_date').val() === $('#finish_date').val()) {
       $('#finish_date').attr('min', $('#create_at').val());
     }
+    $('#question_type').change(function() {
+      if ($('#question_type').val() === 'description') {
+        $('#vote_content').css('display', 'none');
+        return $('#vote_ath').css('display', 'none');
+      } else {
+        $('#vote_content').css('display', 'inherit');
+        return $('#vote_ath').css('display', 'inherit');
+      }
+    });
     this.create_vote = function() {};
     this.answer_add = function() {
       var answer_no, text;

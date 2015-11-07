@@ -5,7 +5,7 @@ var moment = require('moment');
 var pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
-  password: 'research0302',
+  password: '',
   database: 'dicon2015'
 });
 
@@ -21,6 +21,7 @@ router.post('/create', function (req, res, next) {
   var user = req.session.user;
   pool.getConnection(function (err, connection) {
     var data = req.body;
+    console.log(data);
     answer = [];
     for(var i in data.answer){
       var answer_oj = {
@@ -31,7 +32,7 @@ router.post('/create', function (req, res, next) {
     }
     answer = JSON.stringify(answer);
     finish_time = data.finish_date+" "+data.finish_at;
-    connection.query('INSERT INTO questions( u_id, question, answer, ath, secret, create_time, finish_time, count) VALUES (?,?,?,?,?, NOW(),?, 0)', [user.u_id, data.question, answer, data.ath, data.secret, finish_time], function (err, result) {
+    connection.query('INSERT INTO questions( u_id, question, answer, question_type, ath, secret, create_time, finish_time, count) VALUES (?,?,?,?,?,?, NOW(),?, 0)', [user.u_id, data.question, answer, data.ath, data.question_type, data.secret, finish_time], function (err, result) {
       if(err) return next(res.render('error', {title: 'Error', message: err}));
       connection.release();
       res.redirect('/user/'+user.u_id);

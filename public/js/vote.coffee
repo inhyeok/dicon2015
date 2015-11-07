@@ -9,6 +9,14 @@ jQuery ->
 	if $('#create_date').val() is $('#finish_date').val()
 		$('#finish_date').attr('min', $('#create_at').val())
 
+	$('#question_type').change ->
+		if $('#question_type').val() is 'description'
+			$('#vote_content').css 'display', 'none'
+			$('#vote_ath').css 'display', 'none'
+		else
+			$('#vote_content').css 'display', 'inherit'
+			$('#vote_ath').css 'display', 'inherit'
+
 	@create_vote = () ->
 		# $ajax
 		# 	type: 'PUT'

@@ -5,7 +5,7 @@ var mysql = require('mysql');
 var pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
-  password: 'research0302',
+  password: '',
   database: 'dicon2015'
 });
 
@@ -56,10 +56,15 @@ router.post('/sign', function (req, res, next) {
   u_pw = md5.update(u_pw).digest('hex'); //md5 값 변환
   var user = [u_name, u_email, u_pw, u_ph];
   pool.getConnection(function (err, connection) {
-    connection.query('INSERT INTO users(u_name, u_email, u_pw, u_ph) VALUES (?,?,?,?)', user, function (err, rows) {
-      if(err) console.log(err);
-      connection.release();
-      res.redirect('/');
+    connection.query('SELECT u_email FROM users WHERE u_email = ?', u_email, function (err, rows){
+      console.log(rows.length)
+      if(+rows.length)
+        return next(res.render('error', {title: '회원가입 실패', message: '이미 가입된 유저입니다.'}));
+      connection.query('INSERT INTO users(u_name, u_email, u_pw, u_ph) VALUES (?,?,?,?)', user, function (err, rows) {
+        if(err) console.log(err);
+        connection.release();
+        res.redirect('/');
+      });
     });
   });
 });
