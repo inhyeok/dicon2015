@@ -1,5 +1,7 @@
 Dicon 2015 홀가분(HOLGABUN)
 ========
+##### Chrome 브라우저 사용을 권장합니다.
+--------
 **Research Book with grunt, bower, bootstrap**
 --------
 > - npm i

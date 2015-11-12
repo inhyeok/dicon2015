@@ -54,9 +54,12 @@ jQuery ->
 		# 	data: avc
 
 	@answer_add = () ->
-		answer_no = $('#answer_list li').length
+		answer_no = $('#answer_list lnput').length
 		if answer_no is 10
-			alert '더 이상 추가할 수 없습니다.'
+			swal
+				title: '실패'
+				text: '더 이상 추가할 수 없습니다.'
+				type: 'error'
 		else
 			text = '<input id="answer" type="text" name="answer" placeholder="항목 입력" class="form-control" required/>'
 			$('#answer_list').append(text)
@@ -65,11 +68,10 @@ jQuery ->
 	@answer_del = () ->
 		answer_no = $('#answer_list input').length
 		if answer_no is 2
-			swal(
-				title: '삭제실패'
+			swal
+				title: '실패'
 				text: '더 이상 삭제할 수 없습니다.'
 				type: 'error'
-			)
 		else
 			$('#answer_list input:last').remove()
 		false
