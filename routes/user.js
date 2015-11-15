@@ -42,6 +42,21 @@ router.get('/:user_id', function (req, res, next) {
   });
 });
 
+router.get('/delete/:user_id', function (req, res, next) {
+  var user = req.session.user || '';
+  if(!req.user){
+    return next(res.render('error', {title: 'Error', message: '유저를 찾을 수 없습니다.'}));
+  }
+  pool.getConnection(function (err, connection) {
+    connection.query('DELETE FROM users WHERE u_id = ?', req.user.u_id, function (err) {
+      if(err) return next(res.render('error', {title: 'Error', message: err}));
+      connection.release();
+      delete req.session.user;
+      res.redirect('/');
+    });
+  });
+});
+
 router.get('/update/:user_id', function (req, res, next) {
   var user = req.session.user || '';
   if(user.u_id !== req.user.u_id)
